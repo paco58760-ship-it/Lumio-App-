@@ -1,0 +1,65 @@
+{
+  "name": "Lumio — Tu compañero de estudio",
+  "short_name": "Lumio",
+  "description": "App de estudio gratuita para el colegio. Flashcards, Pomodoro, IA local y más.",
+  "id": "lumio-study-app-v1",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#0d0f14",
+  "theme_color": "#f5c518",
+  "orientation": "portrait-primary",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-narrow.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Lumio — App de estudio"
+    },
+    {
+      "src": "screenshot-wide.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Lumio en escritorio"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Flashcards",
+      "url": "./?s=flashcards",
+      "description": "Repasar mis flashcards"
+    },
+    {
+      "name": "Pomodoro",
+      "url": "./?s=pom-screen",
+      "description": "Iniciar Pomodoro"
+    },
+    {
+      "name": "Chat IA",
+      "url": "./?s=chat",
+      "description": "Preguntar una duda"
+    }
+  ]
+}
