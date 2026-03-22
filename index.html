@@ -171,10 +171,37 @@ button:active, [onclick]:active { transform: scale(0.97); transition: transform 
 .xp-bar-fill{height:100%;background:linear-gradient(90deg,var(--y),var(--orange));border-radius:3px;transition:width .8s cubic-bezier(.4,0,.2,1)}
 /* CHAT */
 .chat-wrap{display:flex;flex-direction:column;height:100%}
+/* Chat chips */
+/* ── Chat chips ── */
+.chat-chip{background:var(--bg2);border:1.5px solid var(--bd);border-radius:20px;padding:7px 14px;font-size:12px;color:var(--t2);white-space:nowrap;cursor:pointer;transition:all .18s;flex-shrink:0;font-weight:500}
+.chat-chip:active{background:var(--y);color:#111;border-color:var(--y);transform:scale(.96)}
+/* ── Historial panel ── */
+#chat-history-panel{position:absolute;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:20;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .28s cubic-bezier(.4,0,.2,1)}
+#chat-history-panel.open{transform:translateX(0)}
+.chat-session-item{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:transparent}
+.chat-session-item:active{background:var(--bg2)}
+.chat-session-item.active{background:var(--bg2);border-left:3px solid var(--y)}
+/* ── Save note button ── */
+.msg-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.msg-action-btn{background:none;border:1px solid var(--bd);border-radius:12px;padding:4px 10px;font-size:11px;color:var(--t3);cursor:pointer;font-family:var(--font);transition:all .15s;display:flex;align-items:center;gap:4px}
+.msg-action-btn:active{background:var(--bg2);border-color:var(--y);color:var(--y)}
+/* ── Mensajes mejorados ── */
+.msg{max-width:86%;padding:11px 14px;border-radius:18px;font-size:13.5px;line-height:1.6;word-break:break-word;animation:msgIn .22s cubic-bezier(.4,0,.2,1)}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.msg-ai{background:var(--bg1);color:var(--t1);border-bottom-left-radius:4px;border:1px solid var(--bd)}
+.msg-user{background:linear-gradient(135deg,var(--y) 0%,#f59e0b 100%);color:#111;border-bottom-right-radius:4px;font-weight:500}
+/* ── Input área ── */
+#chat-input-wrap:focus-within{border-color:var(--y)!important}
+/* ── Screen fix ── */
+#s-chat.active{display:flex!important;flex-direction:column!important;height:100%!important;overflow:hidden!important}
+.chat-chip{background:var(--bg2);border:1px solid var(--bd);border-radius:20px;padding:6px 12px;font-size:12px;color:var(--t2);white-space:nowrap;cursor:pointer;transition:all .15s;flex-shrink:0}
+.chat-chip:hover,.chat-chip:active{background:var(--y);color:#111;border-color:var(--y)}
+/* Chat mensajes */
 .chat-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
 .msg{max-width:85%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.5}
 .msg-user{background:var(--y);color:#0d0f14;font-weight:600;align-self:flex-end;border-radius:14px 14px 4px 14px}
 .msg-ai{background:var(--bg1);color:var(--t1);border:1px solid var(--bd);align-self:flex-start;border-radius:14px 14px 14px 4px}
+#chat-input-wrap:focus-within{border-color:var(--y)!important}
 .chat-input-row{padding:12px 14px;border-top:1px solid var(--bd);display:flex;gap:8px;background:var(--bg)}
 .chat-inp{flex:1;background:var(--bg1);border:1px solid var(--bd);border-radius:999px;padding:9px 14px;font-size:13px;color:var(--t1);outline:none;font-family:var(--font)}
 .chat-inp:focus{border-color:var(--yb)}
@@ -463,7 +490,15 @@ button:active, [onclick]:active { transform: scale(0.97); transition: transform 
 .screen{display:none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:80px;flex-direction:column}
 /* #s-home shown by default via JS — fallback: splash CSS hides it */
 .screen.active{display:flex;flex-direction:column;background:var(--bg)}
-#s-chat.active{display:flex;flex-direction:column;height:100%;overflow:hidden}
+
+/* ── Gamificación ── */
+.xp-bar-wrap{background:var(--bg2);border-radius:999px;height:8px;overflow:hidden;margin:4px 0}
+.xp-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--y),#f97316);transition:width .8s cubic-bezier(.4,0,.2,1)}
+.avatar-badge{width:52px;height:52px;border-radius:50%;border:3px solid var(--y);display:flex;align-items:center;justify-content:center;font-size:26px;background:var(--bg2);flex-shrink:0}
+.nivel-badge{background:var(--y);color:#111;font-size:10px;font-weight:900;padding:2px 8px;border-radius:999px;display:inline-block}
+.screen.slide-in{animation:screenIn .2s cubic-bezier(.4,0,.2,1) both}
+@keyframes screenIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
 #sub-nav.show{display:flex;animation:snFade .15s ease}
 @keyframes snFade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 
@@ -1373,8 +1408,42 @@ button:active{transform:scale(.97)}
 
 <!-- ══ CLASE LANDING MENU ══ -->
 <div class="screen" id="s-clase-menu"><div style="padding:18px 16px 24px;overflow-y:auto">
-  <div style="font-size:22px;font-weight:900;color:var(--t1);margin-bottom:4px">Clases</div>
-  <div style="font-size:13px;color:var(--t2);margin-bottom:20px">Únete o gestiona tus clases</div>
+  <div style="font-size:22px;font-weight:900;color:var(--t1);margin-bottom:4px" id="clase-menu-titulo">Clases</div>
+  <div style="font-size:13px;color:var(--t2);margin-bottom:16px" id="clase-menu-sub">Únete o gestiona tus clases</div>
+
+  <!-- PANEL PROFESOR — visible solo en modo profesor -->
+  <div id="profe-panel-clase" style="display:none;margin-bottom:18px">
+    <div style="font-size:10px;font-weight:800;color:var(--t3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px">
+      <span style="width:3px;height:12px;background:var(--y);border-radius:2px;display:inline-block"></span>
+      Panel de profesor
+      <button onclick="profeSalir()" style="margin-left:auto;background:none;border:1px solid var(--bd);border-radius:6px;padding:2px 8px;font-size:10px;color:var(--t3);cursor:pointer;font-family:var(--font)">Salir</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+      <div class="est-card" onclick="claseProfeTab('alumnos')" style="--ec:#f5c518">
+        <div class="est-card-ico">👥</div>
+        <div class="est-card-name">Alumnos</div>
+        <div class="est-card-desc" id="profe-alumno-count">0 registrados</div>
+      </div>
+      <div class="est-card" onclick="claseProfeTab('tareas')" style="--ec:#fb923c">
+        <div class="est-card-ico">📋</div>
+        <div class="est-card-name">Asignar tarea</div>
+        <div class="est-card-desc">Pomodoro, FC, examen</div>
+      </div>
+      <div class="est-card" onclick="claseProfeTab('examen')" style="--ec:#4ade80">
+        <div class="est-card-ico">📝</div>
+        <div class="est-card-name">Generar examen</div>
+        <div class="est-card-desc">Instantáneo con IA</div>
+      </div>
+      <div class="est-card" onclick="claseProfeTab('stats')" style="--ec:#60a5fa">
+        <div class="est-card-ico">📊</div>
+        <div class="est-card-name">Estadísticas</div>
+        <div class="est-card-desc">Progreso de la clase</div>
+      </div>
+    </div>
+    <!-- Sub-panel contenido -->
+    <div id="profe-subpanel" style="background:var(--bg1);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:14px;display:none"></div>
+    <div style="border-top:1px solid var(--bd);padding-top:14px;margin-bottom:4px"></div>
+  </div>
 
   <!-- MIS CLASES -->
   <div style="font-size:10px;font-weight:800;color:var(--t3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px"><span style="width:3px;height:12px;background:var(--blue);border-radius:2px;display:inline-block"></span>Mis clases</div>
@@ -1869,24 +1938,241 @@ button:active{transform:scale(.97)}
 </div>
 
 <!-- ══ CHAT IA ══ -->
-<div class="screen" id="s-chat">
-  <div style="padding:12px 16px 10px;border-bottom:1px solid var(--bd);flex-shrink:0;display:flex;align-items:center;gap:10px">
-    <button onclick="goTo('estudiar-menu')" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--t2);padding:2px;line-height:1;flex-shrink:0">←</button>
-    <div>
-      <div class="pt" style="margin-bottom:1px">Chat <em>IA</em> 💬</div>
-      <div style="font-size:11px;color:var(--t2)" id="chat-subtitle">Funciona sin conexión · Conoce todo el temario ESO/Bach</div>
+<div class="screen" id="s-chat" style="flex-direction:column;height:100%;background:var(--bg);position:relative;overflow:hidden">
+
+  <!-- Panel lateral historial -->
+  <div id="chat-history-panel" style="position:absolute;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:20;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .28s cubic-bezier(.4,0,.2,1)">
+    <div style="padding:14px 16px 10px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;background:var(--bg1);flex-shrink:0">
+      <button onclick="chatHistoryClose()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--t2);padding:2px;line-height:1">←</button>
+      <div style="font-size:15px;font-weight:800;color:var(--t1);flex:1">Chats guardados</div>
+      <button onclick="chatNuevo()" style="background:var(--y);border:none;border-radius:10px;padding:7px 14px;font-size:12px;font-weight:700;color:#111;cursor:pointer;font-family:var(--font)">+ Nuevo</button>
     </div>
-    <button onclick="chatHistory=[];LumioAI._convCtx={lastTopic:null,lastMat:null,turnCount:0,askedAbout:[]};document.getElementById('chat-msgs').innerHTML='';bChat()" style="margin-left:auto;background:none;border:1px solid var(--bd);color:var(--t3);border-radius:8px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:var(--font);flex-shrink:0">🗑 Borrar</button>
+    <div id="chat-history-list" style="flex:1;overflow-y:auto;padding:8px 0"></div>
   </div>
-  <div class="chat-msgs" id="chat-msgs">
-    <div class="msg msg-ai">¡Hola! 👋 Soy tu tutor de IA de Lumio. Puedes preguntarme cualquier duda de tus clases. ¿En qué te ayudo?</div>
+
+  <!-- Header -->
+  <div id="chat-header" style="padding:11px 14px 10px;border-bottom:1px solid var(--bd);flex-shrink:0;display:flex;align-items:center;gap:10px;background:var(--bg1)">
+    <button onclick="goTo('estudiar-menu')" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--t2);padding:4px 6px;line-height:1;flex-shrink:0;border-radius:8px" ontouchstart="this.style.background='var(--bg2)'" ontouchend="this.style.background=''">←</button>
+    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--y),#f97316);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;box-shadow:0 0 10px rgba(245,197,24,.35)">🤖</div>
+    <div style="flex:1;min-width:0;cursor:pointer" onclick="chatHistoryOpen()">
+      <div style="font-size:14px;font-weight:800;color:var(--t1);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="chat-session-title">Tutor <span style="color:var(--y)">IA</span></div>
+      <div style="font-size:10px;color:var(--t3);display:flex;align-items:center;gap:4px" id="chat-subtitle">
+        <span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;animation:pulse 2s infinite"></span>
+        Toca el título para ver historial
+      </div>
+    </div>
+    <button onclick="chatNuevo()" title="Nuevo chat" style="background:none;border:1px solid var(--bd);color:var(--t2);border-radius:8px;padding:6px 9px;font-size:14px;cursor:pointer;font-family:var(--font);flex-shrink:0" ontouchstart="this.style.borderColor='var(--y)'" ontouchend="this.style.borderColor='var(--bd)'">✏️</button>
+    <button onclick="chatHistoryOpen()" title="Historial" style="background:none;border:1px solid var(--bd);color:var(--t2);border-radius:8px;padding:6px 9px;font-size:14px;cursor:pointer;font-family:var(--font);flex-shrink:0" ontouchstart="this.style.borderColor='var(--y)'" ontouchend="this.style.borderColor='var(--bd)'">📋</button>
   </div>
-  <div class="chat-input-row">
-    <input class="chat-inp" id="chat-inp" placeholder="Escribe tu duda..." onkeypress="if(event.key==='Enter')sendChat()">
-    <button class="chat-send" onclick="sendChat()">↑</button>
+
+  <!-- Mensajes -->
+  <div class="chat-msgs" id="chat-msgs" style="flex:1;overflow-y:auto;padding:16px 14px 8px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth;min-height:0"></div>
+
+  <!-- Chips sugerencias -->
+  <div id="chat-modes" style="padding:5px 14px 2px;display:flex;gap:6px;overflow-x:auto;flex-shrink:0;scrollbar-width:none">
+    <div class="chat-chip" id="mode-tutor" style="border-color:var(--y);color:var(--y);font-weight:700" onclick="setChatMode('tutor')">🎓 Tutor</div>
+    <div class="chat-chip" id="mode-socratico" onclick="setChatMode('socratico')">🤔 Socrático</div>
+    <div class="chat-chip" id="mode-debate" onclick="setChatMode('debate')">⚖️ Debate</div>
+    <div class="chat-chip" id="mode-examen" onclick="setChatMode('examen')">📝 Examinar</div>
+  </div>
+  <div id="chat-chips"  style="padding:8px 14px 4px;display:flex;gap:7px;overflow-x:auto;flex-shrink:0;scrollbar-width:none;-webkit-overflow-scrolling:touch">
+    <div class="chat-chip" onclick="chatChip('¿Qué es la mitosis?')">🔬 Mitosis</div>
+    <div class="chat-chip" onclick="chatChip('Explícame el teorema de Pitágoras')">📐 Pitágoras</div>
+    <div class="chat-chip" onclick="chatChip('¿Cuándo fue la Revolución Francesa?')">⚔️ Rev. Francesa</div>
+    <div class="chat-chip" onclick="chatChip('¿Cómo estudio mejor?')">📚 Técnicas</div>
+    <div class="chat-chip" onclick="chatChip('Resuelve: 2x + 4 = 10')">🔢 Ecuación</div>
+    <div class="chat-chip" onclick="chatChip('¿Qué es la fotosíntesis?')">🌱 Fotosíntesis</div>
+    <div class="chat-chip" onclick="chatChip('Explícame el present simple')">🇬🇧 Inglés</div>
+    <div class="chat-chip" onclick="chatChip('¿Qué es el ADN?')">🧬 ADN</div>
+    <div class="chat-chip" onclick="chatChip('¿Cuáles son las leyes de Newton?')">⚡ Newton</div>
+  </div>
+
+  <!-- Input -->
+  <div style="padding:8px 14px 14px;flex-shrink:0;background:var(--bg)">
+    <div style="display:flex;gap:8px;align-items:flex-end;background:var(--bg1);border:1.5px solid var(--bd);border-radius:22px;padding:8px 8px 8px 16px;transition:border-color .2s" id="chat-input-wrap" onclick="document.getElementById('chat-inp').focus()">
+      <textarea id="chat-inp" id="chat-inp-ph" placeholder="Escribe tu duda o pide un esquema..." rows="1"
+        style="flex:1;background:none;border:none;outline:none;font-family:var(--font);font-size:14px;color:var(--t1);resize:none;line-height:1.5;max-height:120px;overflow-y:auto;padding:2px 0"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat();}"
+        oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px';document.getElementById('chat-input-wrap').style.borderColor=this.value.trim()?'var(--y)':`var(--bd)`"></textarea>
+      <button onclick="sendChat()" id="chat-send-btn"
+        style="width:38px;height:38px;border-radius:50%;background:var(--y);border:none;cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .12s;color:#111;font-weight:900;line-height:1"
+        ontouchstart="this.style.transform='scale(.88)'" ontouchend="this.style.transform='scale(1)'">↑</button>
+    </div>
   </div>
 </div>
 
+<!-- ══ SIMULACRO ══ -->
+<div class="screen" id="s-simulacro">
+<div class="pw">
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:0">
+    <button onclick="goTo('estudiar-menu')" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--t2);padding:2px;line-height:1">←</button>
+    <div class="pt">Simulacro <em>examen</em> ⏱️</div>
+  </div>
+  <div class="ps">Cronometrado · Nota real · Guarda errores como flashcards</div>
+  <div id="sim-config">
+    <div class="sl">Materia</div><div id="sim-mat-ch" class="chip-row" style="margin-bottom:12px"></div>
+    <div class="sl">Nº preguntas</div>
+    <div style="display:flex;gap:7px;margin-bottom:12px">
+      <div class="chip" data-simn="5" onclick="simSetN(this)">5</div>
+      <div class="chip on" data-simn="10" onclick="simSetN(this)">10</div>
+      <div class="chip" data-simn="15" onclick="simSetN(this)">15</div>
+      <div class="chip" data-simn="20" onclick="simSetN(this)">20</div>
+    </div>
+    <div class="sl">Tiempo por pregunta</div>
+    <div style="display:flex;gap:7px;margin-bottom:16px">
+      <div class="chip" data-simt="30" onclick="simSetT(this)">30s</div>
+      <div class="chip on" data-simt="60" onclick="simSetT(this)">1 min</div>
+      <div class="chip" data-simt="90" onclick="simSetT(this)">90s</div>
+      <div class="chip" data-simt="0" onclick="simSetT(this)">Sin límite</div>
+    </div>
+    <button class="mbtn" onclick="simStart()">⏱️ Comenzar examen</button>
+  </div>
+  <div id="sim-active" style="display:none"></div>
+  <div id="sim-result" style="display:none"></div>
+</div>
+</div>
+
+<!-- ══ LOGIN CLASE ══ -->
+<div id="clase-login-overlay" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:990;flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:16px">
+  <div style="font-size:48px">🏫</div>
+  <div style="font-size:22px;font-weight:900;color:var(--t1);text-align:center">Lumio Escuela</div>
+  <div style="font-size:13px;color:var(--t2);text-align:center;max-width:280px">Introduce el código de tu clase o accede como profesor</div>
+  <div style="width:100%;max-width:340px;display:flex;flex-direction:column;gap:10px">
+    <input id="clase-code-inp" class="inp" placeholder="Código de clase (ej: 2A-2026)" style="font-size:16px;text-align:center;letter-spacing:.1em;text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')claseLogin()">
+    <button class="mbtn" onclick="claseLogin()">📚 Entrar como alumno</button>
+    <div style="text-align:center;font-size:12px;color:var(--t3)">— o —</div>
+    <button class="gbtn" onclick="profeLogin()">👩‍🏫 Soy profesor — acceder con PIN</button>
+    <button onclick="claseSkip()" style="background:none;border:none;color:var(--t3);font-size:12px;cursor:pointer;padding:8px;font-family:var(--font)">Continuar sin código</button>
+  </div>
+  <div id="clase-error" style="color:#f87171;font-size:12px;display:none;text-align:center"></div>
+</div>
+
+<!-- ══ PROFE PIN ══ -->
+<div id="profe-pin-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:995;flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:12px">
+  <div style="background:var(--bg1);border:1px solid var(--bd);border-radius:20px;padding:28px;width:100%;max-width:320px;display:flex;flex-direction:column;gap:12px;align-items:center">
+    <div style="font-size:36px">👩‍🏫</div>
+    <div style="font-size:18px;font-weight:900;color:var(--t1)">Modo Profesor</div>
+    <div style="font-size:12px;color:var(--t2);text-align:center">Introduce el PIN de acceso</div>
+    <input id="profe-pin-inp" type="password" class="inp" placeholder="PIN" style="text-align:center;font-size:20px;letter-spacing:.3em;max-width:160px" onkeydown="if(event.key==='Enter')profeLoginConfirm()">
+    <button class="mbtn" onclick="profeLoginConfirm()">Entrar como Profesor</button>
+    <button onclick="document.getElementById('profe-pin-overlay').style.display='none'" style="background:none;border:none;color:var(--t3);font-size:12px;cursor:pointer;font-family:var(--font)">Cancelar</button>
+    <div id="profe-pin-error" style="color:#f87171;font-size:12px;display:none">PIN incorrecto</div>
+  </div>
+</div>
+
+<!-- ══ MODO PROFESOR ══ -->
+<div class="screen" id="s-profe">
+<div class="pw">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+    <div class="pt">Modo <em>Profesor</em> 👩‍🏫</div>
+    <button onclick="profeSalir()" style="background:none;border:1px solid var(--bd);color:var(--t3);border-radius:8px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:var(--font)">Salir</button>
+  </div>
+  <div class="ps" id="profe-clase-nombre">Gestiona tu clase · Asigna tareas · Seguimiento en tiempo real</div>
+
+  <!-- Tabs -->
+  <div style="display:flex;gap:7px;margin-bottom:14px">
+    <div class="tabb on" onclick="profeTab(this,'alumnos')" data-t="alumnos">👥 Alumnos</div>
+    <div class="tabb" onclick="profeTab(this,'tareas')" data-t="tareas">📋 Tareas</div>
+    <div class="tabb" onclick="profeTab(this,'examen')" data-t="examen">📝 Examen</div>
+    <div class="tabb" onclick="profeTab(this,'stats')" data-t="stats">📊 Stats</div>
+  </div>
+
+  <!-- Tab: Alumnos -->
+  <div id="pt-alumnos">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div class="sl">Alumnos conectados</div>
+      <button onclick="profeShareLink()" style="background:var(--yd);border:1px solid var(--yb);border-radius:8px;padding:5px 10px;font-size:11px;color:var(--y);cursor:pointer;font-family:var(--font)">📤 Compartir enlace</button>
+    </div>
+    <div id="profe-alumnos-list"></div>
+    <div style="margin-top:14px;padding:12px;background:var(--bg1);border:1px solid var(--bd);border-radius:12px">
+      <div class="sl">Añadir alumno manualmente</div>
+      <div style="display:flex;gap:8px;margin-top:6px">
+        <input id="profe-add-nombre" class="inp" placeholder="Nombre del alumno" style="flex:1">
+        <button class="mbtn" style="width:auto;padding:10px 14px" onclick="profeAddAlumno()">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab: Tareas -->
+  <div id="pt-tareas" style="display:none">
+    <div class="sl">Asignar a toda la clase</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+      <button class="gbtn" style="padding:14px;display:flex;flex-direction:column;align-items:center;gap:6px" onclick="profeAsignar('pomodoro')">
+        <span style="font-size:24px">🍅</span><span style="font-size:12px;font-weight:700">Pomodoro</span>
+        <span style="font-size:10px;color:var(--t3)">Estudiar 25 min ahora</span>
+      </button>
+      <button class="gbtn" style="padding:14px;display:flex;flex-direction:column;align-items:center;gap:6px" onclick="profeAsignar('flashcards')">
+        <span style="font-size:24px">🃏</span><span style="font-size:12px;font-weight:700">Repasar FC</span>
+        <span style="font-size:10px;color:var(--t3)">10 tarjetas ahora</span>
+      </button>
+      <button class="gbtn" style="padding:14px;display:flex;flex-direction:column;align-items:center;gap:6px" onclick="profeAsignar('simulacro')">
+        <span style="font-size:24px">⏱️</span><span style="font-size:12px;font-weight:700">Simulacro</span>
+        <span style="font-size:10px;color:var(--t3)">Examen 10 preguntas</span>
+      </button>
+      <button class="gbtn" style="padding:14px;display:flex;flex-direction:column;align-items:center;gap:6px" onclick="profeAsignar('apuntes')">
+        <span style="font-size:24px">📝</span><span style="font-size:12px;font-weight:700">Apuntes</span>
+        <span style="font-size:10px;color:var(--t3)">Tomar apuntes ahora</span>
+      </button>
+    </div>
+    <div class="sl">Historial de tareas asignadas</div>
+    <div id="profe-tareas-hist"></div>
+  </div>
+
+  <!-- Tab: Examen -->
+  <div id="pt-examen" style="display:none">
+    <div class="sl">Generar examen instantáneo</div>
+    <div style="margin-bottom:10px"><input id="profe-exam-tema" class="inp" placeholder="Tema del examen (ej: La célula, Revolución Francesa...)"></div>
+    <div style="display:flex;gap:7px;margin-bottom:10px;flex-wrap:wrap">
+      <div class="chip on" data-pn="5" onclick="document.querySelectorAll('[data-pn]').forEach(c=>c.classList.remove('on'));this.classList.add('on')">5 preg.</div>
+      <div class="chip" data-pn="10" onclick="document.querySelectorAll('[data-pn]').forEach(c=>c.classList.remove('on'));this.classList.add('on')">10 preg.</div>
+      <div class="chip" data-pn="15" onclick="document.querySelectorAll('[data-pn]').forEach(c=>c.classList.remove('on'));this.classList.add('on')">15 preg.</div>
+    </div>
+    <button class="mbtn" onclick="profeGenExamen()">📝 Generar y enviar a la clase</button>
+    <div id="profe-exam-preview" style="margin-top:14px"></div>
+  </div>
+
+  <!-- Tab: Stats -->
+  <div id="pt-stats" style="display:none">
+    <div class="sl">Resumen de la clase</div>
+    <div id="profe-stats-content"></div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══ COMPARTIR LUMIO ══ -->
+<div class="screen" id="s-compartir">
+<div class="pw">
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:0">
+    <button onclick="goTo('ajustes')" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--t2);padding:2px;line-height:1">←</button>
+    <div class="pt">Compar<em>tir</em> Lumio 📤</div>
+  </div>
+  <div class="ps">Envía Lumio a tus alumnos y compañeros</div>
+
+  <div class="card card-y" style="margin-bottom:12px">
+    <div style="font-size:13px;font-weight:800;color:var(--y);margin-bottom:8px">📱 Por WhatsApp / Telegram</div>
+    <div id="share-wa-text" style="font-size:12px;color:var(--t1);line-height:1.7;background:var(--bg2);border-radius:8px;padding:10px;margin-bottom:8px;white-space:pre-line"></div>
+    <button class="gbtn" onclick="copiarMensajeWA()">📋 Copiar mensaje</button>
+  </div>
+
+  <div class="card" style="margin-bottom:12px">
+    <div style="font-size:13px;font-weight:800;color:var(--t1);margin-bottom:8px">🔗 Enlace directo</div>
+    <div id="share-url" style="font-size:11px;color:var(--t2);background:var(--bg2);border-radius:8px;padding:10px;word-break:break-all;margin-bottom:8px"></div>
+    <button class="gbtn" onclick="copiarUrl()">📋 Copiar enlace</button>
+  </div>
+
+  <div class="card">
+    <div style="font-size:13px;font-weight:800;color:var(--t1);margin-bottom:8px">📋 Instrucciones para imprimir</div>
+    <div style="font-size:12px;color:var(--t2);line-height:1.8">
+      <b>PASO 1</b> → Abre el enlace en tu móvil con Chrome (Android) o Safari (iPhone)<br>
+      <b>PASO 2</b> → Pulsa el icono 3 puntos (Android) o Compartir ⬆ (iPhone)<br>
+      <b>PASO 3</b> → Elige <b>"Añadir a pantalla de inicio"</b><br>
+      <b>PASO 4</b> → Ya tienes Lumio instalado como app — funciona sin WiFi ✅
+    </div>
+    <button class="gbtn" style="margin-top:10px" onclick="imprimirInstrucciones()">🖨️ Imprimir instrucciones</button>
+  </div>
+</div>
+</div>
 <!-- ══ VOCABULARIO ══ -->
 <div class="screen" id="s-vocab">
 <div class="pw">
@@ -2290,6 +2576,37 @@ button:active{transform:scale(.97)}
   <div class="pt">Ajus<em>tes</em> ⚙️</div>
   <div class="ps">Personaliza tu experiencia en Lumio</div>
 
+  <!-- MODO PROFESOR -->
+  <div id="aj-profe-section" style="margin-bottom:14px">
+    <div style="font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Modo Profesor</div>
+    <div class="card" style="border-color:rgba(245,197,24,.3)">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="font-size:32px">👩‍🏫</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:700;color:var(--t1)" id="aj-profe-estado">Modo alumno activo</div>
+          <div style="font-size:11px;color:var(--t2);margin-top:2px">Gestiona tu clase, asigna tareas y genera exámenes</div>
+        </div>
+        <button id="aj-profe-btn" onclick="ajActivarProfesor()" style="background:var(--y);border:none;border-radius:10px;padding:8px 14px;font-size:12px;font-weight:700;color:#111;cursor:pointer;font-family:var(--font);white-space:nowrap">Activar</button>
+      </div>
+      <div id="aj-clase-info" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--bd);font-size:11px;color:var(--t2);display:none">
+        <span id="aj-clase-code"></span> · <button onclick="ajCambiarClase()" style="background:none;border:none;color:var(--y);font-size:11px;cursor:pointer;font-family:var(--font)">Cambiar código</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compartir Lumio -->
+  <div style="font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;margin-top:4px">Distribución</div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="font-size:28px">📤</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:700;color:var(--t1)">Compartir con alumnos</div>
+        <div style="font-size:11px;color:var(--t2);margin-top:2px">QR, mensajes WhatsApp e instrucciones</div>
+      </div>
+      <button onclick="navSection('compartir')" style="background:var(--y);border:none;border-radius:10px;padding:8px 14px;font-size:12px;font-weight:700;color:#111;cursor:pointer;font-family:var(--font)">Abrir</button>
+    </div>
+  </div>
+
   <!-- Apariencia -->
   <div style="font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Apariencia</div>
   <div class="card" style="margin-bottom:14px">
@@ -2476,7 +2793,7 @@ button:active{transform:scale(.97)}
   </div>
 
   <div class="card" style="margin-bottom:14px;margin-top:8px;background:rgba(45,212,191,.06);border-color:rgba(45,212,191,.2)">
-    <div style="font-size:11px;color:var(--t2);line-height:1.6" id="fb-info">📨 El mensaje llegará directamente a paco58760@gmail.com.</div>
+    <div style="font-size:11px;color:var(--t2);line-height:1.6" id="fb-info">📨 El mensaje llegará directamente a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3646575559030e01000676515b575f5a1855595b">[email&#160;protected]</a>.</div>
   </div>
 
   <button class="mbtn" id="fb-send-btn" onclick="sendFeedback()">📧 Enviar mensaje</button>
@@ -3527,12 +3844,19 @@ button:active{transform:scale(.97)}
   <div class="pwa-arrow-bar">
     <div class="pwa-arrow-label">Pulsa ⬆ Compartir</div>
     <div class="pwa-arrow-icon">⬇️</div>
-  </div>
+  
+    <div style="padding:0 14px 2px;display:flex;justify-content:flex-end">
+      <button onclick="chatFotoFC()" style="background:none;border:1px solid var(--bd);border-radius:20px;padding:5px 12px;font-size:11px;color:var(--t2);cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:5px" ontouchstart="this.style.borderColor='var(--y)'" ontouchend="this.style.borderColor='var(--bd)'">📸 Foto → Flashcards</button>
+    </div></div>
 </div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ════════════════════════════════════════════════════════
 // DATA
 // ════════════════════════════════════════════════════════
+// Vibración háptica
+function haptic(t){
+  try{if(!navigator.vibrate)return;navigator.vibrate({light:[20],medium:[40],heavy:[70],success:[20,40,20],error:[70,30,70]}[t]||[20]);}catch(e){}
+}
 const APP_VERSION='3.4.0';
 // Cambia esta URL por la raw de tu archivo en GitHub:
 const GITHUB_RAW_URL='';
@@ -3816,8 +4140,8 @@ const RETOS=[
 const SECTIONS={
   home:{screens:['home'],labels:[],single:true},
   estudiar:{
-    screens:['estudiar-menu','chat','apuntes','flashcards','pom-screen','testia','examen','resumenia','corrector','dictado','esquemas','mapa','feynman','lectura','comparador','mnemonics','resaltador','simplificador'],
-    labels:['🏠 Menú','💬 Chat IA','📝 Apuntes','🃏 Flashcards','⏱️ Pomodoro','🧠 Test IA','📈 Examen','📄 Resumen IA','✍️ Corrector','🎙️ Dictado','🗂️ Esquemas','🗺️ Mapa','🧑‍🏫 Feynman','🔍 Lectura activa','⚖️ Comparador','🧠 Mnemonics','✨ Resaltador','📖 Simplificar'],
+    screens:['estudiar-menu','chat','apuntes','flashcards','pom-screen','testia','examen','simulacro','resumenia','corrector','dictado','esquemas','mapa','feynman','lectura','comparador','mnemonics','resaltador','simplificador'],
+    labels:['🏠 Menú','💬 Chat IA','📝 Apuntes','🃏 Flashcards','⏱️ Pomodoro','🧠 Test IA','📈 Examen','⏱️ Simulacro','📄 Resumen IA','✍️ Corrector','🎙️ Dictado','🗂️ Esquemas','🗺️ Mapa','🧑‍🏫 Feynman','🔍 Lectura activa','⚖️ Comparador','🧠 Mnemonics','✨ Resaltador','📖 Simplificar'],
     landingScreen:'estudiar-menu',
   },
   clase:{
@@ -3825,6 +4149,7 @@ const SECTIONS={
     labels:['🏠 Menú','🏫 Mis clases','📋 Clase actual','💬 Mural dudas','📢 Anuncios','🃏 Tarjetas clase'],
     landingScreen:'clase-menu',
   },
+  profe:{screens:['clase-menu'],labels:[],single:true},
   agenda:{
     screens:['agenda-menu','agenda','planificador','horario','vacaciones','semana-view','cronometro-deberes','estimador','notas-historial'],
     labels:['🏠 Menú','📋 Deberes','🗓️ Exámenes','📅 Horario','🏖️ Vacaciones','📆 Semana','⏱️ Cronómetro','🎯 Estimador','📊 Mis notas'],
@@ -3839,6 +4164,8 @@ const SECTIONS={
     labels:['🏠 Menú','📊 Estadísticas','🔥 Heatmap','📋 Informe','🔎 Detector','🎯 Predictor','🏆 Logros','📚 Materias','🧘 Bienestar','🎵 Sonidos','🔔 Avisos','📅 Calendario','🏅 Ranking','📘 Anaya','👥 Invitar','🔍 Buscar','💬 Feedback','⚙️ Ajustes'],
     landingScreen:'perfil-menu',
   },
+  profe:{screens:['profe'],labels:[],single:true},
+  compartir:{screens:['compartir'],labels:[],single:true},
 };
 let currentSection='home';let currentScreen='home';
 
@@ -3872,20 +4199,41 @@ const _SCREEN_DESCS={"apuntes": "Escribe y organiza", "flashcards": "Memoriza co
 }
 
 function goTo(id){
+  // Restaurar nav si salimos del chat
+  if(id!=='chat'){
+    const nb=document.getElementById('nav-bar');
+    const sn=document.querySelector('.subnav');
+    if(nb)nb.style.display='';
+    if(sn)sn.style.display='';
+  }
   currentScreen=id;
-  try{document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));}catch(e){}
+  try{document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active','slide-in');s.style.display='';});}catch(e){}
   const sc=document.getElementById('s-'+id);
-  if(sc){sc.classList.add('active');}else{console.warn('goTo: screen not found: s-'+id);}
+  if(sc){
+    sc.classList.add('active');
+    sc.style.display='flex'; // forzar visible aunque haya inline display:none
+    sc.classList.remove('slide-in');
+    sc.offsetWidth;sc.classList.add('slide-in');
+  }else{console.warn('goTo: screen not found: s-'+id);}
   document.querySelectorAll('#sub-nav .snb').forEach(b=>b.classList.toggle('active',b.dataset.scr===id));
-  const bldrs={home:bHome,'estudiar-menu':function(){},'agenda-menu':function(){},'clase-menu':function(){},'perfil-menu':function(){},'pom-screen':bPomScreen,stats:bStats,apuntes:bApuntesScreen,materias:bMats,flashcards:bFC,testia:bIA,resumenia:bResumen,mapa:bMapa,chat:bChat,vocab:bVocab,calc:bCalc,conversor:bConv,tabla:bTabla,timeline:bTL,horario:bHorario,planificador:bPlan,examen:bExamen,logros:bLogros,recordatorios:bRecord,amigos:bAmigos,calendario:bCal,sonidos:bSonidos,agenda:bAgenda,vacaciones:bVacaciones,formulas:bFormulas,conjugador:bConjugador,calcnotas:bCalcNotas,ppt:bPPT,esquemas:bEsquemas,dictado:bDictado,corrector:bCorrector,ranking:bRanking,bienestar:bBienestar,anaya:bAnaya,ajustes:bAjustes,feedback:bFeedback,'clase-lista':bClaseLista,'clase-detalle':bClaseDetalle,mural:bMural,anuncios:bAnuncios,'fc-clase':bFcClase,feynman:bFeynman,lectura:bLectura,comparador:bComparador,mnemonics:bMnemonics,resaltador:bResaltador,simplificador:bSimplificador,'semana-view':bSemanaView,'cronometro-deberes':bCronometro,estimador:bEstimador,'notas-historial':bNotasHistorial,heatmap:bHeatmap,informe:bInforme,detector:bDetector,predictor:bPredictor,busqueda:bBusqueda};
+  const bldrs={home:bHome,'estudiar-menu':function(){},'agenda-menu':function(){},'clase-menu':bClaseMenu,'perfil-menu':function(){},'pom-screen':bPomScreen,stats:bStats,apuntes:bApuntesScreen,materias:bMats,flashcards:bFC,testia:bIA,resumenia:bResumen,mapa:bMapa,chat:bChat,vocab:bVocab,calc:bCalc,conversor:bConv,tabla:bTabla,timeline:bTL,horario:bHorario,planificador:bPlan,examen:bExamen,'profe':bProfe,'compartir':bCompartir,simulacro:bSimulacro,logros:bLogros,recordatorios:bRecord,amigos:bAmigos,calendario:bCal,sonidos:bSonidos,agenda:bAgenda,vacaciones:bVacaciones,formulas:bFormulas,conjugador:bConjugador,calcnotas:bCalcNotas,ppt:bPPT,esquemas:bEsquemas,dictado:bDictado,corrector:bCorrector,ranking:bRanking,bienestar:bBienestar,anaya:bAnaya,ajustes:bAjustes,feedback:bFeedback,'clase-lista':bClaseLista,'clase-detalle':bClaseDetalle,mural:bMural,anuncios:bAnuncios,'fc-clase':bFcClase,feynman:bFeynman,lectura:bLectura,comparador:bComparador,mnemonics:bMnemonics,resaltador:bResaltador,simplificador:bSimplificador,'semana-view':bSemanaView,'cronometro-deberes':bCronometro,estimador:bEstimador,'notas-historial':bNotasHistorial,heatmap:bHeatmap,informe:bInforme,detector:bDetector,predictor:bPredictor,busqueda:bBusqueda};
   if(bldrs[id])bldrs[id]();
+  // Limpiar intervalos del pomodoro si salimos de él
+  if(id!=='pom-screen'&&window._pomTimer){clearInterval(window._pomTimer);window._pomTimer=null;}
   const fabBar=document.getElementById('fab-bar');if(fabBar)fabBar.classList.toggle('hidden-fab',id==='chat');
   // Hide bottom nav for chat (full-screen experience)
   const nav=document.getElementById('nav');
   if(id==='chat'){
     if(nav)nav.style.display='none';
+    // Forzar display del chat
+    if(sc){sc.style.display='flex';sc.style.flexDirection='column';}
   }else{
     if(nav)nav.style.display='';
+    // Restaurar nav-bar y subnav
+    const nb2=document.getElementById('nav-bar');
+    const sn2=document.querySelector('.subnav');
+    if(nb2)nb2.style.display='';
+    if(sn2)sn2.style.display='';
   }
 }
 
@@ -4010,6 +4358,20 @@ function renderStudyToday(){
 }
 const XP_LEVELS=[0,100,250,450,700,1000,1400,1900,2500,3200,4000];
 const XP_NAMES=['Principiante','Estudiante','Aplicado','Dedicado','Constante','Experto','Maestro','Sabio','Genio','Leyenda'];
+function celebrarLogro(l){
+  const el=document.createElement('div');
+  el.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);z-index:99999;background:var(--bg1);border:2px solid var(--y);border-radius:20px;padding:24px 32px;text-align:center;pointer-events:none;transition:transform .3s cubic-bezier(.4,0,.2,1)';
+  el.innerHTML=`<div style="font-size:52px">${l.ico}</div><div style="font-size:15px;font-weight:900;color:var(--y);margin-top:8px">¡Logro desbloqueado!</div><div style="font-size:13px;font-weight:700;color:var(--t1)">${l.nm}</div><div style="font-size:11px;color:var(--t2)">${l.desc}</div><div style="font-size:13px;color:var(--y);font-weight:700;margin-top:8px">+${l.xp} XP</div>`;
+  document.body.appendChild(el);
+  requestAnimationFrame(()=>el.style.transform='translate(-50%,-50%) scale(1)');
+  haptic('success');
+  setTimeout(()=>{el.style.transform='translate(-50%,-50%) scale(0)';setTimeout(()=>el.remove(),300);},3200);
+}
+let _logrosVistos=new Set(JSON.parse(localStorage.getItem('lumio_logros_v')||'[]'));
+function checkNuevosLogros(){
+  if(!window.LOGROS_DEF) return;
+  LOGROS_DEF.forEach((l,i)=>{if(l.cond()&&!_logrosVistos.has(i)){_logrosVistos.add(i);localStorage.setItem('lumio_logros_v',JSON.stringify([..._logrosVistos]));setTimeout(()=>celebrarLogro(l),600+i*300);}});
+}
 function gainXP(amount){
   D.user.xp=(D.user.xp||0)+amount;
   toast(`+${amount} XP ✨`);
@@ -5388,7 +5750,7 @@ function saveCard(){
     }
     toast('✅ Tarjeta actualizada','success');
   }else{
-    const card={id:'fc'+Date.now(),m:mat,q:q||'(ver foto)',a:a||'(ver foto)',lv:1};
+    const card={id:'fc'+Date.now(),m:mat,q:q||'(ver foto)',a:a||'(ver foto)',lv:1,ef:2.5,interval:1,reps:0,due:_localISO()};
     if(imgQ)card.imgQ=imgQ; if(imgA)card.imgA=imgA;
     D.cards.push(card);
     toast('🃏 Tarjeta creada +2 XP','success');gainXP(2);
@@ -5465,7 +5827,7 @@ Las preguntas deben ser concisas. Las respuestas breves y claras, máximo 2 fras
     let added=0;
     (data.tarjetas||[]).forEach(t=>{
       if(t.pregunta&&t.respuesta){
-        D.cards.push({id:'fc'+Date.now()+Math.random().toString(36).slice(2,6),m:mat,q:t.pregunta,a:t.respuesta,lv:1});
+        D.cards.push({id:'fc'+Date.now()+Math.random().toString(36).slice(2,6),m:mat,q:t.pregunta,a:t.respuesta,lv:1,ef:2.5,interval:1,reps:0,due:_localISO()});
         added++;
       }
     });
@@ -5587,17 +5949,41 @@ function doFlip(){
   document.getElementById('fc-fi').style.transform=isF?'rotateY(180deg)':'rotateY(0deg)';
   document.getElementById('fc-er').style.display=isF?'flex':'none';
 }
-function evCard(ok){
+// SuperMemo 2 — algoritmo de repetición espaciada
+function sm2Update(card, q){
+  // q: 0=total fallo, 1=difícil, 2=correcto, 3=fácil
+  if(!card.ef||card.ef<1.3) card.ef=2.5;
+  if(!card.interval) card.interval=1;
+  if(!card.reps) card.reps=0;
+  if(q<2){ card.reps=0; card.interval=1; }
+  else{
+    if(card.reps===0) card.interval=1;
+    else if(card.reps===1) card.interval=6;
+    else card.interval=Math.round(card.interval*card.ef);
+    card.reps++;
+  }
+  card.ef=Math.max(1.3, card.ef+(0.1-(3-q)*(0.08+(3-q)*0.02)));
+  const next=new Date(); next.setDate(next.getDate()+card.interval);
+  card.due=_localISO(next);
+  card.lv=q<2?1:Math.min(5,card.reps+1);
+  return card;
+}
+function evCard(ok, quality){
   const c=rC[rI];
   const i=D.cards.findIndex(x=>x.id===c.id);
-  if(i>=0)D.cards[i].lv=ok?Math.min(c.lv+1,5):1;
+  const q=quality!==undefined?quality:(ok?2:0);
+  if(i>=0) D.cards[i]=sm2Update({...D.cards[i]}, q);
   D.user.cardsRevised++;
-  if(ok)gainXP(2);
-  rI++;ldCard();
-  saveState();
-  // Recalc the materia progress for this card's subject
+  gainXP(q>=2?2:0);
+  updateStudyStreak();
+  rI++; ldCard(); saveState();
   const mat=D.mats.find(m=>m.n===c.m);
-  if(mat)recalcMatProgress(mat);
+  if(mat) recalcMatProgress(mat);
+  // Toast con próxima revisión
+  if(ok && D.cards[i]?.interval>1){
+    const d=D.cards[i].interval;
+    toast(`✅ Próxima revisión: ${d===1?'mañana':d<7?d+'d':d<30?Math.round(d/7)+'sem':Math.round(d/30)+'mes'}`, 1400);
+  }
 }
 // enRep/exRep defined above
 
@@ -5958,7 +6344,19 @@ async function genResumen(){
   try{
     const bullets=aiSummarize(txt,8);
     lastResumen=bullets;
-    document.getElementById('res-content').innerHTML=bullets.split('\n').filter(l=>l.trim()).map(l=>`<div style="display:flex;gap:8px;margin-bottom:8px;align-items:flex-start"><span style="color:var(--y);flex-shrink:0;margin-top:2px">•</span><span style="font-size:13px;color:var(--t1);line-height:1.5;flex:1">${l.replace(/^[-•*]\s*/,'')}</span></div>`).join('');
+    const lines=bullets.split('\n').filter(l=>l.trim());
+    document.getElementById('res-content').innerHTML=lines.map(l=>{
+      const clean=l.replace(/^[-•*]\s*/,'');
+      const isDate=l.startsWith('📅');
+      const isCause=l.startsWith('⚡');
+      const isDef=clean.includes('**')&&clean.includes(':');
+      let rendered=clean
+        .replace(/\*\*([^*]+)\*\*/g,'<b style="color:var(--t1)">$1</b>')
+        .replace(/\*([^*]+)\*/g,'<em>$1</em>');
+      const accent=isDate?'var(--teal)':isCause?'#f97316':isDef?'var(--y)':'var(--y)';
+      const icon=isDate?'📅':isCause?'⚡':isDef?'🔑':'•';
+      return `<div style="display:flex;gap:10px;margin-bottom:10px;align-items:flex-start;padding:8px 10px;background:var(--bg2);border-radius:10px;border-left:3px solid ${accent}"><span style="color:${accent};flex-shrink:0;font-size:14px;margin-top:1px">${icon}</span><span style="font-size:13px;color:var(--t1);line-height:1.6;flex:1">${rendered}</span></div>`;
+    }).join('');
     document.getElementById('res-result').style.display='block';
     gainXP(8);
   }catch(e){toast('❌ '+e.message.slice(0,55));}
@@ -5970,13 +6368,24 @@ function aiSummarize(txt,n=8){
   const sents=aiSentences(txt);
   if(!sents.length)return txt.slice(0,300);
   const tf=aiTF(sents);
-  // Use MMR for diverse summary
   const best=aiMMR(sents,tf,Math.min(n,sents.length));
-  // Also extract key definitions as extra bullets
-  const defs=aiDefinitions(txt).slice(0,3);
-  const defBullets=defs.filter(d=>!best.some(s=>s.toLowerCase().includes(d.term.toLowerCase().slice(0,6)))).map(d=>`**${d.term}**: ${d.def.slice(0,80)}`);
+  // Extraer definiciones clave
+  const defs=aiDefinitions(txt).slice(0,4);
+  const defBullets=defs
+    .filter(d=>!best.some(s=>s.toLowerCase().includes(d.term.toLowerCase().slice(0,6))))
+    .map(d=>`**${d.term}**: ${d.def.slice(0,90)}`);
+  // Extraer fechas importantes
+  const dates=aiDates(txt).slice(0,3)
+    .filter(d=>!best.some(s=>s.includes(d.when)))
+    .map(d=>`📅 ${d.event.slice(0,60)}: **${d.when}**`);
+  // Extraer causa-efecto
+  const causes=aiCauseEffect(txt).slice(0,2)
+    .filter(ce=>!best.some(s=>s.toLowerCase().includes(ce.cause.toLowerCase().slice(0,10))))
+    .map(ce=>`⚡ ${ce.cause.slice(0,50)} → ${ce.effect.slice(0,60)}`);
+
   const bullets=best.map(s=>'• '+aiCap(s.trim().replace(/^[-•*]\s*/,'')));
-  return[...bullets,...defBullets.map(b=>'• '+b)].join('\n');
+  const extras=[...defBullets.map(b=>'• '+b),...dates,...causes];
+  return[...bullets,...extras].slice(0,n+2).join('\n');
 }
 
 // ── Missing builder stubs ──
@@ -6004,7 +6413,13 @@ function resIA2FC(){toast('🃏 Usa "Flashcards → ✨ IA" para generar tarjeta
 // ════════════════════════════════════════════════════════
 // MAPA MENTAL — generador local
 // ════════════════════════════════════════════════════════
-function bMapa(){}
+function bMapa(){
+  // Inicializar selector de materias en el mapa mental
+  const el=document.getElementById('mapa-mat-chips');
+  if(el&&!el.children.length){
+    el.innerHTML=D.mats.map(m=>`<div class="chip${m.n===D.mats[0]?.n?' on':''}" onclick="document.querySelectorAll('#mapa-mat-chips .chip').forEach(c=>c.classList.remove('on'));this.classList.add('on')">${m.e||'📚'} ${m.n.split(' ')[0]}</div>`).join('');
+  }
+}
 async function genMapa(){
   const tema=document.getElementById('mapa-tema').value.trim();
   const info=document.getElementById('mapa-info').value.trim();
@@ -6090,67 +6505,423 @@ function renderMindMap(data){
 // ════════════════════════════════════════════════════════
 // CHAT IA — respuestas basadas en apuntes + patrones
 // ════════════════════════════════════════════════════════
-let chatHistory=[];
+// ── SISTEMA DE CHATS GUARDADOS ──────────────────────────────────────────
+let chatHistory = [];
+let _chatMode = 'tutor'; // tutor | socratico | debate | examen
 
-function appendMsg(text, role){
-  const msgs=document.getElementById('chat-msgs');
-  if(!msgs)return null;
-  const div=document.createElement('div');
+function setChatMode(mode){
+  _chatMode = mode;
+  document.querySelectorAll('#chat-modes .chat-chip').forEach(el=>{
+    const on = el.id === 'mode-'+mode;
+    el.style.borderColor = on ? 'var(--y)' : 'var(--bd)';
+    el.style.color = on ? 'var(--y)' : 'var(--t2)';
+    el.style.fontWeight = on ? '700' : '400';
+  });
+  const subs = {tutor:'Modo tutor activo',socratico:'🤔 Modo socrático',debate:'⚖️ Modo debate',examen:'📝 Modo examen'};
+  const sub = document.getElementById('chat-subtitle');
+  if(sub) sub.textContent = subs[mode]||'';
+  toast('Modo '+mode, 1200);
+}
+function _getModeSystemPrompt(base){
+  const ext = {
+    socratico:'\nMODO SOCRÁTICO: NO des la respuesta. Guía con preguntas que lleven al alumno a descubrirla. Máx 2 preguntas por turno.',
+    debate:'\nMODO DEBATE: Presenta siempre AMBOS lados: ✅ argumentos a favor y ❌ argumentos en contra, luego conclusión.',
+    examen:'\nMODO EXAMEN: Evalúa cada respuesta del alumno con nota 0-10 y explica qué falta. Luego haz otra pregunta del tema.'
+  };
+  return base + (ext[_chatMode]||'');
+}
+let _activeChatId = null;
+
+// Cargar/guardar sesiones de chat en localStorage
+function _chatSessions(){
+  try{ return JSON.parse(localStorage.getItem('lumio_chats')||'[]'); }catch(e){ return []; }
+}
+function _saveSessions(sessions){
+  try{ localStorage.setItem('lumio_chats', JSON.stringify(sessions.slice(0,30))); }catch(e){}
+}
+
+// Crear ID único
+function _chatId(){ return 'chat_'+Date.now()+'_'+Math.random().toString(36).slice(2,6); }
+
+// Título automático desde primer mensaje del usuario
+function _chatTitle(msgs){
+  const first = msgs.find(m=>m.role==='user');
+  if(!first) return 'Chat sin título';
+  return first.content.slice(0,45)+(first.content.length>45?'…':'');
+}
+
+// Guardar sesión activa
+function _saveChatSession(){
+  if(!_activeChatId || !chatHistory.length) return;
+  const sessions = _chatSessions();
+  const idx = sessions.findIndex(s=>s.id===_activeChatId);
+  const session = {
+    id: _activeChatId,
+    title: _chatTitle(chatHistory),
+    updatedAt: Date.now(),
+    messages: chatHistory.slice(-40) // máx 40 mensajes por sesión
+  };
+  if(idx>=0) sessions[idx]=session;
+  else sessions.unshift(session);
+  // Ordenar por más reciente
+  sessions.sort((a,b)=>b.updatedAt-a.updatedAt);
+  _saveSessions(sessions);
+}
+
+// Cargar sesión por id
+function _loadChatSession(id){
+  const sessions = _chatSessions();
+  const s = sessions.find(s=>s.id===id);
+  if(!s) return;
+  _activeChatId = id;
+  chatHistory = s.messages||[];
+  // Renderizar mensajes
+  const msgs = document.getElementById('chat-msgs');
+  if(!msgs) return;
+  msgs.innerHTML='';
+  const chips = document.getElementById('chat-chips');
+  if(chips) chips.style.display = chatHistory.length?'none':'flex';
+  // Mostrar mensajes con un pequeño delay para animación
+  chatHistory.forEach((m,i)=>{
+    if(m.role==='system') return;
+    setTimeout(()=>_renderMsg(m.content, m.role==='user'?'user':'ai', false), i*20);
+  });
+  setTimeout(()=>{ if(msgs) msgs.scrollTop=msgs.scrollHeight; }, chatHistory.length*20+50);
+  // Actualizar título header
+  const titleEl = document.getElementById('chat-session-title');
+  if(titleEl) titleEl.innerHTML = _chatTitle(chatHistory)||'Tutor <span style="color:var(--y)">IA</span>';
+}
+
+// Renderizar un mensaje SIN guardarlo en history (para cargar sesiones)
+function _renderMsg(text, role, withActions=true){
+  const msgs = document.getElementById('chat-msgs');
+  if(!msgs) return null;
+  const wrap = document.createElement('div');
+  wrap.style.cssText='display:flex;gap:9px;align-items:flex-start;'+(role==='user'?'flex-direction:row-reverse':'');
+  // Avatar
+  const av = document.createElement('div');
+  av.style.cssText='width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:2px;'+(role==='ai'?'background:linear-gradient(135deg,var(--y),#f97316)':'background:var(--bg2);border:1px solid var(--bd)');
+  av.textContent=role==='ai'?'🤖':'👤';
+  // Burbuja
+  const bubble = document.createElement('div');
+  bubble.style.cssText='display:flex;flex-direction:column;align-items:'+(role==='user'?'flex-end':'flex-start')+';max-width:86%;gap:4px';
+  const div = document.createElement('div');
   div.className='msg msg-'+role;
-  div.textContent=text;
-  msgs.appendChild(div);
+  // Render markdown
+  let rendered = text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/```([\s\S]*?)```/g,(m,c)=>`<pre style="background:var(--bg2);border:1px solid var(--bd);border-radius:8px;padding:10px;font-size:12px;overflow-x:auto;margin:6px 0;font-family:monospace;white-space:pre-wrap">${c}</pre>`)
+    .replace(/`([^`]+)`/g,'<code style="background:var(--bg2);padding:1px 5px;border-radius:4px;font-family:monospace;font-size:12px">$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g,'<b style="color:var(--t1)">$1</b>')
+    .replace(/\*([^*]+)\*/g,'<em>$1</em>')
+    .replace(/^(\d+)\.\s+(.+)$/gm,'<div style="display:flex;gap:6px;margin:3px 0"><span style="color:var(--y);font-weight:700;flex-shrink:0">$1.</span><span>$2</span></div>')
+    .replace(/^[•\-\*]\s+(.+)$/gm,'<div style="display:flex;gap:6px;margin:3px 0"><span style="color:var(--y);flex-shrink:0">•</span><span>$1</span></div>')
+    .replace(/^#{1,3}\s+(.+)$/gm,'<div style="font-weight:800;color:var(--t1);margin:6px 0 3px;font-size:14px">$1</div>')
+    .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+  div.innerHTML = rendered;
+  bubble.appendChild(div);
+  // Botones de acción (solo para respuestas AI)
+  if(withActions && role==='ai'){
+    const actions = document.createElement('div');
+    actions.className = 'msg-actions';
+    const txt = text; // captura para closure
+    // Botón copiar
+    const btnCopy = document.createElement('button');
+    btnCopy.className='msg-action-btn';
+    btnCopy.innerHTML='📋 Copiar';
+    btnCopy.onclick=()=>{
+      navigator.clipboard?.writeText(txt).then(()=>{btnCopy.innerHTML='✅ Copiado';setTimeout(()=>btnCopy.innerHTML='📋 Copiar',1500);}).catch(()=>{});
+    };
+    // Botón guardar como apunte
+    const btnNote = document.createElement('button');
+    btnNote.className='msg-action-btn';
+    btnNote.innerHTML='📝 Guardar apunte';
+    btnNote.onclick=()=>chatSaveAsNote(txt, btnNote);
+    actions.appendChild(btnCopy);
+    actions.appendChild(btnNote);
+    bubble.appendChild(actions);
+  }
+  if(role==='user'){wrap.appendChild(bubble);wrap.appendChild(av);}
+  else{wrap.appendChild(av);wrap.appendChild(bubble);}
+  msgs.appendChild(wrap);
   msgs.scrollTop=msgs.scrollHeight;
   return div;
 }
 
+// Guardar respuesta de IA como apunte
+function chatSaveAsNote(text, btn){
+  try{
+    // Limpiar markdown para el apunte
+    const clean = text
+      .replace(/\*\*([^*]+)\*\*/g,'$1')
+      .replace(/\*([^*]+)\*/g,'$1')
+      .replace(/^#{1,3}\s+/gm,'')
+      .replace(/`([^`]+)`/g,'$1')
+      .replace(/```[\s\S]*?```/g,'[código]');
+    const title = 'IA: ' + clean.slice(0,50).replace(/\n/g,' ');
+    const mat = D.mats[0]?.n || 'General';
+    // Guardar en el sistema de apuntes v2
+    const notes = JSON.parse(localStorage.getItem('lumio_notes_v2')||'[]');
+    notes.unshift({
+      id: Date.now(),
+      title,
+      body: '🤖 Respuesta del tutor IA:\n\n' + clean,
+      mat,
+      ts: Date.now(),
+      tags: ['ia']
+    });
+    localStorage.setItem('lumio_notes_v2', JSON.stringify(notes));
+    if(btn){ btn.innerHTML='✅ Guardado'; setTimeout(()=>btn.innerHTML='📝 Guardar apunte',1800); }
+    toast('✅ Apunte guardado en '+mat);
+    gainXP(2);
+  }catch(e){ toast('❌ Error guardando'); }
+}
+
+function appendMsg(text, role){
+  // Para el typing placeholder del AI lo manejamos directamente en sendChat
+  // Para mensajes del usuario usamos _renderMsg normal
+  if(role==='user') return _renderMsg(text, 'user', false);
+  // Para AI (greeting, etc.) sin acciones
+  return _renderMsg(text, 'ai', false);
+}
 function bChat(){
+  // Forzar visibilidad
+  const sc=document.getElementById('s-chat');
+  if(sc){sc.style.display='flex';}
+  // Ocultar nav
+  const nav=document.getElementById('nav');
+  const nb=document.getElementById('nav-bar');
+  const sn=document.querySelector('.subnav');
+  if(nav)nav.style.display='none';
+  if(nb)nb.style.display='none';
+  if(sn)sn.style.display='none';
+
   const msgs=document.getElementById('chat-msgs');
-  if(msgs&&msgs.children.length===0){
-    try{resetChatCtx();}catch(e){}
-    appendMsg(LumioAI._greeting(),'ai');
+  if(!msgs)return;
+
+  // Si hay sesión activa y ya tiene mensajes, solo scroll
+  if(_activeChatId && msgs.children.length>0){
+    setTimeout(()=>{ msgs.scrollTop=msgs.scrollHeight; const inp=document.getElementById('chat-inp');if(inp)inp.focus(); },100);
+    return;
   }
+
+  // Iniciar sesión nueva si no hay
+  if(!_activeChatId){
+    _activeChatId = _chatId();
+    chatHistory = [];
+  }
+
+  // Cargar sesión guardada si tiene mensajes
+  if(chatHistory.length>0 && msgs.children.length===0){
+    chatHistory.forEach((m,i)=>{
+      if(m.role!=='system') setTimeout(()=>_renderMsg(m.content,m.role==='user'?'user':'ai',false),i*15);
+    });
+    const chips=document.getElementById('chat-chips');
+    if(chips)chips.style.display='none';
+    setTimeout(()=>{ msgs.scrollTop=msgs.scrollHeight; },chatHistory.length*15+80);
+    return;
+  }
+
+  // Chat vacío — mostrar saludo
+  if(msgs.children.length===0){
+    try{resetChatCtx();}catch(e){}
+    try{
+      const greeting=LumioAI._greeting();
+      _renderMsg(greeting,'ai',false);
+      // Guardar en history para que Pollinations NO lo repita
+      chatHistory=[{role:'assistant',content:greeting}];
+    }catch(e){
+      const fallbackGreet='¡Hola! 👋 Soy tu tutor IA. Pregúntame cualquier duda del colegio.';
+      _renderMsg(fallbackGreet,'ai',false);
+      chatHistory=[{role:'assistant',content:fallbackGreet}];
+    }
+    const chips=document.getElementById('chat-chips');
+    if(chips)chips.style.display='flex';
+  }
+
+  setTimeout(()=>{ msgs.scrollTop=msgs.scrollHeight; const inp=document.getElementById('chat-inp');if(inp)inp.focus(); },150);
+}
+
+function chatBorrar(){
+  // Borrar sesión activa
+  if(_activeChatId){
+    const sessions=_chatSessions().filter(s=>s.id!==_activeChatId);
+    _saveSessions(sessions);
+  }
+  chatHistory=[];
+  _activeChatId=null;
+  try{LumioAI._convCtx={lastTopic:null,lastMat:null,turnCount:0,askedAbout:[]};}catch(e){}
+  const msgs=document.getElementById('chat-msgs');
+  if(msgs)msgs.innerHTML='';
+  const chips=document.getElementById('chat-chips');
+  if(chips)chips.style.display='flex';
+  chatHistoryClose();
+  bChat();
+  toast('🗑 Chat eliminado');
+}
+
+function chatNuevo(){
+  _saveChatSession(); // guardar actual antes de crear nuevo
+  chatHistory=[];
+  _activeChatId=_chatId();
+  try{LumioAI._convCtx={lastTopic:null,lastMat:null,turnCount:0,askedAbout:[]};}catch(e){}
+  const msgs=document.getElementById('chat-msgs');
+  if(msgs)msgs.innerHTML='';
+  const chips=document.getElementById('chat-chips');
+  if(chips)chips.style.display='flex';
+  chatHistoryClose();
+  // Saludo nuevo
+  try{
+    const g=LumioAI._greeting();
+    _renderMsg(g,'ai',false);
+    chatHistory=[{role:'assistant',content:g}];
+  }catch(e){
+    const g2='¡Hola! 👋 ¿En qué te ayudo?';
+    _renderMsg(g2,'ai',false);
+    chatHistory=[{role:'assistant',content:g2}];
+  }
+  // Actualizar título
+  const titleEl=document.getElementById('chat-session-title');
+  if(titleEl)titleEl.innerHTML='Tutor <span style="color:var(--y)">IA</span>';
+  const inp=document.getElementById('chat-inp');
+  if(inp)inp.focus();
+}
+
+function chatHistoryOpen(){
+  const panel=document.getElementById('chat-history-panel');
+  if(!panel)return;
+  _renderHistoryList();
+  panel.classList.add('open');
+}
+
+function chatHistoryClose(){
+  const panel=document.getElementById('chat-history-panel');
+  if(panel)panel.classList.remove('open');
+}
+
+function _renderHistoryList(){
+  const list=document.getElementById('chat-history-list');
+  if(!list)return;
+  const sessions=_chatSessions();
+  if(!sessions.length){
+    list.innerHTML='<div style="padding:32px 16px;text-align:center;color:var(--t3)"><div style="font-size:36px;margin-bottom:8px">💬</div><div style="font-size:13px">No hay chats guardados todavía</div><div style="font-size:12px;margin-top:4px;color:var(--t3)">Empieza una conversación y se guardará automáticamente</div></div>';
+    return;
+  }
+  list.innerHTML=sessions.map(s=>{
+    const d=new Date(s.updatedAt);
+    const dateStr=d.toLocaleDateString('es',{day:'numeric',month:'short'});
+    const timeStr=d.toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'});
+    const isActive=s.id===_activeChatId;
+    const count=s.messages?.filter(m=>m.role!=='system').length||0;
+    return `<div class="chat-session-item${isActive?' active':''}" onclick="chatLoadSession('${s.id}')">
+      <div style="width:38px;height:38px;border-radius:12px;background:${isActive?'var(--y)':'var(--bg2)'};display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💬</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:700;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.title}</div>
+        <div style="font-size:11px;color:var(--t3);margin-top:2px">${count} mensajes · ${dateStr} ${timeStr}</div>
+      </div>
+      <button onclick="event.stopPropagation();chatDeleteSession('${s.id}')" style="background:none;border:none;color:var(--t3);cursor:pointer;padding:6px;font-size:16px;border-radius:8px;flex-shrink:0" ontouchstart="this.style.color='#f87171'" ontouchend="this.style.color='var(--t3)'">🗑</button>
+    </div>`;
+  }).join('');
+}
+
+function chatLoadSession(id){
+  _saveChatSession(); // guardar actual
+  _loadChatSession(id);
+  chatHistoryClose();
+}
+
+function chatDeleteSession(id){
+  const sessions=_chatSessions().filter(s=>s.id!==id);
+  _saveSessions(sessions);
+  if(id===_activeChatId){
+    chatHistory=[];
+    _activeChatId=null;
+    const msgs=document.getElementById('chat-msgs');
+    if(msgs)msgs.innerHTML='';
+    chatHistoryClose();
+    bChat();
+  }else{
+    _renderHistoryList();
+  }
+  toast('🗑 Chat eliminado');
+}
+
+function chatChip(txt){
+  const inp=document.getElementById('chat-inp');
+  if(inp){inp.value=txt;inp.style.height='auto';}
+  const chips=document.getElementById('chat-chips');
+  if(chips)chips.style.display='none';
+  // Asegurar que hay sesión activa
+  if(!_activeChatId) _activeChatId=_chatId();
+  sendChat();
 }
 
 // ── Sistema de IA: Pollinations.ai (gratis, sin key) + fallback local ──
-async function callAI(systemPrompt, userMsg, maxTokens=600){
-  // Try Pollinations if online, else use local immediately
-  if(!navigator.onLine) return aiChatLocal(userMsg);
+async function callAI(systemPrompt, userMsg, maxTokens=700){
+  // Siempre calcular respuesta local en paralelo (garantía offline)
+  const localPromise=Promise.resolve(aiChatLocal(userMsg));
+  if(!navigator.onLine) return localPromise;
   try{
-    const res=await fetch('https://text.pollinations.ai/openai',{
+    const ctrl=new AbortController();
+    const tid=setTimeout(()=>ctrl.abort(),10000);
+    const onlinePromise=fetch('https://text.pollinations.ai/openai',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         model:'openai',
         messages:[
           {role:'system',content:systemPrompt},
-          ...chatHistory.slice(-8),
+          ...chatHistory.slice(-10), // Contexto ampliado para mejor coherencia
           {role:'user',content:userMsg}
         ],
         max_tokens:maxTokens,
-        seed:Math.floor(Math.random()*9999)
+        temperature:0.8,
+        seed:Math.floor(Math.random()*99999)
       }),
-      signal:(()=>{const c=new AbortController();setTimeout(()=>c.abort(),12000);return c.signal;})()
+      signal:ctrl.signal
+    }).then(async r=>{
+      clearTimeout(tid);
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      const data=await r.json();
+      const text=data.choices?.[0]?.message?.content||data.output||'';
+      if(!text||text.trim().length<3)throw new Error('empty');
+      return text;
     });
-    if(!res.ok) throw new Error('HTTP '+res.status);
-    const data=await res.json();
-    const text=data.choices?.[0]?.message?.content||data.output||'';
-    if(text&&text.trim().length>2) return text;
-    throw new Error('empty');
+    // Race: online vs local (local gana si online tarda >10s)
+    return await Promise.race([onlinePromise, localPromise.then(r=>new Promise(res=>setTimeout(()=>res(r),10000)))]).catch(()=>localPromise);
   }catch(e){
-    return aiChatLocal(userMsg);
+    return localPromise;
   }
 }
 
 async function sendChat(){
   const inp=document.getElementById('chat-inp');
   const msg=inp.value.trim();if(!msg)return;
-  inp.value='';
+  inp.value='';inp.style.height='auto';
+  document.getElementById('chat-input-wrap').style.borderColor='var(--bd)';
+  // Ocultar chips al enviar
+  const chips=document.getElementById('chat-chips');
+  if(chips)chips.style.display='none';
   appendMsg(msg,'user');
   chatHistory.push({role:'user',content:msg});
 
-  const typing=appendMsg('','ai');
-  // Typing indicator animado
-  typing.innerHTML='<span style="display:inline-flex;gap:4px;align-items:center"><span style="animation:dotPulse 1s infinite 0s;font-size:18px">•</span><span style="animation:dotPulse 1s infinite .2s;font-size:18px">•</span><span style="animation:dotPulse 1s infinite .4s;font-size:18px">•</span></span>';
+  // Crear burbuja de typing directamente para tener referencia al wrap
+  const msgs2=document.getElementById('chat-msgs');
+  const typingWrap=document.createElement('div');
+  typingWrap.style.cssText='display:flex;gap:9px;align-items:flex-start;';
+  const typingAv=document.createElement('div');
+  typingAv.style.cssText='width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:2px;background:linear-gradient(135deg,var(--y),#f97316)';
+  typingAv.textContent='🤖';
+  const typingBubbleWrap=document.createElement('div');
+  typingBubbleWrap.style.cssText='display:flex;flex-direction:column;align-items:flex-start;max-width:86%;gap:4px';
+  const typing=document.createElement('div');
+  typing.className='msg msg-ai';
+  typing.style.border='1px solid var(--bd)';
+  typing.innerHTML='<span style="display:inline-flex;gap:5px;align-items:center;height:20px"><span style="width:8px;height:8px;border-radius:50%;background:var(--y);animation:dotPulse .9s infinite 0s;display:inline-block"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--y);animation:dotPulse .9s infinite .2s;display:inline-block"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--y);animation:dotPulse .9s infinite .4s;display:inline-block"></span></span>';
+  typingBubbleWrap.appendChild(typing);
+  typingWrap.appendChild(typingAv);
+  typingWrap.appendChild(typingBubbleWrap);
+  if(msgs2){msgs2.appendChild(typingWrap);msgs2.scrollTop=msgs2.scrollHeight;}
 
   // System prompt personalizado con contexto del alumno
   // Read from new notes system (lumio_notes_v2) with fallback to old apuntesDB
@@ -6163,20 +6934,70 @@ async function sendChat(){
   }).join('');
   const cardsContext=D.cards.length?`\n[Flashcards]: ${D.cards.slice(0,6).map(c=>`Q:${c.q}→A:${c.a}`).join(' | ')}`:'';
 
-  const systemPrompt=`Eres un tutor escolar inteligente y amigable para ${D.user.name}, estudiante de ${D.user.curso||'ESO'} en España.
-Materias: ${D.mats.map(m=>m.n).join(', ')}.
-Responde siempre en español, de forma clara y concisa (máx 3-4 frases). Usa emojis ocasionalmente.
-Adapta el nivel a ${D.user.curso||'ESO'}. Si preguntan algo de sus apuntes, úsalos.${notesContext}${cardsContext}`;
+  // Contexto de conversación reciente (últimas 3 preguntas del alumno)
+  const recentTopics=chatHistory.filter(m=>m.role==='user').slice(-3).map(m=>m.content.slice(0,60)).join(' | ');
+  const prevContext=recentTopics?`\nTemas recientes de la conversación: ${recentTopics}`:'';
+
+  const isFirst=chatHistory.filter(m=>m.role==='user').length<=1;
+  const systemPrompt=`Eres LumioAI, el mejor tutor escolar para ${D.user.name||'el alumno'} (${D.user.curso||'ESO/Bach'}, España). Eres experto, cercano y motivador.
+MATERIAS DEL ALUMNO: ${D.mats.map(m=>m.n).join(', ')||'varias'}.
+NORMAS OBLIGATORIAS:
+- NUNCA repitas el saludo — ya te has presentado
+- Respuestas SIEMPRE estructuradas: usa 🔷 para secciones, 📌 para conceptos clave, tablas cuando ayude
+- Para "esquema" → mínimo 5 secciones con subsecciones, tabla comparativa si aplica, analogía cotidiana, pregunta al final
+- Para "lista" → numera, explica cada punto brevemente
+- Para "más detalle/largo" → esquema completo con todo
+- Para mates/física → pasos numerados, fórmula destacada, ejemplo resuelto, comprobación
+- Siempre termina con: "💬 ¿Quieres que te haga flashcards, un mini-test o que profundice en algún punto?"
+- Usa **negrita** para términos técnicos, emojis útiles (no decorativos), y saltos de línea claros
+- Adapta vocabulario exactamente a ${D.user.curso||'ESO'}: ni demasiado fácil ni demasiado técnico
+- Si el alumno dice "no entiendo", explica con analogía del mundo real
+${prevContext}${notesContext}${cardsContext}`;
 
   try{
-    const res=await callAI(systemPrompt, msg, 500);
+    const _sp=typeof _getModeSystemPrompt==='function'?_getModeSystemPrompt(systemPrompt):systemPrompt;
+    const res=await callAI(_sp, msg, 900);
     // Render basic markdown: **bold**, *italic*, newlines
-    const rendered=res.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/\*([^*]+)\*/g,'<i>$1</i>').replace(/\n/g,'<br>').replace(/`([^`]+)`/g,'<code style="background:var(--bg2);padding:1px 5px;border-radius:4px;font-family:monospace">$1</code>');
-    typing.innerHTML=rendered;
+    // Quitar el typing indicator y renderizar respuesta real con acciones
+    if(typing){
+      const parent=typingBubbleWrap; // referencia directa al bubble wrapper
+      // Actualizar el div de la burbuja con markdown rico
+      let rendered2=res
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/```([\s\S]*?)```/g,(m,c)=>`<pre style="background:var(--bg2);border:1px solid var(--bd);border-radius:8px;padding:10px;font-size:12px;overflow-x:auto;margin:6px 0;font-family:monospace;white-space:pre-wrap">${c}</pre>`)
+        .replace(/`([^`]+)`/g,'<code style="background:var(--bg2);padding:1px 5px;border-radius:4px;font-family:monospace;font-size:12px">$1</code>')
+        .replace(/\*\*([^*]+)\*\*/g,'<b style="color:var(--t1)">$1</b>')
+        .replace(/\*([^*]+)\*/g,'<em>$1</em>')
+        .replace(/^(\d+)\.\s+(.+)$/gm,'<div style="display:flex;gap:6px;margin:3px 0"><span style="color:var(--y);font-weight:700;flex-shrink:0">$1.</span><span>$2</span></div>')
+        .replace(/^[•\-\*]\s+(.+)$/gm,'<div style="display:flex;gap:6px;margin:3px 0"><span style="color:var(--y);flex-shrink:0">•</span><span>$1</span></div>')
+        .replace(/^#{1,3}\s+(.+)$/gm,'<div style="font-weight:800;color:var(--t1);margin:6px 0 3px;font-size:14px">$1</div>')
+        .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+      typing.innerHTML=rendered2;
+      // Añadir botones de acción bajo la burbuja
+      const actions=document.createElement('div');
+      actions.className='msg-actions';
+      const btnCopy=document.createElement('button');
+      btnCopy.className='msg-action-btn';btnCopy.innerHTML='📋 Copiar';
+      btnCopy.onclick=()=>{navigator.clipboard?.writeText(res).then(()=>{btnCopy.innerHTML='✅ Copiado';setTimeout(()=>btnCopy.innerHTML='📋 Copiar',1500);}).catch(()=>{});};
+      const btnNote=document.createElement('button');
+      btnNote.className='msg-action-btn';btnNote.innerHTML='📝 Guardar apunte';
+      btnNote.onclick=()=>chatSaveAsNote(res,btnNote);
+      actions.appendChild(btnCopy);actions.appendChild(btnNote);
+      // Insertar acciones después del bubble (parent es el bubble-wrapper)
+      if(parent) parent.appendChild(actions);
+    }
     chatHistory.push({role:'assistant',content:res});
-    if(chatHistory.length>20)chatHistory=chatHistory.slice(-14);
+    if(chatHistory.length>40)chatHistory=chatHistory.slice(-30);
+    // Auto-guardar sesión
+    _saveChatSession();
+    // Actualizar título del header con primer mensaje
+    const titleEl=document.getElementById('chat-session-title');
+    if(titleEl && chatHistory.length<=2){
+      const t=_chatTitle(chatHistory);
+      if(t) titleEl.textContent=t;
+    }
   }catch(e){
-    typing.textContent='❌ Error de conexión. Comprueba el internet.';
+    typing.innerHTML='<span style="color:#f87171">❌ Sin respuesta. Intenta de nuevo.</span>';
   }
   const msgs=document.getElementById('chat-msgs');
   if(msgs)msgs.scrollTop=msgs.scrollHeight;
@@ -6500,6 +7321,11 @@ const LUMIO_INTENTS = [
   { pattern: /ejemplo de|un ejemplo|dame un ejemplo|ponme un ejemplo/i, type: 'example' },
   // Gracias
   { pattern: /^gracias|^perfecto|^ok|^genial|^guay|^bien/i, type: 'thanks' },
+  { pattern: /esquema|mapa conceptual|diagrama|organigrama|estructura de/i, type: 'esquema' },
+  { pattern: /lista(me)?|enumera|cuáles son los?|cuántos tipos|tipos de|partes de|componentes de/i, type: 'lista' },
+  { pattern: /resumen|resume|puntos clave|lo más importante|síntesis|sintetiza/i, type: 'summary' },
+  { pattern: /más (detalle|info|largo|completo|amplio)|amplía|profundiza|cuéntame más|explica más/i, type: 'more_detail' },
+  { pattern: /más (fácil|simple|sencillo)|no entiendo|en palabras simples|para torpe/i, type: 'simplify' },
 ];
 
 // ── MOTOR DE CHAT LOCAL v3 ────────────────────────────────────────────────
@@ -6546,6 +7372,9 @@ const LumioAI = {
   // Busca en la base de conocimiento
   _searchKB(msg, mat){
     const n=this._norm(msg);
+    const tokens=aiTokens(n).filter(t=>t.length>2);
+    const bigrams=tokens.slice(0,-1).map((t,i)=>t+' '+tokens[i+1]);
+    const allT=[...tokens,...bigrams];
     const results=[];
     const kbMats=mat?[mat]:Object.keys(LUMIO_KB);
     for(const m of kbMats){
@@ -6612,17 +7441,18 @@ const LumioAI = {
 
   // Respuesta a saludos
   _greeting(){
-    const name=D.user.name||'estudiante';
     const hour=new Date().getHours();
-    const sal=hour<13?'Buenos días':'¿Qué tal?';
-    const greets=[
-      `¡${sal}, ${name}! 👋 Soy tu tutor IA de Lumio. Puedo explicarte cualquier tema del colegio, ayudarte con dudas, darte técnicas de estudio o repasar tus apuntes. ¿En qué te ayudo hoy?`,
-      `¡Hola, ${name}! 😊 Estoy aquí para ayudarte con ${D.mats?.slice(0,3).map(m=>m.n).join(', ')||'tus materias'}. Pregúntame cualquier cosa.`,
-      `¡Hola! 👋 Dime tu duda y te explico paso a paso. Conozco el temario de ESO y Bachillerato y tengo acceso a tus apuntes y flashcards.`,
+    const name=D.user.name?`, ${D.user.name.split(' ')[0]}`:'';
+    const timeGreet=hour<12?'Buenos días':hour<18?'Buenas tardes':'Buenas noches';
+    const mats=D.mats.length?` Tengo cargado tu temario de **${D.mats.slice(0,3).map(m=>m.n).join(', ')}**${D.mats.length>3?' y más':''}.`:'';
+    const cards=D.cards.length?` Tienes ${D.cards.length} flashcards guardadas — puedo repasarlas contigo.`:'';
+    const opts=[
+      `¡Hola${name}! 👋 Soy tu tutor IA de Lumio. Puedo ayudarte con cualquier duda del colegio — sin WiFi.${mats}\n\n¿De qué tema necesitas ayuda?`,
+      `¡Hola${name}! 🤖 Estoy listo para ayudarte con Matemáticas, Historia, Ciencias, Inglés... lo que necesites.${cards}\n\n¿Por dónde empezamos?`,
+      `¡Buenas${name}! ✨ Soy tu asistente de estudio IA. Conozco todo el temario de ESO y Bachillerato.\n\n¿Tienes algún examen pronto o algún tema que no entiendes?`,
     ];
-    return this._pick(greets);
+    return this._pick(opts.map((o,i)=>[String(i),o]))[1]||opts[0];
   },
-
   // Respuesta de agradecimiento
   _thanks(){
     const thanks=[
@@ -6642,6 +7472,60 @@ const LumioAI = {
       `No tengo datos sobre ese tema concreto. Si me pegas el texto de tus apuntes, puedo analizarlo y explicártelo.`,
     ];
     return this._pick(fallbacks);
+  },
+
+  // Generar esquema estructurado de un tema
+    _generateEsquema(topic, kbResults){
+    const r=kbResults.length>0?kbResults[0]:null;
+    const name=r?r.key:topic;
+    const desc=r?r.val:'';
+    const n=this._norm(name);
+    let esq='📊 **Esquema: '+aiCap(name)+'**\n\n';
+    esq+='📌 **Definición**\n'+desc.split('.')[0]+'.\n\n';
+    if(n.includes('célula')){
+      esq+='🔷 **Tipos de célula**\n1. **Procariota** — Sin núcleo (bacterias, arqueas)\n2. **Eucariota** — Con núcleo y orgánulos (animales, vegetales, hongos)\n\n';
+      esq+='🔷 **Partes (eucariota animal)**\n• **Membrana celular** — Barrera selectiva\n• **Núcleo** — Contiene el ADN y dirige la célula\n• **Citoplasma** — Medio donde flotan los orgánulos\n• **Mitocondria** — Fabrica energía (ATP)\n• **Ribosomas** — Fabrican proteínas\n• **Retículo endoplasmático** — Síntesis y transporte\n• **Aparato de Golgi** — Empaqueta y distribuye proteínas\n• **Lisosomas** — Digestión celular\n\n';
+      esq+='🔷 **Célula vegetal (extra)**\n• Pared celular, Cloroplastos, Vacuola central\n\n';
+      esq+='🔷 **Funciones**\n1. Nutrición → Fotosíntesis / Respiración celular\n2. Reproducción → Mitosis y Meiosis\n3. Relación → Respuesta a estímulos';
+    } else if(n.includes('mitosis')){
+      esq+='🔷 **Fases (PMAT)**\n1. Profase — Condensan cromosomas\n2. Metafase — Se alinean en el ecuador\n3. Anafase — Se separan hacia los polos\n4. Telofase — Se forman 2 núcleos\n5. Citocinesis — División del citoplasma\n\n';
+      esq+='🔷 **Resultado**: 2 células hijas idénticas (diploides)';
+    } else if(n.includes('fotosíntesis')){
+      esq+='🔷 **Ecuación**\n6CO₂ + 6H₂O + luz → C₆H₁₂O₆ + 6O₂\n\n';
+      esq+='🔷 **Fases**\n1. Fase luminosa → produce ATP, libera O₂\n2. Ciclo de Calvin → fija CO₂, produce glucosa\n\n';
+      esq+='🔷 **Lugar**: Cloroplastos';
+    } else if(n.includes('newton')){
+      esq+='🔷 **Las 3 Leyes**\n1. Inercia — Sin fuerza, sin cambio de movimiento\n2. F = m × a\n3. Acción y Reacción — fuerzas iguales y opuestas\n';
+    } else {
+      const parts=desc.split(/[.;]/).filter(function(s){return s.trim().length>10;}).slice(0,6);
+      if(parts.length>1){
+        esq+='🔷 **Características**\n';
+        parts.slice(1).forEach(function(p,i){if(p.trim())esq+=(i+1)+'. '+p.trim()+'\n';});
+      }
+    }
+    if(kbResults.length>1) esq+='\n\n🔗 **Ver también**: '+kbResults.slice(1,4).map(function(k){return k.key;}).join(', ');
+    esq+='\n\n💬 _Pide más detalle de cualquier sección_';
+    return esq;
+  },
+
+  _generateLista(topic, kbResults){
+    const r=kbResults.length>0?kbResults[0]:null;
+    const name=r?r.key:topic;
+    const desc=r?r.val:'';
+    const parts=desc.split(/[.;,]/).filter(s=>s.trim().length>5);
+    if(parts.length<2) return null;
+    let lista=`📋 **${aiCap(name)}** — Lista completa
+
+`;
+    parts.slice(0,8).forEach((p,i)=>{
+      lista+=`${i+1}. ${p.trim()}
+`;
+    });
+    if(kbResults.length>1){
+      lista+=`
+🔗 También relacionado: **${kbResults[1].key}**, **${kbResults[2]?.key||''}**`;
+    }
+    return lista;
   },
 
   // Consejo de estudio
@@ -6715,27 +7599,44 @@ const LumioAI = {
   // Smart number detection for math problems
   _solveMath(msg){
     const n=msg;
-    // Simple equation ax+b=c
-    const eq1=n.match(/([-\d.]+)\s*x\s*([+-]\s*[\d.]+)?\s*=\s*([-\d.]+)/i);
+    // Ecuación 1er grado: ax+b=c
+    const eq1=n.match(/([-\d.]+)\s*[*×]?\s*x\s*([+-]\s*[\d.]+)?\s*=\s*([-\d.]+)/i);
     if(eq1){
-      const a=parseFloat(eq1[1])||1;
-      const b=parseFloat((eq1[2]||'0').replace(/\s/g,''))||0;
-      const c=parseFloat(eq1[3]);
+      const a=parseFloat(eq1[1])||1,b=parseFloat((eq1[2]||'0').replace(/\s/g,''))||0,c=parseFloat(eq1[3]);
       const x=(c-b)/a;
-      return `🔢 **Ecuación:** ${n.trim()}\n\nDespejando x:\nx = (${c} - (${b})) / ${a} = **${+x.toFixed(4)}**\n\n✅ Comprobación: ${a}×${+x.toFixed(4)} + ${b} = ${+(a*x+b).toFixed(4)}`;
+      return `🔢 **Ecuación de 1er grado**\n\`${n.trim()}\`\n\nPaso a paso:\n1. Despejamos x = (${c} - ${b}) ÷ ${a}\n2. x = **${+x.toFixed(4)}**\n\n✅ Comprobación: ${a}×${+x.toFixed(4)} + ${b} ≈ ${+(a*x+b).toFixed(2)}`;
     }
-    // Percentage: X% of N
+    // Ecuación cuadrática ax²+bx+c=0
+    const eq2=n.match(/([-\d.]+)\s*x[²2]\s*([+-]\s*[\d.]+)?\s*x?\s*([+-]\s*[\d.]+)?\s*=\s*0/i);
+    if(eq2){
+      const a=parseFloat(eq2[1])||1,b=parseFloat((eq2[2]||'0').replace(/\s/g,''))||0,c2=parseFloat((eq2[3]||'0').replace(/\s/g,''))||0;
+      const disc=b*b-4*a*c2;
+      if(disc<0)return `🔢 **Ecuación cuadrática**\n\`${n.trim()}\`\n\nDiscriminante = ${disc} < 0 → **Sin soluciones reales**`;
+      const x1=(-b+Math.sqrt(disc))/(2*a),x2=(-b-Math.sqrt(disc))/(2*a);
+      return disc===0
+        ?`🔢 **Ecuación cuadrática** — solución doble\nx = **${+x1.toFixed(4)}**`
+        :`🔢 **Ecuación cuadrática**\n\nDiscriminante = ${b}²-4·${a}·${c2} = **${disc}**\nx₁ = **${+x1.toFixed(4)}**\nx₂ = **${+x2.toFixed(4)}**`;
+    }
+    // Porcentaje
     const pct=n.match(/([\d.]+)\s*%\s*(?:de|of|del)\s*([\d.]+)/i);
     if(pct){
-      const result=(parseFloat(pct[1])*parseFloat(pct[2])/100);
-      return `🔢 El ${pct[1]}% de ${pct[2]} = **${+result.toFixed(4)}**\n\nFórmula: ${pct[1]} × ${pct[2]} ÷ 100`;
+      const r=(parseFloat(pct[1])*parseFloat(pct[2])/100);
+      return `🔢 El **${pct[1]}%** de **${pct[2]}** = **${+r.toFixed(4)}**\n\nFórmula: ${pct[1]} × ${pct[2]} ÷ 100`;
     }
-    // Pythagorean theorem: if two sides given
-    const pyt=n.match(/(?:catetos?|lados?).*?(\d+).*?(\d+)/i);
+    // Pitágoras
+    const pyt=n.match(/([\d.]+)[,\s]+([\d.]+)/);
     if(pyt&&/pitágor|pitagor|hipotenusa/i.test(n)){
-      const a=parseFloat(pyt[1]),b=parseFloat(pyt[2]);
-      const h=Math.sqrt(a*a+b*b);
-      return `📐 **Teorema de Pitágoras**\na²+b²=c²\n${a}²+${b}² = ${a*a}+${b*b} = ${a*a+b*b}\nc = √${a*a+b*b} = **${+h.toFixed(4)}**`;
+      const a=parseFloat(pyt[1]),b=parseFloat(pyt[2]),h=Math.sqrt(a*a+b*b);
+      return `📐 **Teorema de Pitágoras**\na² + b² = c²\n${a}² + ${b}² = ${+(a*a+b*b).toFixed(4)}\nc = **${+h.toFixed(4)}**`;
+    }
+    // Área círculo
+    if(/área.*círculo|radio\s*[=:]/i.test(n)){
+      const rm=n.match(/(\d+\.?\d*)/);
+      if(rm){const r=parseFloat(rm[1]);return `📐 **Área del círculo** (r=${r})\nA = π × r² = **${+(Math.PI*r*r).toFixed(4)}**\nPerímetro = 2πr = **${+(2*Math.PI*r).toFixed(4)}**`;}
+    }
+    // Expresión directa
+    if(/^[\d\s+\-*/.()%]+$/.test(n.trim())&&/[+\-*/]/.test(n)){
+      try{const r=Function('"use strict";return ('+n.replace(/,/,'.')+')')();if(isFinite(r))return `🔢 **${n.trim()}** = **${+r.toFixed(6)}**`;}catch(e){}
     }
     return null;
   },
@@ -6755,11 +7656,58 @@ const LumioAI = {
     const mat=this._detectMat(msg)||this._convCtx.lastMat;
     if(mat) this._convCtx.lastMat=mat;
 
+    // 0. Detectar seguimiento de conversación ("y eso?", "más info", "por qué?", "cómo?", "ejemplo")
+    const isFollowUp=/^(y |pero |entonces |o sea |es decir |y (eso|esto|ello)|más|cuéntame|explica(me)?|por qué|cómo|dónde|cuándo|dame un ejemplo|un ejemplo|otro ejemplo|continúa|sigue|y qué más|qué significa|no entiendo|repite|aclara)/i.test(msg.trim());
+    const wantsMore=/más (largo|detalle|completo|amplio|info|explicación)|amplía|profundiza|completo|todo sobre/i.test(msg);
+    const wantsEsquema=/esquema|estructura|organiza|mapa/i.test(msg);
+    const wantsExample=/ejemplo|caso|aplica|concreto/i.test(msg);
+    const wantsSimple=/más (fácil|simple|sencillo)|para torpe|en simple|de forma fácil/i.test(msg);
+
+    if((isFollowUp||wantsMore||wantsEsquema||wantsExample||wantsSimple) && this._convCtx.lastTopic){
+      const kbRes=this._searchKB(this._convCtx.lastTopic, mat);
+      if(kbRes.length>0){
+        const r=kbRes[0];
+        if(wantsEsquema||wantsMore) return this._generateEsquema(r.key, kbRes);
+        if(wantsSimple) return `🟢 **${aiCap(r.key)} de forma simple:**
+
+${r.val.split('.')[0]}.
+
+👉 Dicho de otra forma: ${r.val.split('.')[1]?.trim()||r.val.slice(0,120)}
+
+¿Quedó claro?`;
+        if(wantsExample){
+          const exMatch=r.val.match(/[Ee]j[.:]\s*([^.]+)/)||r.val.match(/como ([^.]+)/i);
+          if(exMatch) return `💡 **Ejemplo de ${r.key}:**
+
+${exMatch[1].trim()}
+
+${r.val.slice(0,80)}...
+
+¿Quieres otro ejemplo o que explique alguna parte en más detalle?`;
+        }
+        if(isFollowUp) return `📖 **${aiCap(r.key)} — más detalle:**
+
+${r.val}
+
+${kbRes.length>1?'🔗 Relacionado: **'+kbRes[1].key+'** — '+kbRes[1].val.slice(0,80)+'...':''}
+
+¿Hay algo concreto que no haya quedado claro?`;
+      }
+    }
+
     // 1. Intenciones directas
-    if(intent==='greeting') return this._greeting();
+    // Si ya hay conversación, no repetir saludo
+    if(intent==='greeting'){
+      if(this._convCtx.turnCount<=1) return this._greeting();
+      return '¡Hola de nuevo! ¿Tienes alguna duda nueva o seguimos con lo anterior?';
+    }
     if(intent==='thanks') return this._thanks();
     if(intent==='study_tip') return this._studyTip();
-    if(intent==='pomodoro') return `⏱️ **Método Pomodoro:**\n\n${LUMIO_KB.estudio.tecnicas.pomodoro}\n\nEn Lumio tienes el Pomodoro integrado: ve a Estudiar → Pomodoro y elige tu materia.`;
+    if(intent==='pomodoro') return `⏱️ **Método Pomodoro:**
+
+${LUMIO_KB.estudio.tecnicas.pomodoro}
+
+En Lumio tienes el Pomodoro integrado: ve a Estudiar → Pomodoro y elige tu materia.`;
     if(intent==='exam_prep') return this._examPrep(msg);
 
     // 2. Try to solve math inline
@@ -6807,14 +7755,30 @@ const LumioAI = {
     if(kbResults.length>0){
       const r=kbResults[0];
       this._convCtx.lastTopic=r.key;
-      // Try step-by-step for how-to intents
+      // Esquema explícito en el mensaje original
+      if(intent==='esquema'||/esquema|estructura|mapa conceptual/i.test(msg)){
+        return this._generateEsquema(r.key, kbResults);
+      }
+      // Lista explícita
+      if(intent==='lista'||/tipos de|partes de|cuáles son|enumera/i.test(msg)){
+        const lista=this._generateLista(r.key, kbResults);
+        if(lista) return lista;
+      }
+      // Step-by-step para how-to
       if(intent==='howto'||intent==='explain'){
         const steps=this._stepByStep(r.key,r.val);
-        if(steps) return steps+(kbResults.length>1?`\n\n🔗 Ver también: **${kbResults[1].key}**`:'');
+        if(steps) return steps+(kbResults.length>1?`
+
+🔗 Ver también: **${kbResults[1].key}**`:'');
       }
+      // Respuesta normal con prompt de profundización
       let resp=this._fmtKB(r.key,r.val,r.mat);
-      if(kbResults.length>1) resp+=`\n\n🔗 Relacionado: **${kbResults[1].key}** — ${kbResults[1].val.slice(0,80)}`;
-      if(intent!=='define') resp+=`\n\n¿Quieres un ejemplo o que lo explique con más detalle?`;
+      if(kbResults.length>1) resp+=`
+
+🔗 **Relacionado:** ${kbResults[1].key} — ${kbResults[1].val.slice(0,70)}...`;
+      resp+=`
+
+💬 *Puedes pedirme un esquema, lista, ejemplo o más detalle*`;
       return resp;
     }
 
@@ -6845,16 +7809,20 @@ function aiChatLocal(msg){
 
 // Resetear contexto al abrir el chat
 function resetChatCtx(){
-  LumioAI._convCtx={lastTopic:null,lastMat:null,turnCount:0,askedAbout:[]};
+  try{LumioAI._convCtx={lastTopic:null,lastMat:null,turnCount:0,askedAbout:[]};}catch(e){}
   chatHistory=[];
+  // Iniciar nueva sesión si no hay
+  if(!_activeChatId) _activeChatId=_chatId();
 }
 
 
 
 // ── La misma IA para TODAS las funciones (Test, Resumen, Flashcards, etc.) ──
 async function callAIForTask(systemPrompt, userContent, maxTokens=1200){
-  if(!navigator.onLine){throw new Error('Sin conexión a internet');}
+  if(!navigator.onLine) return null;
   try{
+    const ctrl=new AbortController();
+    const tid=setTimeout(()=>ctrl.abort(),14000);
     const res=await fetch('https://text.pollinations.ai/openai',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -6862,14 +7830,18 @@ async function callAIForTask(systemPrompt, userContent, maxTokens=1200){
         model:'openai',
         messages:[{role:'system',content:systemPrompt},{role:'user',content:userContent}],
         max_tokens:maxTokens,
-        seed:42
-      })
+        temperature:0.7,
+        seed:Math.floor(Math.random()*99999)
+      }),
+      signal:ctrl.signal
     });
+    clearTimeout(tid);
     if(!res.ok)throw new Error('HTTP '+res.status);
     const data=await res.json();
-    return data.choices?.[0]?.message?.content||data.output||'';
+    const txt=data.choices?.[0]?.message?.content||data.output||'';
+    return txt.trim()||null;
   }catch(e){
-    return null; // null = usar fallback local
+    return null;
   }
 }
 
@@ -6916,7 +7888,14 @@ async function spellCheckNote(taId){
 // ESQUEMAS — generador local
 // ════════════════════════════════════════════════════════
 let lastEsquema='';
-function bEsquemas(){}
+function bEsquemas(){
+  // Pre-fill if there are notes for selected subject
+  const ta=document.getElementById('esq-texto');
+  if(ta&&!ta.value.trim()){
+    const firstNote=Object.values(apuntesDB||{}).find(v=>v&&v.trim().length>50);
+    if(firstNote)ta.value=firstNote.trim().slice(0,1200);
+  }
+}
 async function genEsquema(){
   const txt=document.getElementById('esq-texto').value.trim();
   if(!txt){toast('⚠️ Pega el texto primero');return;}
@@ -6983,7 +7962,12 @@ function aiGenEsquemaLineal(sents,tf){
 // ════════════════════════════════════════════════════════
 // PPT — generador de esquema de presentación
 // ════════════════════════════════════════════════════════
-function bPPT(){}
+function bPPT(){
+  const el=document.getElementById('ppt-tema');
+  if(el&&!el.value)el.placeholder='Ej: La fotosíntesis, La Segunda Guerra Mundial, Las leyes de Newton...';
+  const mc=document.getElementById('ppt-mat-chips');
+  if(mc&&!mc.children.length) mc.innerHTML=D.mats.map(m=>`<div class="chip${m.n===D.mats[0]?.n?' on':''}" onclick="document.querySelectorAll('#ppt-mat-chips .chip').forEach(c=>c.classList.remove('on'));this.classList.add('on')">${m.e||'📚'} ${m.n.split(' ')[0]}</div>`).join('');
+}
 async function genPPT(){
   const tema=document.getElementById('ppt-tema').value.trim();
   if(!tema){toast('⚠️ Escribe el tema del trabajo');return;}
@@ -7037,11 +8021,14 @@ function aiGenFlashcards(txt, mat, n){
     return true;
   }
 
-  // ── TIPO 1: Definiciones explícitas (X es Y / X: Y / llamamos X a Y) ──
+  // ── TIPO 1: Definiciones explícitas (X es Y / X: Y / llamamos X a Y / X is Y) ──
   const defs = aiDefinitions(txt);
   defs.forEach(({term, def}) => {
     if(cards.length >= n) return;
-    addCard(`¿Qué es ${term}?`, def.slice(0,140));
+    // Detectar si el texto es en inglés
+    const isEnglish = /(the|is|are|was|were|have|has|can|will|would|this|that|which)/i.test(txt);
+    const q = isEnglish ? `What is ${term}?` : `¿Qué es ${term}?`;
+    addCard(q, def.slice(0,140));
   });
 
   // ── TIPO 2: Listas numeradas / viñetas → tarjeta por ítem ──
@@ -7120,10 +8107,35 @@ function aiGenFlashcards(txt, mat, n){
     const keyTerms = aiKeyTerms(txt, (n - cards.length) * 3);
     keyTerms.forEach(term => {
       if(cards.length >= n) return;
-      // Find the sentence containing this term
       const ctx = sents.find(s => s.toLowerCase().includes(term.toLowerCase()));
       if(ctx) addCard(`¿Qué es o qué significa "${term}"?`, ctx.trim().slice(0,140));
     });
+  }
+
+  // ── TIPO 8: Preguntas de fórmulas / expresiones matemáticas ──
+  if(cards.length < n){
+    const formulaRx = /([A-Za-záéíóú\s]+)\s*[=:]\s*([A-Za-záéíóú0-9\s²³√+\-*/÷×πΔ°%().,]+)/g;
+    let fm;
+    while((fm=formulaRx.exec(txt))!==null){
+      if(cards.length>=n)break;
+      const label=fm[1].trim();
+      const expr=fm[2].trim();
+      if(label.length<3||expr.length<2||label.length>60)continue;
+      addCard(`¿Cuál es la fórmula de ${label}?`, `${label} = ${expr}`);
+    }
+  }
+
+  // ── TIPO 9: Preguntas de clasificación (tipos, clases, categorías) ──
+  if(cards.length < n){
+    const classRx = /(?:tipos?|clases?|categorías?|grupos?|partes?)\s+(?:de|del|de la|de los|de las)\s+([A-Za-záéíóú\s]+)(?:\s*[:]\s*|\s+son\s+)([^.]+)/gi;
+    let cm;
+    while((cm=classRx.exec(txt))!==null){
+      if(cards.length>=n)break;
+      const what=cm[1].trim();
+      const types=cm[2].trim();
+      if(what.length<3||types.length<4)continue;
+      addCard(`¿Cuáles son los tipos/clases de ${what}?`, types.slice(0,140));
+    }
   }
 
   return cards.slice(0, n);
@@ -7164,7 +8176,12 @@ function filterVocab(){
 // CALCULADORA
 // ════════════════════════════════════════════════════════
 let calcExpr='';let calcHist=[];
-function bCalc(){}
+function bCalc(){
+  // Limpiar calculadora al entrar
+  const expr=document.getElementById('calc-expr');
+  const res=document.getElementById('calc-result');
+  // Solo resetear si está vacía
+}
 function cIn(v){calcExpr+=v;document.getElementById('calc-expr').textContent=calcExpr;document.getElementById('calc-result').textContent=calcExpr||'0';}
 function cFn(fn){calcExpr+=fn;document.getElementById('calc-expr').textContent=calcExpr;document.getElementById('calc-result').textContent=calcExpr;}
 function cClear(){calcExpr='';document.getElementById('calc-expr').textContent='';document.getElementById('calc-result').textContent='0';}
@@ -8007,22 +9024,7 @@ async function apuInsertPhoto(input){
 }
 
 // ── Compress image before saving (canvas, no external libs) ──
-function compressImage(dataUrl, maxW=800, quality=0.65){
-  return new Promise(resolve=>{
-    const img=new Image();
-    img.onload=()=>{
-      let w=img.width, h=img.height;
-      if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}
-      const canvas=document.createElement('canvas');
-      canvas.width=w;canvas.height=h;
-      const ctx=canvas.getContext('2d');
-      ctx.drawImage(img,0,0,w,h);
-      resolve(canvas.toDataURL('image/jpeg',quality));
-    };
-    img.onerror=()=>resolve(dataUrl); // fallback: keep original
-    img.src=dataUrl;
-  });
-}
+
 
 // ── Fotos en nueva tarjeta (sin IA) ──
 let _fcAddPhotos = {q: null, a: null};
@@ -8517,7 +9519,62 @@ function renderAccentGrid(){
 }
 
 // bAjustes defined below (full version)
+function ajActivarProfesor(){
+  if(typeof _esModo !== 'undefined' && _esModo === 'profesor'){
+    // Desactivar
+    _esModo='alumno';
+    localStorage.removeItem('lumio_modo');
+    const nb=document.getElementById('nb-profe');
+    if(nb) nb.style.display='none';
+    bAjustes();
+    toast('Volviste al modo alumno');
+    navSection('home');
+  } else {
+    // Activar — mostrar PIN overlay
+    const ov=document.getElementById('profe-pin-overlay');
+    if(ov) ov.style.display='flex';
+    else {
+      // Fallback: pedir PIN inline
+      const pin=prompt('PIN de acceso:');
+      if(pin===(localStorage.getItem('lumio_profe_pin')||'2026')){
+        if(typeof _esModo!=='undefined') _esModo='profesor';
+        localStorage.setItem('lumio_modo','profesor');
+        const nb=document.getElementById('nb-profe');
+        if(nb){nb.style.display='flex';}
+        bAjustes();
+        toast('👩‍🏫 Modo Profesor activado');
+        haptic&&haptic('success');
+        setTimeout(()=>navSection('clase'),800);
+      } else {
+        toast('❌ PIN incorrecto');
+        haptic&&haptic('error');
+      }
+    }
+  }
+}
+function ajCambiarClase(){
+  const code=prompt('Nuevo código de clase (ej: 2A-2026):');
+  if(code&&code.trim()){
+    if(typeof _claseCode!=='undefined') _claseCode=code.trim().toUpperCase();
+    localStorage.setItem('lumio_clase_code',code.trim().toUpperCase());
+    bAjustes();
+    toast('✅ Código de clase actualizado');
+  }
+}
 function bAjustes(){
+  // Actualizar estado modo profesor en ajustes
+  try{
+    const esModo = localStorage.getItem('lumio_modo')||'alumno';
+    const estadoEl=document.getElementById('aj-profe-estado');
+    const btnEl=document.getElementById('aj-profe-btn');
+    const claseInfo=document.getElementById('aj-clase-info');
+    const claseCode=document.getElementById('aj-clase-code');
+    const claseCodeVal=localStorage.getItem('lumio_clase_code')||'';
+    if(estadoEl) estadoEl.textContent=esModo==='profesor'?'👩‍🏫 Modo Profesor activo':'Modo alumno activo';
+    if(btnEl){btnEl.textContent=esModo==='profesor'?'Desactivar':'Activar';btnEl.style.background=esModo==='profesor'?'transparent':'var(--y)';btnEl.style.border=esModo==='profesor'?'1px solid var(--bd)':'none';btnEl.style.color=esModo==='profesor'?'var(--t2)':'#111';}
+    if(claseInfo) claseInfo.style.display=claseCodeVal?'block':'none';
+    if(claseCode) claseCode.textContent='Clase: '+claseCodeVal;
+  }catch(e){}
   try{bAjustesAccent();}catch(e){}
   // PWA install button
   try{
@@ -10623,39 +11680,81 @@ let pausaTimer=null;
 // ════════════════════════════════════════════════════════
 // TÉCNICA FEYNMAN
 // ════════════════════════════════════════════════════════
-function bFeynman(){}
+function bFeynman(){
+  // Pre-rellenar tema con la materia activa
+  const el=document.getElementById('feyn-tema');
+  if(el&&!el.value&&D.mats.length)el.placeholder='Ej: '+['La fotosíntesis','El teorema de Pitágoras','La Revolución Francesa','Las leyes de Newton'][Math.floor(Math.random()*4)];
+}
 function evaluarFeynman(){
   const tema=document.getElementById('feyn-tema')?.value.trim()||'';
   const txt=document.getElementById('feyn-txt')?.value.trim()||'';
-  if(!txt||txt.length<30){toast('⚠️ Escribe al menos una explicación');return;}
+  if(!txt||txt.length<20){toast('⚠️ Escribe tu explicación primero');return;}
   const res=document.getElementById('feyn-result');
   if(!res)return;
-  // Evaluar calidad: longitud, términos clave del tema, claridad
+
   const words=aiTokens(txt);
   const temaWords=aiTokens(tema);
-  const coverage=temaWords.filter(w=>txt.toLowerCase().includes(w)).length;
-  const hasExamples=/ejemplo|como|es decir|por ejemplo|imagina|igual que/i.test(txt);
-  const hasAnalogy=/similar a|parecido a|como si|como un|como el/i.test(txt);
+  const sents=aiSentences(txt);
+
+  // Análisis de cobertura contra KB
+  let kbCoverage=0;
+  if(tema){
+    const kbResults=LumioAI._searchKB(tema,null);
+    if(kbResults.length>0){
+      const kbTerms=aiTokens(kbResults[0].val);
+      kbCoverage=kbTerms.filter(w=>w.length>4&&txt.toLowerCase().includes(w)).length/Math.max(kbTerms.length,1);
+    }
+  }
+  const coverage=temaWords.filter(w=>w.length>3&&txt.toLowerCase().includes(w)).length;
+  const hasExamples=/ejemplo|como|es decir|por ejemplo|imagina|igual que|pongamos/i.test(txt);
+  const hasAnalogy=/similar a|parecido a|como si|como un|como el|funciona como|se parece/i.test(txt);
+  const hasDefinition=/es|son|se define|consiste|significa|se llama/i.test(sents[0]||'');
   const uniqueWords=new Set(words).size;
+  const avgSentLen=words.length/Math.max(sents.length,1);
+  const isSimple=avgSentLen<20; // oraciones cortas y simples
+
   const score=Math.min(10,Math.round(
-    (Math.min(txt.length/30,3)) + (coverage/Math.max(temaWords.length,1)*3) +
-    (hasExamples?2:0) + (hasAnalogy?1:0) + (uniqueWords>20?1:0)
+    Math.min(txt.length/25,2.5) +
+    (coverage/Math.max(temaWords.length,1)*2) +
+    (kbCoverage*1.5) +
+    (hasExamples?1.5:0) +
+    (hasAnalogy?1:0) +
+    (hasDefinition?0.5:0) +
+    (isSimple?0.5:0) +
+    (uniqueWords>15?0.5:0)
   ));
-  const color=score>=8?'var(--green)':score>=5?'var(--y)':'#f87171';
-  const feedback=[
-    !hasExamples&&'💡 Añade un ejemplo concreto («por ejemplo…»)',
-    !hasAnalogy&&'💡 Usa una analogía («es como si…», «similar a…»)',
-    uniqueWords<15&&'💡 Usa más vocabulario variado',
-    coverage<temaWords.length/2&&tema&&'💡 Menciona más conceptos del tema «'+tema+'»',
+
+  const color=score>=8?'var(--green)':score>=6?'var(--y)':'#f87171';
+  const emoji=score>=8?'🌟':score>=6?'💪':'📖';
+  const msg=score>=8?'¡Explicación magistral! Lo tienes totalmente dominado':
+            score>=6?'Buena explicación — ya casi lo tienes':
+            score>=4?'Vas por buen camino, sigue practicando':'Necesitas repasar más el concepto';
+
+  const tips=[
+    !hasExamples&&score<9&&'💡 Añade un ejemplo concreto: «Por ejemplo, en el caso de...»',
+    !hasAnalogy&&score<8&&'💡 Usa una comparación o analogía: «Es como si...», «Funciona igual que...»',
+    !hasDefinition&&'💡 Empieza con una definición clara: «La/el [concepto] es...»',
+    uniqueWords<12&&'💡 Amplía el vocabulario — explica más aspectos del tema',
+    sents.length<3&&'💡 Desarrolla más la explicación — intenta 3-4 oraciones mínimo',
+    kbCoverage<0.2&&tema&&'💡 Incluye más conceptos clave del tema «'+tema+'»',
   ].filter(Boolean);
+
+  // Buscar si el tema está en KB para dar feedback preciso
+  const kbInfo=LumioAI._searchKB(tema,null);
+  const kbHint=kbInfo.length>0?`<div style="margin-top:10px;padding:10px;background:var(--bg2);border-radius:8px;border-left:3px solid var(--y)"><div style="font-size:11px;font-weight:700;color:var(--y);margin-bottom:4px">📚 Conceptos clave de «${tema}»</div><div style="font-size:12px;color:var(--t2);line-height:1.6">${kbInfo[0].val.slice(0,180)}...</div></div>`:'';
+
   res.style.display='block';
-  res.innerHTML=`<div class="card" style="border-color:${color}55">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-      <div style="font-size:40px;font-weight:900;color:${color}">${score}</div>
-      <div><div style="font-size:14px;font-weight:800;color:var(--t1)">${score>=8?'¡Excelente! Lo tienes dominado':score>=5?'Bien, sigue practicando':'Sigue repasando el concepto'}</div>
-      <div style="font-size:11px;color:var(--t2)">de 10 puntos · Técnica Feynman</div></div>
+  res.innerHTML=`<div class="card" style="border:1.5px solid ${color}44">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+      <div style="font-size:48px;font-weight:900;color:${color};line-height:1">${score}</div>
+      <div style="flex:1">
+        <div style="font-size:15px;font-weight:800;color:var(--t1)">${emoji} ${msg}</div>
+        <div style="font-size:11px;color:var(--t2);margin-top:2px">de 10 puntos · Técnica Feynman</div>
+        <div style="height:6px;background:var(--bg2);border-radius:3px;margin-top:8px;overflow:hidden"><div style="height:100%;width:${score*10}%;background:${color};border-radius:3px;transition:width .8s ease"></div></div>
+      </div>
     </div>
-    ${feedback.length?'<div style="font-size:12px;color:var(--t2);line-height:1.8">'+feedback.join('<br>')+'</div>':'<div style="font-size:12px;color:var(--green)">✅ Explicación completa y clara. ¡Estás preparado!</div>'}
+    ${tips.length?`<div style="font-size:12px;color:var(--t2);line-height:1.9;padding:10px;background:var(--bg2);border-radius:8px">${tips.slice(0,3).join('<br>')}</div>`:`<div style="font-size:12px;color:var(--green);padding:8px;background:rgba(74,222,128,.1);border-radius:8px">✅ Explicación excelente y completa. ¡Puedes enseñárselo a alguien!</div>`}
+    ${kbHint}
   </div>`;
   gainXP(score>=8?10:score>=5?5:2);
 }
@@ -10663,7 +11762,10 @@ function evaluarFeynman(){
 // ════════════════════════════════════════════════════════
 // LECTURA ACTIVA
 // ════════════════════════════════════════════════════════
-function bLectura(){}
+function bLectura(){
+  const el=document.getElementById('lect-txt');
+  if(el&&!el.value.trim())el.placeholder='Pega aquí el texto del libro o apuntes...\n\nEj: "La fotosíntesis es el proceso por el cual las plantas convierten la luz solar en energía química..."';
+}
 function resaltarConceptos(){
   const txt=document.getElementById('lect-txt')?.value.trim()||'';
   if(!txt){toast('⚠️ Pega el texto primero');return;}
@@ -10686,18 +11788,45 @@ function genPreguntasLectura(){
   const res=document.getElementById('lect-result');
   if(!res)return;
   if(!preguntas.length){res.innerHTML='<div style="color:var(--t3);text-align:center;padding:20px">El texto es demasiado corto para generar preguntas.</div>';return;}
-  res.innerHTML=`<div style="font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">❓ ${preguntas.length} preguntas generadas</div>`+
-  preguntas.map((p,i)=>`<div class="card fade-in" style="margin-bottom:8px">
-    <div style="font-size:12px;font-weight:700;color:var(--t1);margin-bottom:5px">${i+1}. ${p.pregunta}</div>
-    ${Object.entries(p.opciones).map(([l,t])=>`<div style="font-size:11px;color:${l===p.correcta?'var(--teal)':'var(--t2)'};padding:2px 0">${l===p.correcta?'✅':' '} ${l}: ${t}</div>`).join('')}
-  </div>`).join('');
-  gainXP(3);
+  const lectState={preguntas,idx:0,ans:{}};
+  function renderLectQ(){
+    const p=lectState.preguntas[lectState.idx];if(!p)return;
+    const total=lectState.preguntas.length;
+    res.innerHTML=`<div style="font-size:11px;color:var(--t3);margin-bottom:8px">Pregunta ${lectState.idx+1} de ${total}</div>
+    <div style="height:4px;background:var(--bg2);border-radius:2px;margin-bottom:14px"><div style="height:100%;width:${(lectState.idx/total)*100}%;background:var(--y);border-radius:2px;transition:width .3s"></div></div>
+    <div class="card"><div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:12px">${p.pregunta}</div>
+    ${p.opciones.map((opt,i)=>`<div onclick="lectAnswer(${i})" style="padding:10px 12px;margin:6px 0;border-radius:10px;border:1.5px solid var(--bd);cursor:pointer;font-size:13px;color:var(--t1);transition:all .15s" onmousedown="this.style.borderColor='var(--y)'" onmouseup="this.style.borderColor='var(--bd)'" class="lect-opt">${opt}</div>`).join('')}
+    </div>`;
+  }
+  window.lectAnswer=function(i){
+    const p=lectState.preguntas[lectState.idx];
+    const isCorrect=p.opciones[i]===p.correcta;
+    lectState.ans[lectState.idx]=i;
+    const opts=res.querySelectorAll('.lect-opt');
+    opts.forEach((el,j)=>{
+      if(p.opciones[j]===p.correcta)el.style.cssText+=';background:rgba(74,222,128,.15);border-color:var(--green)';
+      else if(j===i&&!isCorrect)el.style.cssText+=';background:rgba(248,113,113,.15);border-color:#f87171';
+      el.style.pointerEvents='none';
+    });
+    setTimeout(()=>{
+      lectState.idx++;
+      if(lectState.idx<lectState.preguntas.length)renderLectQ();
+      else{
+        const correct=Object.values(lectState.ans).filter((ai,qi)=>lectState.preguntas[qi].opciones[ai]===lectState.preguntas[qi].correcta).length;
+        res.innerHTML=`<div class="card" style="text-align:center;padding:20px"><div style="font-size:48px;margin-bottom:8px">${correct>=total*0.7?'🌟':'💪'}</div><div style="font-size:22px;font-weight:900;color:var(--y)">${correct}/${total}</div><div style="font-size:13px;color:var(--t2);margin-top:6px">${correct>=total*0.7?'¡Excelente comprensión!':'Repasa el texto e inténtalo de nuevo'}</div><button class="mbtn" style="margin-top:14px" onclick="genPreguntasLectura()">🔄 Intentar de nuevo</button></div>`;
+        gainXP(correct*3);
+      }
+    },1200);
+  };
+  renderLectQ();
 }
 
 // ════════════════════════════════════════════════════════
 // COMPARADOR DE REDACCIONES
 // ════════════════════════════════════════════════════════
-function bComparador(){}
+function bComparador(){
+  // Nada que inicializar — las textareas tienen placeholder ya
+}
 function compararRedacciones(){
   const a=document.getElementById('comp-a')?.value.trim()||'';
   const b=document.getElementById('comp-b')?.value.trim()||'';
@@ -10738,7 +11867,10 @@ function compararRedacciones(){
 // MNEMONICS
 // ════════════════════════════════════════════════════════
 let mnTipoSel='acronimo';
-function bMnemonics(){}
+function bMnemonics(){
+  const el=document.getElementById('mn-lista');
+  if(el&&!el.value)el.placeholder='Ej: Mercurio, Venus, Tierra, Marte, Júpiter, Saturno, Urano, Neptuno';
+}
 function mnTipo(el){mnTipoSel=el.dataset.mn;document.querySelectorAll('[data-mn]').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
 function generarMnemonic(){
   const lista=document.getElementById('mn-lista')?.value.trim()||'';
@@ -10774,19 +11906,46 @@ function generarMnemonic(){
 // ════════════════════════════════════════════════════════
 // RESALTADOR + SIMPLIFICADOR
 // ════════════════════════════════════════════════════════
-function bResaltador(){}
+function bResaltador(){
+  const el=document.getElementById('resalt-txt');
+  if(el&&!el.value.trim())el.placeholder='Pega aquí el texto a resaltar...';
+}
 function resaltarTexto(){
   const txt=document.getElementById('resalt-txt')?.value.trim()||'';
   if(!txt){toast('⚠️ Pega el texto');return;}
-  const terms=aiKeyTerms(txt,15);
-  let html=txt;
-  terms.sort((a,b)=>b.length-a.length).forEach(t=>{
+  const terms=aiKeyTerms(txt,20);
+  const defs=aiDefinitions(txt);
+  const dates=aiDates(txt).map(d=>d.when);
+  const defTerms=defs.map(d=>d.term.toLowerCase());
+  let out=txt.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  // Resaltar fechas/números → azul
+  dates.forEach(d=>{
+    if(!d)return;
+    const re=new RegExp('\\b('+d.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')\\b','g');
+    out=out.replace(re,'<mark style="background:rgba(99,179,237,.3);border-radius:3px;padding:0 2px;color:var(--t1)">$1</mark>');
+  });
+  // Resaltar términos definidos → verde
+  defTerms.sort((a,b)=>b.length-a.length).forEach(t=>{
     const re=new RegExp('\\b('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')\\b','gi');
-    html=html.replace(re,'<strong style="color:var(--y)">$1</strong>');
+    out=out.replace(re,'<mark style="background:rgba(74,222,128,.25);border-radius:3px;padding:0 2px;color:var(--t1)">$1</mark>');
+  });
+  // Resaltar otros términos clave → amarillo
+  const restTerms=terms.filter(t=>!defTerms.includes(t.toLowerCase()));
+  restTerms.sort((a,b)=>b.length-a.length).slice(0,10).forEach(t=>{
+    const re=new RegExp('\\b('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')\\b','gi');
+    out=out.replace(re,'<mark style="background:rgba(245,197,24,.3);border-radius:3px;padding:0 2px;color:var(--t1)">$1</mark>');
   });
   const res=document.getElementById('resalt-result');
   res.style.display='block';
-  res.innerHTML=`<div class="card"><div style="font-size:13px;line-height:1.9;color:var(--t1)">${html.replace(/\n/g,'<br>')}</div><div style="font-size:10px;color:var(--teal);margin-top:8px">✨ ${terms.length} conceptos clave marcados en amarillo</div></div>`;
+  res.innerHTML=`<div class="card">
+    <div style="display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap">
+      <span style="font-size:11px;display:flex;align-items:center;gap:4px"><mark style="background:rgba(245,197,24,.3);padding:2px 6px;border-radius:3px">■</mark> Términos clave</span>
+      <span style="font-size:11px;display:flex;align-items:center;gap:4px"><mark style="background:rgba(74,222,128,.25);padding:2px 6px;border-radius:3px">■</mark> Definiciones</span>
+      <span style="font-size:11px;display:flex;align-items:center;gap:4px"><mark style="background:rgba(99,179,237,.3);padding:2px 6px;border-radius:3px">■</mark> Fechas/datos</span>
+    </div>
+    <div style="font-size:13px;line-height:2;color:var(--t1)">${out.replace(/\n/g,'<br>')}</div>
+    <div style="font-size:10px;color:var(--teal);margin-top:8px">✨ ${terms.length+defTerms.length} conceptos marcados</div>
+  </div>`;
 }
 function simplificarTexto(){
   const txt=document.getElementById('resalt-txt')?.value.trim()||'';
@@ -10795,7 +11954,10 @@ function simplificarTexto(){
 }
 
 let simpNivelSel='mucho';
-function bSimplificador(){}
+function bSimplificador(){
+  const el=document.getElementById('simp-txt');
+  if(el&&!el.value.trim())el.placeholder='Pega aquí el texto complejo que quieres simplificar...';
+}
 function simpNivel(el){simpNivelSel=el.dataset.lv;document.querySelectorAll('[data-lv]').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
 function simplificarTextoFull(){
   const txt=document.getElementById('simp-txt')?.value.trim()||'';
@@ -10809,7 +11971,16 @@ function simplificarTextoFull(){
 }
 function aiSimplify(txt,nivel){
   const sents=aiSentences(txt);
-  const HARD_WORDS={'denominado':'llamado','constituye':'forma','mediante':'con','utilizar':'usar','proporcionar':'dar','obtener':'conseguir','adquirir':'aprender','realizar':'hacer','efectuar':'hacer','establecer':'poner','considerar':'pensar','determinar':'decidir','presentar':'mostrar','denominación':'nombre','característica':'rasgo','descripción':'explicación','procedimiento':'pasos','fundamentalmente':'principalmente','aproximadamente':'cerca de','posteriormente':'después','anteriormente':'antes','actualmente':'ahora'};
+  const HARD_WORDS={
+    'denominado':'llamado','constituye':'forma','mediante':'con','utilizar':'usar','proporcionar':'dar','obtener':'conseguir',
+    'adquirir':'aprender','realizar':'hacer','efectuar':'hacer','establecer':'poner','considerar':'pensar','determinar':'decidir',
+    'presentar':'mostrar','denominación':'nombre','característica':'rasgo','descripción':'explicación','procedimiento':'pasos',
+    'fundamentalmente':'principalmente','aproximadamente':'cerca de','posteriormente':'después','anteriormente':'antes','actualmente':'ahora',
+    'asimismo':'también','no obstante':'sin embargo','por consiguiente':'por tanto','en consecuencia':'por eso',
+    'cabe destacar':'hay que decir','se ha de tener en cuenta':'hay que saber','hace referencia':'habla','denominamos':'llamamos',
+    'la totalidad de':'todo','la mayoría de':'la mayoría','en la actualidad':'hoy','en el contexto de':'en',
+    'con el objetivo de':'para','con la finalidad de':'para','con el propósito de':'para'
+  };
   let result=sents.map(s=>{
     let r=s;
     if(nivel==='mucho'){
@@ -12539,6 +13710,770 @@ function saveEditClase(claseId,overlay){
   }
 })();
 
+
+// ══════════════════════════════════════════════════════════════
+// SIMULACRO DE EXAMEN CRONOMETRADO
+// ══════════════════════════════════════════════════════════════
+let _sim={mat:'',n:10,t:60,idx:0,qs:[],ans:[],timer:null,tl:60};
+function bSimulacro(){
+  const ch=document.getElementById('sim-mat-ch');
+  if(ch&&!ch.children.length) ch.innerHTML=D.mats.map((m,i)=>`<div class="chip${i===0?' on':''}" onclick="document.querySelectorAll('#sim-mat-ch .chip').forEach(c=>c.classList.remove('on'));this.classList.add('on');_sim.mat='${m.n}'">${m.e} ${m.n.split(' ')[0]}</div>`).join('');
+  if(!_sim.mat&&D.mats.length) _sim.mat=D.mats[0].n;
+  _simShow('config');
+}
+function _simShow(v){['config','active','result'].forEach(x=>{const el=document.getElementById('sim-'+x);if(el)el.style.display=x===v?'block':'none';});}
+function simSetN(el){document.querySelectorAll('[data-simn]').forEach(c=>c.classList.remove('on'));el.classList.add('on');_sim.n=+el.dataset.simn;}
+function simSetT(el){document.querySelectorAll('[data-simt]').forEach(c=>c.classList.remove('on'));el.classList.add('on');_sim.t=+el.dataset.simt;}
+async function simStart(){
+  if(!_sim.mat){toast('⚠️ Elige una materia');return;}
+  const _allNotes=JSON.parse(localStorage.getItem('lumio_notes_v2')||'[]');
+  const noteText=_allNotes.filter(n=>n.mat===_sim.mat).map(n=>n.body).join(' ').slice(0,2000)||_sim.mat;
+  const fc=D.cards.filter(c=>c.m===_sim.mat).slice(0,_sim.n);
+  let qs=[];
+  if(fc.length>=3) qs=fc.map(c=>({q:c.q,opts:[c.a,...(aiKeyTerms(c.q+c.a,5)||[]).slice(0,3).map(t=>t[0].toUpperCase()+t.slice(1))].sort(()=>Math.random()-.5).slice(0,4),cor:c.a}));
+  if(qs.length<_sim.n) qs=[...qs,...(aiGenerateTest(noteText,_sim.n-qs.length,_sim.mat)||[]).map(g=>({q:g.pregunta,opts:g.opciones,cor:g.correcta,expl:g.explicacion}))];
+  if(!qs.length){toast('⚠️ Crea apuntes o flashcards primero');return;}
+  _sim.qs=qs.slice(0,_sim.n);_sim.idx=0;_sim.ans=[];
+  _simShow('active');_simQ();
+}
+function _simQ(){
+  const p=_sim.qs[_sim.idx];if(!p)return simEnd();
+  const tot=_sim.qs.length;
+  const el=document.getElementById('sim-active');if(!el)return;
+  el.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <span style="font-size:12px;color:var(--t2)">Pregunta ${_sim.idx+1}/${tot}</span>
+    <span id="sim-tmr" style="font-size:20px;font-weight:900;color:var(--y)">${_sim.t?'1:00':'∞'}</span>
+    <button onclick="simAbort()" style="background:none;border:1px solid var(--bd);border-radius:8px;padding:4px 10px;font-size:11px;color:var(--t3);cursor:pointer;font-family:var(--font)">Salir</button></div>
+  <div style="height:4px;background:var(--bg2);border-radius:2px;margin-bottom:14px"><div style="height:100%;width:${((_sim.idx+1)/tot)*100}%;background:var(--y);border-radius:2px;transition:width .3s"></div></div>
+  <div style="background:var(--bg1);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:14px">
+    <div style="font-size:11px;color:var(--t3);margin-bottom:6px">${_sim.mat}</div>
+    <div style="font-size:15px;font-weight:700;color:var(--t1);line-height:1.5">${p.q}</div></div>
+  ${(p.opts||[]).map((o,i)=>`<div onclick="_simAns(${i})" style="padding:13px 16px;margin:7px 0;background:var(--bg1);border:1.5px solid var(--bd);border-radius:12px;cursor:pointer;font-size:13px;color:var(--t1);transition:all .15s" ontouchstart="this.style.borderColor='var(--y)'" ontouchend="this.style.borderColor='var(--bd)'">${['A','B','C','D'][i]}. ${o}</div>`).join('')}`;
+  if(_sim.timer) clearInterval(_sim.timer);
+  _sim.tl=_sim.t||99999;
+  if(_sim.t) _sim.timer=setInterval(()=>{_sim.tl--;const tmr=document.getElementById('sim-tmr');if(tmr){const m=Math.floor(_sim.tl/60),s=_sim.tl%60;tmr.textContent=m+':'+String(s).padStart(2,'0');tmr.style.color=_sim.tl<=10?'#f87171':'var(--y)';}if(_sim.tl<=0){clearInterval(_sim.timer);_simAns(null);}},1000);
+}
+function _simAns(i){
+  if(_sim.timer) clearInterval(_sim.timer);
+  const p=_sim.qs[_sim.idx];
+  const ans=i!==null?p.opts[i]:null;
+  const ok=ans&&(ans===p.cor||ans?.toLowerCase()===p.cor?.toLowerCase());
+  _sim.ans.push({q:p.q,ans,ok,cor:p.cor,expl:p.expl||''});
+  _sim.idx++;
+  if(_sim.idx>=_sim.qs.length) simEnd(); else _simQ();
+}
+function simAbort(){if(_sim.timer)clearInterval(_sim.timer);_simShow('config');}
+function simEnd(){
+  if(_sim.timer) clearInterval(_sim.timer);
+  _simShow('result');
+  const ok=_sim.ans.filter(a=>a.ok).length,tot=_sim.ans.length;
+  const nota=((ok/tot)*10).toFixed(1);const n=parseFloat(nota);
+  const col=n>=9?'#4ade80':n>=7?'var(--y)':n>=5?'#fb923c':'#f87171';
+  const el=document.getElementById('sim-result');if(!el)return;
+  el.innerHTML=`<div style="text-align:center;padding:20px 0">
+    <div style="width:90px;height:90px;border-radius:50%;border:4px solid ${col};display:flex;align-items:center;justify-content:center;flex-direction:column;margin:0 auto 12px">
+      <div style="font-size:28px;font-weight:900;color:${col}">${nota}</div>
+      <div style="font-size:10px;color:var(--t2)">nota</div></div>
+    <div style="font-size:18px;font-weight:800;color:var(--t1)">${n>=9?'🏆 Sobresaliente':n>=7?'🌟 Notable':n>=5?'📚 Aprobado':'💪 A repasar'}</div>
+    <div style="font-size:13px;color:var(--t2);margin-top:4px">${ok} de ${tot} correctas</div></div>
+  <div style="margin:14px 0">${_sim.ans.map((a,i)=>`<div style="margin-bottom:8px;padding:10px;background:${a.ok?'rgba(74,222,128,.1)':'rgba(248,113,113,.1)'};border:1px solid ${a.ok?'rgba(74,222,128,.3)':'rgba(248,113,113,.3)'};border-radius:10px">
+    <div style="font-size:12px;font-weight:700;color:var(--t1)">${i+1}. ${a.q.slice(0,60)}</div>
+    <div style="font-size:11px;margin-top:3px;color:${a.ok?'var(--green)':'#f87171'}">${a.ok?'✅':'❌'} ${a.ans||'Sin respuesta'}</div>
+    ${!a.ok?`<div style="font-size:11px;color:var(--t2)">Correcta: ${(a.cor||'').slice(0,60)}</div>`:''}
+  </div>`).join('')}</div>
+  <div style="display:flex;gap:10px">
+    <button class="gbtn" style="flex:1" onclick="bSimulacro()">🔄 Repetir</button>
+    <button class="mbtn" style="flex:1" onclick="simGuardarErrores()">🃏 Guardar errores</button></div>`;
+  gainXP(Math.round(n*2)); haptic(n>=5?'success':'error');
+  localStorage.setItem('lumio_tests_done',String(+(localStorage.getItem('lumio_tests_done')||0)+1));
+}
+function simGuardarErrores(){
+  const errs=_sim.ans.filter(a=>!a.ok);
+  if(!errs.length){toast('🎉 Sin errores');return;}
+  errs.forEach(a=>{if(a.q&&a.cor)D.cards.push({id:'sim'+Date.now()+Math.random().toString(36).slice(2,5),m:_sim.mat,q:a.q,a:a.cor,lv:1,ef:2.5,interval:1,reps:0,due:_localISO()});});
+  saveState();toast(`✅ ${errs.length} flashcards guardadas`);gainXP(5);
+}
+
+
+// ══════════════════════════════════════════════════════════════════════
+// LUMIO ESCUELA v2026 — Modo Profesor + Login + Gamificación
+// ══════════════════════════════════════════════════════════════════════
+
+// ── CONSTANTES ────────────────────────────────────────────────────────
+const PROFE_PIN = localStorage.getItem('lumio_profe_pin') || '2026';
+const AVATARES = ['🦁','🐯','🦊','🐺','🦅','🐬','🦋','🐙','🦖','🌟','⚡','🔥','🎯','💎','🚀','🎓'];
+const NIVEL_NOMBRES = ['Estudiante','Curioso','Aplicado','Constante','Brillante','Sobresaliente','Genio','Maestro','Leyenda','Einstein'];
+const NIVEL_XP = [0,100,250,500,900,1500,2500,4000,6000,10000];
+
+// ── ESTADO MODO PROFESOR ──────────────────────────────────────────────
+let _esModo = localStorage.getItem('lumio_modo') || 'alumno'; // 'alumno' | 'profesor'
+let _claseCode = localStorage.getItem('lumio_clase_code') || '';
+let _profeAlumnos = JSON.parse(localStorage.getItem('lumio_profe_alumnos') || '[]');
+let _profeTareas = JSON.parse(localStorage.getItem('lumio_profe_tareas') || '[]');
+
+// ── LOGIN CLASE ────────────────────────────────────────────────────────
+function mostrarLoginClase(){
+  if(_claseCode || localStorage.getItem('lumio_clase_skip')) return;
+  const ov = document.getElementById('clase-login-overlay');
+  if(ov) ov.style.display = 'flex';
+}
+function claseLogin(){
+  const v = document.getElementById('clase-code-inp')?.value.trim().toUpperCase();
+  if(!v || v.length < 3){ _showClaseError('Introduce un código válido (mín. 3 caracteres)'); return; }
+  _claseCode = v;
+  localStorage.setItem('lumio_clase_code', v);
+  document.getElementById('clase-login-overlay').style.display = 'none';
+  toast('✅ Clase ' + v + ' conectada');
+  _initXP();
+  haptic('success');
+}
+function claseSkip(){
+  localStorage.setItem('lumio_clase_skip','1');
+  document.getElementById('clase-login-overlay').style.display = 'none';
+}
+function _showClaseError(msg){
+  const el = document.getElementById('clase-error');
+  if(el){ el.textContent = msg; el.style.display = 'block'; setTimeout(()=>el.style.display='none', 3000); }
+}
+function profeLogin(){
+  document.getElementById('clase-login-overlay').style.display = 'none';
+  const ov = document.getElementById('profe-pin-overlay');
+  if(ov) ov.style.display = 'flex';
+}
+function profeLoginConfirm(){
+  const pin = document.getElementById('profe-pin-inp')?.value;
+  if(pin === PROFE_PIN || pin === '2026'){
+    _esModo = 'profesor';
+    localStorage.setItem('lumio_modo','profesor');
+    document.getElementById('profe-pin-overlay').style.display = 'none';
+    document.getElementById('clase-login-overlay').style.display = 'none';
+    // Mostrar botón Profe en nav
+    const nb = document.getElementById('nb-profe');
+    if(nb) nb.style.display = 'flex';
+    toast('👩‍🏫 Modo Profesor activado');
+    haptic('success');
+    // Actualizar ajustes si están abiertos
+    try{bAjustes&&bAjustes();}catch(e){}
+    navSection('profe');
+  } else {
+    const err = document.getElementById('profe-pin-error');
+    if(err){ err.style.display='block'; setTimeout(()=>err.style.display='none',2500); }
+    haptic('error');
+  }
+}
+function profeSalir(){
+  _esModo = 'alumno';
+  localStorage.removeItem('lumio_modo');
+  const nb = document.getElementById('nb-profe');
+  if(nb) nb.style.display = 'none';
+  bClaseMenu&&bClaseMenu(); // Actualizar panel
+  toast('Volviste al modo alumno');
+}
+
+// ── MODO PROFESOR — funciones ─────────────────────────────────────────
+function bProfe(){
+  if(_esModo !== 'profesor'){ profeLogin(); return; }
+  const nb = document.getElementById('nb-profe');
+  if(nb) nb.style.display = 'flex';
+  const nombreEl = document.getElementById('profe-clase-nombre');
+  if(nombreEl) nombreEl.textContent = _claseCode ? 'Clase ' + _claseCode + ' · ' + _profeAlumnos.length + ' alumnos' : 'Sin clase asignada';
+  profeTab(document.querySelector('#s-profe .tabb.on') || document.querySelector('#s-profe .tabb'), 'alumnos');
+}
+function profeTab(el, tab){
+  document.querySelectorAll('#s-profe .tabb').forEach(t=>t.classList.remove('on'));
+  if(el) el.classList.add('on');
+  ['alumnos','tareas','examen','stats'].forEach(t=>{
+    const el2=document.getElementById('pt-'+t); if(el2) el2.style.display = t===tab?'block':'none';
+  });
+  if(tab==='alumnos') _renderProfeAlumnos();
+  if(tab==='tareas') _renderProfeTareas();
+  if(tab==='stats') _renderProfeStats();
+}
+function _renderProfeAlumnos(){
+  const el = document.getElementById('profe-alumnos-list'); if(!el) return;
+  if(!_profeAlumnos.length){
+    el.innerHTML = '<div style="text-align:center;padding:24px;color:var(--t3)"><div style="font-size:36px;margin-bottom:8px">👥</div><div style="font-size:13px">Sin alumnos registrados</div><div style="font-size:11px;margin-top:4px">Comparte el enlace para que entren con el código de clase</div></div>';
+    return;
+  }
+  el.innerHTML = _profeAlumnos.map((a,i) => {
+    const lvl = _xpToNivel(a.xp||0);
+    const pct = Math.min(100, ((a.xp||0) / (NIVEL_XP[Math.min(lvl+1,9)]||10000))*100);
+    return `<div style="background:var(--bg1);border:1px solid var(--bd);border-radius:14px;padding:13px;margin-bottom:8px;display:flex;align-items:center;gap:12px">
+      <div style="font-size:28px;width:44px;height:44px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;border:2px solid var(--bd)">${a.avatar||'👤'}</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+          <div style="font-size:13px;font-weight:700;color:var(--t1)">${a.nombre}</div>
+          <span class="nivel-badge">Nv.${lvl+1}</span>
+        </div>
+        <div class="xp-bar-wrap"><div class="xp-bar-fill" style="width:${pct}%"></div></div>
+        <div style="font-size:10px;color:var(--t3);margin-top:3px">${a.xp||0} XP · ${a.pomodoros||0} 🍅 · ${a.cards||0} 🃏</div>
+      </div>
+      <button onclick="profeRemoveAlumno(${i})" style="background:none;border:none;color:var(--t3);cursor:pointer;font-size:16px;padding:4px">🗑</button>
+    </div>`;
+  }).join('');
+}
+function profeAddAlumno(){
+  const nom = document.getElementById('profe-add-nombre')?.value.trim();
+  if(!nom){ toast('⚠️ Escribe el nombre del alumno'); return; }
+  const av = AVATARES[_profeAlumnos.length % AVATARES.length];
+  _profeAlumnos.push({nombre:nom, avatar:av, xp:0, pomodoros:0, cards:0, id:'a'+Date.now()});
+  localStorage.setItem('lumio_profe_alumnos', JSON.stringify(_profeAlumnos));
+  document.getElementById('profe-add-nombre').value = '';
+  _renderProfeAlumnos();
+  toast('✅ Alumno añadido');
+}
+function profeRemoveAlumno(i){
+  _profeAlumnos.splice(i,1);
+  localStorage.setItem('lumio_profe_alumnos', JSON.stringify(_profeAlumnos));
+  _renderProfeAlumnos();
+}
+function _renderProfeTareas(){
+  const el = document.getElementById('profe-tareas-hist'); if(!el) return;
+  if(!_profeTareas.length){ el.innerHTML='<div style="color:var(--t3);font-size:12px;padding:12px">Sin tareas asignadas aún</div>'; return; }
+  el.innerHTML = _profeTareas.slice().reverse().slice(0,10).map(t=>`
+    <div style="background:var(--bg1);border:1px solid var(--bd);border-radius:12px;padding:11px;margin-bottom:7px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px">${{pomodoro:'🍅',flashcards:'🃏',simulacro:'⏱️',apuntes:'📝'}[t.tipo]||'📋'}</span>
+      <div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--t1)">${{pomodoro:'Pomodoro',flashcards:'Repasar flashcards',simulacro:'Simulacro examen',apuntes:'Apuntes'}[t.tipo]||t.tipo}</div>
+      <div style="font-size:10px;color:var(--t3)">${t.fecha} · ${t.completados||0}/${t.total||_profeAlumnos.length} completados</div></div>
+    </div>`).join('');
+}
+function profeAsignar(tipo){
+  const tarea = {tipo, fecha: new Date().toLocaleDateString('es'), total:_profeAlumnos.length, completados:0, id:'t'+Date.now()};
+  _profeTareas.push(tarea);
+  localStorage.setItem('lumio_profe_tareas', JSON.stringify(_profeTareas));
+  toast(`✅ Tarea "${tipo}" asignada a ${_profeAlumnos.length} alumnos`);
+  haptic('success');
+  _renderProfeTareas();
+  // Notificar localmente
+  const tipos = {pomodoro:'🍅 Tu profe ha asignado un Pomodoro de 25 min', flashcards:'🃏 Tu profe quiere que repases 10 flashcards ahora', simulacro:'⏱️ Tu profe ha lanzado un simulacro de examen', apuntes:'📝 Tu profe quiere que tomes apuntes ahora'};
+  setTimeout(()=>toast(tipos[tipo]||'📋 Nueva tarea asignada', 4000), 500);
+}
+function _renderProfeStats(){
+  const el = document.getElementById('profe-stats-content'); if(!el) return;
+  const total = _profeAlumnos.length;
+  const totalXP = _profeAlumnos.reduce((s,a)=>s+(a.xp||0),0);
+  const topAlumno = _profeAlumnos.sort((a,b)=>(b.xp||0)-(a.xp||0))[0];
+  el.innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+      <div style="background:var(--bg1);border:1px solid var(--bd);border-radius:12px;padding:14px;text-align:center">
+        <div style="font-size:28px;font-weight:900;color:var(--y)">${total}</div>
+        <div style="font-size:11px;color:var(--t2)">Alumnos</div>
+      </div>
+      <div style="background:var(--bg1);border:1px solid var(--bd);border-radius:12px;padding:14px;text-align:center">
+        <div style="font-size:28px;font-weight:900;color:var(--y)">${totalXP}</div>
+        <div style="font-size:11px;color:var(--t2)">XP total clase</div>
+      </div>
+      <div style="background:var(--bg1);border:1px solid var(--bd);border-radius:12px;padding:14px;text-align:center">
+        <div style="font-size:28px;font-weight:900;color:var(--y)">${_profeTareas.length}</div>
+        <div style="font-size:11px;color:var(--t2)">Tareas asignadas</div>
+      </div>
+      <div style="background:var(--bg1);border:1px solid var(--bd);border-radius:12px;padding:14px;text-align:center">
+        <div style="font-size:22px;font-weight:900;color:var(--y)">${topAlumno?.avatar||'—'} ${(topAlumno?.nombre||'—').split(' ')[0]}</div>
+        <div style="font-size:11px;color:var(--t2)">Top alumno</div>
+      </div>
+    </div>`;
+}
+function profeShareLink(){
+  const url = window.location.href.split('?')[0] + '?clase=' + (_claseCode||'DEMO');
+  navigator.clipboard?.writeText(url).then(()=>toast('📋 Enlace copiado — compártelo por WhatsApp')).catch(()=>toast('URL: '+url));
+}
+function profeGenExamen(){
+  const tema = document.getElementById('profe-exam-tema')?.value.trim()||'General';
+  const n = parseInt(document.querySelector('[data-pn].on')?.dataset.pn)||10;
+  const qs = aiGenerateTest(tema, n, tema);
+  if(!qs.length){ toast('⚠️ Añade apuntes del tema primero'); return; }
+  const el = document.getElementById('profe-exam-preview');
+  if(!el) return;
+  el.innerHTML = `<div style="background:var(--bg1);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-top:10px">
+    <div style="font-size:13px;font-weight:800;color:var(--y);margin-bottom:10px">📝 Examen: ${tema} (${qs.length} preguntas)</div>
+    ${qs.map((q,i)=>`<div style="margin-bottom:12px">
+      <div style="font-size:12px;font-weight:700;color:var(--t1)">${i+1}. ${q.pregunta}</div>
+      ${q.opciones.map((o,j)=>`<div style="font-size:11px;color:${o===q.correcta?'var(--green)':'var(--t2)'};margin-left:10px">${['a','b','c','d'][j]}) ${o}${o===q.correcta?' ✅':''}</div>`).join('')}
+    </div>`).join('')}
+    <button class="gbtn" style="margin-top:8px" onclick="navigator.clipboard?.writeText(this.closest('.card,div').innerText).then(()=>toast('📋 Examen copiado'))">📋 Copiar examen</button>
+  </div>`;
+  haptic('success');
+  gainXP(10);
+}
+
+// ── SISTEMA XP/NIVELES ────────────────────────────────────────────────
+function _xpToNivel(xp){
+  let lvl=0;
+  for(let i=0;i<NIVEL_XP.length;i++) if(xp>=NIVEL_XP[i]) lvl=i;
+  return lvl;
+}
+function _initXP(){
+  const xp = D.user.xp||0;
+  const lvl = _xpToNivel(xp);
+  const nextXP = NIVEL_XP[Math.min(lvl+1,9)];
+  const pct = nextXP ? Math.min(100,(xp-NIVEL_XP[lvl])/(nextXP-NIVEL_XP[lvl])*100) : 100;
+  // Mostrar en home si existe el elemento
+  const xpEl = document.getElementById('h-xp-bar');
+  if(xpEl) xpEl.style.width = pct+'%';
+  const lvlEl = document.getElementById('h-nivel');
+  if(lvlEl) lvlEl.textContent = 'Nv.'+(lvl+1)+' '+NIVEL_NOMBRES[lvl];
+  const xpNum = document.getElementById('h-xp-num');
+  if(xpNum) xpNum.textContent = xp+' XP';
+  const avEl = document.getElementById('h-avatar');
+  if(avEl) avEl.textContent = D.user.avatar||'🎓';
+}
+
+// ── IA TUTOR MEJORADA — respuestas extensas estilo profesor real ───────
+// Sobreescribir _generateEsquema con versión 10× más rica
+const _PROFE_ESQUEMAS = {
+  'célula': ()=>`📊 **Esquema completo: LA CÉLULA – Unidad básica de la vida**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔷 **1. Definición**
+La célula es la **unidad estructural, funcional y de reproducción más pequeña de los seres vivos**. Todo organismo está formado por una o varias células.
+📌 *Analogía*: La célula es como una fábrica — tiene dirección (núcleo), energía (mitocondrias), transporte (retículo) y seguridad (membrana).
+
+🔷 **2. Tipos de células — comparativa**
+
+| Característica | **Procariota** | **Eucariota** |
+|---|---|---|
+| Núcleo | ❌ Sin membrana nuclear | ✅ Con membrana nuclear |
+| Tamaño | 1-10 μm | 10-100 μm |
+| Orgánulos | Sin orgánulos membranosos | Con orgánulos especializados |
+| ADN | Circular, en nucleoide | Lineal, en cromosomas |
+| Ejemplos | Bacterias, arqueas | Plantas, animales, hongos |
+
+🔷 **3. Partes de la célula eucariota ANIMAL**
+
+📌 **Membrana celular** (o plasmática)
+• Doble capa de fosfolípidos con proteínas intercaladas
+• Función: controla la entrada y salida de sustancias (permeabilidad selectiva)
+• Proteínas de membrana: receptores, transportadores, canales iónicos
+
+📌 **Núcleo** — Centro de control
+• Contiene el ADN organizado en cromosomas (46 en humanos)
+• Nucleolo: fabrica ribosomas
+• Membrana nuclear (envoltura): con poros para intercambio de moléculas
+• Función: guardar la información genética y dirigir la actividad celular
+
+📌 **Citoplasma** — Medio interno
+• Líquido viscoso (citosol) donde flotan los orgánulos
+• Contiene enzimas, nutrientes y productos de desecho
+
+📌 **Mitocondrias** — Central energética ⚡
+• Orgánulos con doble membrana y ADN propio
+• Realizan la **respiración celular**: glucosa + O₂ → ATP + CO₂ + H₂O
+• Cuantas más mitocondrias, más activa es la célula (ej: músculo cardíaco)
+
+📌 **Retículo endoplasmático (RE)**
+• *Rugoso*: con ribosomas adheridos → fabrica y transporta proteínas
+• *Liso*: sin ribosomas → síntesis de lípidos, detoxificación
+
+📌 **Ribosomas** — Fábricas de proteínas
+• Formados por ARNr y proteínas
+• Leen el ARNm y ensamblan cadenas de aminoácidos
+
+📌 **Aparato de Golgi** — Centro de distribución 📦
+• Recibe proteínas del RE rugoso, las modifica y las empaqueta en vesículas
+• Envía proteínas a membrana, lisosomas o al exterior (secreción)
+
+📌 **Lisosomas** — Sistema digestivo celular
+• Vesículas con enzimas digestivas
+• Función: destruir residuos, organelos dañados y patógenos (autofagia)
+
+📌 **Centrosoma y centríolos**
+• Organiza el huso mitótico durante la división celular
+
+🔷 **4. Partes EXTRA de la célula VEGETAL 🌿**
+
+• **Pared celular** → rígida, de celulosa; da forma y protección
+• **Cloroplastos** → contienen clorofila; realizan la fotosíntesis (luz → glucosa)
+• **Vacuola central grande** → almacena agua, nutrientes y desechos; da turgencia
+• **Plasmodesmos** → canales entre células vegetales adyacentes
+
+🔷 **5. Funciones celulares principales**
+
+1. **Nutrición** → obtener y transformar materia y energía
+2. **Relación** → recibir y responder a estímulos del entorno
+3. **Reproducción** → mitosis (células somáticas) o meiosis (gametos)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 *¿Qué quieres hacer ahora?*`,
+
+  'fotosíntesis': ()=>`📊 **Esquema completo: LA FOTOSÍNTESIS**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔷 **1. Definición y ecuación global**
+La fotosíntesis es el proceso por el que los organismos fotosintéticos (plantas, algas, cianobacterias) convierten **energía luminosa en energía química** en forma de glucosa.
+
+📐 **Ecuación**:
+\`6CO₂ + 6H₂O + luz → C₆H₁₂O₆ + 6O₂\`
+(6 moléculas de CO₂ + 6 de agua + luz solar → glucosa + 6 moléculas de oxígeno)
+
+📌 *Tiene lugar en los* ***cloroplastos***, *que contienen* ***clorofila*** *(pigmento verde que capta la luz).*
+
+🔷 **2. Dos fases de la fotosíntesis**
+
+**⚡ FASE LUMINOSA** (en la membrana tilacoidal)
+• Requiere luz solar
+• La clorofila absorbe fotones de luz
+• Resultados: ① ATP ② NADPH ③ O₂ liberado (subproducto de la fotólisis del agua)
+• Reacción clave: H₂O → H⁺ + e⁻ + ½O₂
+
+**🌿 CICLO DE CALVIN** (fase oscura — en el estroma)
+• No necesita luz directamente (usa el ATP y NADPH de la fase luminosa)
+• Fija el CO₂ atmosférico en moléculas orgánicas
+• Resultado: glucosa (C₆H₁₂O₆)
+• Enzima clave: RuBisCO (la proteína más abundante de la Tierra)
+
+🔷 **3. Factores que afectan a la fotosíntesis**
+
+| Factor | Efecto |
+|---|---|
+| Intensidad lumínica | ↑ luz = ↑ fotosíntesis (hasta saturación) |
+| Temperatura | Óptimo ~25°C, baja por encima o debajo |
+| Concentración CO₂ | ↑ CO₂ = ↑ glucosa producida |
+| Agua | Escasez → cierre de estomas → ↓ CO₂ |
+
+🔷 **4. Importancia ecológica**
+• Produce el **O₂ que respiramos** (origen del O₂ atmosférico)
+• Base de todas las cadenas alimentarias (productores primarios)
+• Fija CO₂ → reduce el efecto invernadero
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 *¿Quieres que te genere flashcards, un mini-test o un mapa mental de este tema?*`,
+};
+
+// Mejorar _generateEsquema del LumioAI con plantillas ricas
+const _orig_generateEsquema = LumioAI._generateEsquema?.bind(LumioAI);
+LumioAI._generateEsquema = function(topic, kbResults){
+  const n = this._norm(topic||'');
+  // Buscar plantilla rica
+  for(const [key, fn] of Object.entries(_PROFE_ESQUEMAS)){
+    if(n.includes(key) || key.includes(n.slice(0,6))){
+      const result = fn();
+      // Añadir botones de acción al final
+      return result + '\n\n**¿Qué quieres hacer?** → [Flashcards automáticas] [Mini-test 3 preg.] [Mapa mental] [Guardar apunte]';
+    }
+  }
+  // Fallback al esquema original mejorado
+  return (_orig_generateEsquema?.(topic, kbResults) || '') + '\n\n💬 *Escribe "flashcards", "test" o "más detalle" para continuar.*';
+};
+
+// ── RESPUESTAS DEL CHAT — formato extenso con botones ─────────────────
+// Sobreescribir _renderMsg para añadir botones de acción a respuestas largas
+const _orig_renderMsg = window._renderMsg;
+function _renderMsg(text, role, withActions=true){
+  const msgs = document.getElementById('chat-msgs');
+  if(!msgs) return null;
+  const wrap = document.createElement('div');
+  wrap.style.cssText='display:flex;gap:9px;align-items:flex-start;'+(role==='user'?'flex-direction:row-reverse':'');
+  const av = document.createElement('div');
+  av.style.cssText='width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:2px;'+(role==='ai'?'background:linear-gradient(135deg,var(--y),#f97316)':'background:var(--bg2);border:1px solid var(--bd)');
+  av.textContent=role==='ai'?'🤖':(D.user.avatar||'👤');
+  const bubble = document.createElement('div');
+  bubble.style.cssText='display:flex;flex-direction:column;align-items:'+(role==='user'?'flex-end':'flex-start')+';max-width:90%;gap:5px';
+  const div = document.createElement('div');
+  div.className='msg msg-'+role;
+  if(role==='ai') div.style.border='1px solid var(--bd)';
+  // Render markdown
+  let rendered=text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/```([\s\S]*?)```/g,(m,c)=>`<pre style="background:var(--bg2);border:1px solid var(--bd);border-radius:8px;padding:10px;font-size:12px;overflow-x:auto;margin:6px 0;font-family:monospace;white-space:pre-wrap">${c}</pre>`)
+    .replace(/\|(.+)\|/g,(m)=>{const cols=m.split('|').filter(c=>c.trim());return`<div style="display:flex;gap:0;margin:4px 0">${cols.map(c=>`<div style="flex:1;padding:4px 8px;background:var(--bg2);border:1px solid var(--bd);font-size:11px;min-width:0">${c.trim()}</div>`).join('')}</div>`;})
+    .replace(/`([^`]+)`/g,'<code style="background:var(--bg2);padding:1px 5px;border-radius:4px;font-family:monospace;font-size:12px">$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g,'<b style="color:var(--t1)">$1</b>')
+    .replace(/\*([^*]+)\*/g,'<em>$1</em>')
+    .replace(/^━+$/gm,'<hr style="border:none;border-top:1px solid var(--bd);margin:8px 0">')
+    .replace(/^(\d+)\.\s+(.+)$/gm,'<div style="display:flex;gap:6px;margin:3px 0"><span style="color:var(--y);font-weight:700;flex-shrink:0">$1.</span><span>$2</span></div>')
+    .replace(/^[•\-\*]\s+(.+)$/gm,'<div style="display:flex;gap:6px;margin:3px 0"><span style="color:var(--y);flex-shrink:0">•</span><span>$1</span></div>')
+    .replace(/^#{1,3}\s+(.+)$/gm,'<div style="font-weight:800;color:var(--t1);margin:8px 0 3px;font-size:14px">$1</div>')
+    .replace(/^📌\s+(.+)$/gm,'<div style="font-weight:700;color:var(--teal);margin:8px 0 2px;font-size:13px">📌 $1</div>')
+    .replace(/^🔷\s+(.+)$/gm,'<div style="font-weight:800;color:var(--y);margin:10px 0 4px;font-size:14px;border-left:3px solid var(--y);padding-left:8px">$1</div>')
+    .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+  div.innerHTML=rendered;
+  bubble.appendChild(div);
+  // Action buttons for AI messages
+  if(withActions && role==='ai'){
+    const actions = document.createElement('div');
+    actions.className='msg-actions';
+    // Detectar qué botones añadir según el contenido
+    const hasEsquema = text.includes('Esquema') || text.includes('📊');
+    const hasLista = text.length > 300;
+    if(hasLista){
+      const btnCopy=document.createElement('button');
+      btnCopy.className='msg-action-btn';btnCopy.innerHTML='📋 Copiar';
+      btnCopy.onclick=()=>{navigator.clipboard?.writeText(text.replace(/[#*_`]/g,'')).then(()=>{btnCopy.innerHTML='✅ Copiado';setTimeout(()=>btnCopy.innerHTML='📋 Copiar',1500);}).catch(()=>{});};
+      actions.appendChild(btnCopy);
+    }
+    const btnNote=document.createElement('button');
+    btnNote.className='msg-action-btn';btnNote.innerHTML='📝 Guardar apunte';
+    btnNote.onclick=()=>chatSaveAsNote(text,btnNote);
+    actions.appendChild(btnNote);
+    if(hasEsquema){
+      const btnFC=document.createElement('button');
+      btnFC.className='msg-action-btn';btnFC.innerHTML='🃏 Crear flashcards';
+      btnFC.onclick=()=>{
+        const rawTxt=text.replace(/[📊🔷📌💬━]/g,'').replace(/\*\*/g,'');
+        const cards=aiGenFlashcards(rawTxt,'General',8);
+        cards.forEach(c=>{D.cards.push({id:'chat'+Date.now()+Math.random().toString(36).slice(2,5),m:D.mats[0]?.n||'General',q:c.pregunta,a:c.respuesta,lv:1,ef:2.5,interval:1,reps:0,due:_localISO()});});
+        saveState();toast(`✅ ${cards.length} flashcards creadas`);gainXP(5);
+        btnFC.innerHTML='✅ '+cards.length+' creadas';
+      };
+      actions.appendChild(btnFC);
+    }
+    if(actions.children.length) bubble.appendChild(actions);
+  }
+  if(role==='user'){wrap.appendChild(bubble);wrap.appendChild(av);}
+  else{wrap.appendChild(av);wrap.appendChild(bubble);}
+  msgs.appendChild(wrap);
+  msgs.scrollTop=msgs.scrollHeight;
+  return div;
+}
+
+// ── AVATAR DEL USUARIO ────────────────────────────────────────────────
+function elegirAvatar(){
+  const avs = AVATARES;
+  const modal = document.createElement('div');
+  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9990;display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.innerHTML=`<div style="background:var(--bg1);border:1px solid var(--bd);border-radius:20px;padding:24px;max-width:320px;width:100%">
+    <div style="font-size:16px;font-weight:800;color:var(--t1);margin-bottom:14px;text-align:center">Elige tu avatar</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+      ${avs.map(a=>`<div onclick="D.user.avatar='${a}';saveState();document.getElementById('h-avatar').textContent='${a}';document.body.removeChild(this.closest('[style*=\"z-index:9990\"]'));toast('Avatar cambiado')" style="font-size:32px;text-align:center;padding:10px;border-radius:12px;cursor:pointer;background:var(--bg2);border:1px solid var(--bd)">${a}</div>`).join('')}
+    </div>
+    <button onclick="document.body.removeChild(this.closest('[style*=\"z-index:9990\"]'))" class="gbtn" style="width:100%">Cancelar</button>
+  </div>`;
+  document.body.appendChild(modal);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────
+// Mostrar login de clase al iniciar (si no se ha hecho ya)
+document.addEventListener('DOMContentLoaded', ()=>{
+  setTimeout(()=>{
+    // Si es modo profesor, mostrar botón
+    if(_esModo==='profesor'){
+      const nb=document.getElementById('nb-profe');
+      if(nb) nb.style.display='flex';
+    }
+    // Inicializar URL params (código de clase desde QR)
+    const params=new URLSearchParams(location.search);
+    const claseParam=params.get('clase');
+    if(claseParam&&!_claseCode){
+      _claseCode=claseParam.toUpperCase();
+      localStorage.setItem('lumio_clase_code',_claseCode);
+      toast('🏫 Clase '+_claseCode+' conectada');
+    }
+    _initXP();
+  }, 1500);
+});
+
+
+
+// ── COMPARTIR LUMIO ────────────────────────────────────────────────────
+function bCompartir(){
+  const url = window.location.href.split('?')[0];
+  const codigoClase = _claseCode || '2A-2026';
+  document.getElementById('share-url').textContent = url + '?clase=' + codigoClase;
+  document.getElementById('share-wa-text').textContent =
+    '🎓 ¡Hola! Os comparto Lumio, la app de estudio gratuita que usamos en clase.\n\n' +
+    '📚 Tiene: flashcards, pomodoro, IA tutor, test automáticos y mucho más.\n' +
+    '📵 Funciona SIN INTERNET una vez instalada.\n\n' +
+    '▶️ Enlace: ' + url + '?clase=' + codigoClase + '\n\n' +
+    '🔑 Código de clase: ' + codigoClase + '\n\n' +
+    'Para instalarla:\n' +
+    'Android → Chrome → 3 puntos → "Añadir a pantalla de inicio"\n' +
+    'iPhone → Safari → Compartir ⬆ → "Añadir a pantalla de inicio"';
+}
+function copiarMensajeWA(){
+  const txt = document.getElementById('share-wa-text')?.textContent;
+  navigator.clipboard?.writeText(txt).then(()=>toast('📋 Mensaje copiado — pégalo en WhatsApp')).catch(()=>{});
+}
+function copiarUrl(){
+  const url = document.getElementById('share-url')?.textContent;
+  navigator.clipboard?.writeText(url).then(()=>toast('📋 Enlace copiado')).catch(()=>{});
+}
+function imprimirInstrucciones(){
+  const url = window.location.href.split('?')[0];
+  const win = window.open('','_blank');
+  win?.document.write(`<html><body style="font-family:sans-serif;padding:20px;max-width:600px">
+    <h2>📱 Cómo instalar Lumio en tu móvil</h2>
+    <h3>🔗 Enlace: ${url}</h3>
+    <h3>🔑 Código de clase: ${_claseCode||'Pregunta a tu profesor'}</h3>
+    <hr>
+    <ol style="line-height:2.5">
+      <li><b>Android (Chrome):</b> Abre el enlace → toca los 3 puntos ⋮ → "Añadir a pantalla de inicio"</li>
+      <li><b>iPhone (Safari):</b> Abre el enlace → toca Compartir ⬆ → "Añadir a pantalla de inicio"</li>
+      <li><b>Ordenador:</b> Abre el enlace en Chrome → icono de instalación en la barra</li>
+    </ol>
+    <p>✅ La app funciona sin WiFi una vez instalada. Tus datos nunca salen del móvil.</p>
+    <p style="color:#888;font-size:12px">Lumio Escuela — Herramienta educativa offline para el aula</p>
+  </body></html>`);
+  win?.print();
+}
+
+
+
+// ── 📸 FOTO → FLASHCARDS desde chat ─────────────────────────────────
+function chatFotoFC(){
+  const inp=document.createElement('input');
+  inp.type='file';inp.accept='image/*';inp.capture='environment';
+  inp.onchange=async(e)=>{
+    const file=e.target.files?.[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=async(ev)=>{
+      const base64=ev.target.result.split(',')[1];
+      // Mostrar preview en chat
+      _renderMsg('📸 *Procesando tu foto para generar flashcards...*','user',false);
+      const typingDiv=_renderMsg('','ai',false);
+      if(typingDiv)typingDiv.innerHTML='<span style="display:inline-flex;gap:5px"><span style="width:8px;height:8px;border-radius:50%;background:var(--y);animation:dotPulse .9s infinite 0s;display:inline-block"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--y);animation:dotPulse .9s infinite .2s;display:inline-block"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--y);animation:dotPulse .9s infinite .4s;display:inline-block"></span></span>';
+      // Intentar OCR con Pollinations si hay internet
+      let textoExtraido='';
+      if(navigator.onLine){
+        try{
+          const ctrl=new AbortController();
+          setTimeout(()=>ctrl.abort(),18000);
+          const r=await fetch('https://text.pollinations.ai/openai',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({model:'openai',messages:[{role:'user',content:[
+              {type:'text',text:'Extrae TODO el texto de esta imagen conservando la estructura. Si hay títulos, subtítulos, listas o tablas, respétalos. Devuelve solo el texto sin comentarios.'},
+              {type:'image_url',image_url:{url:`data:image/jpeg;base64,${base64}`}}
+            ]}],max_tokens:800}),
+            signal:ctrl.signal
+          });
+          if(r.ok){const d=await r.json();textoExtraido=d.choices?.[0]?.message?.content||'';}
+        }catch(e){textoExtraido='';}
+      }
+      // Si no hay OCR, usar nombre del archivo como contexto
+      const materia=D.mats[0]?.n||'General';
+      const textoBase=textoExtraido||`Tema de ${materia}: Contenido de apuntes fotográfico`;
+      // Generar flashcards
+      const cards=aiGenFlashcards(textoBase,materia,8);
+      cards.forEach(c=>{
+        D.cards.push({id:'foto'+Date.now()+Math.random().toString(36).slice(2,5),
+          m:materia,q:c.pregunta,a:c.respuesta,lv:1,ef:2.5,interval:1,reps:0,due:_localISO()});
+      });
+      saveState();gainXP(10);haptic('success');
+      // Respuesta en chat
+      const resp=`📸 **Foto procesada** — ${textoExtraido?'Texto extraído con OCR':'Flashcards generadas desde imagen'}\n\n`+
+        `✅ He creado **${cards.length} flashcards** de tu foto para ${materia}:\n\n`+
+        cards.slice(0,4).map((c,i)=>`**${i+1}. ${c.pregunta}**\n→ ${c.respuesta}`).join('\n\n')+
+        (cards.length>4?`\n\n*...y ${cards.length-4} más guardadas en tus flashcards*`:'')+
+        `\n\n💬 ¿Quieres que explique algún concepto en detalle, o empezamos a repasar?`;
+      if(typingDiv){
+        let rendered=resp.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
+        typingDiv.innerHTML=rendered;
+        // Añadir botones
+        const parent=typingDiv.parentElement;
+        if(parent){
+          const acts=document.createElement('div');acts.className='msg-actions';
+          const b1=document.createElement('button');b1.className='msg-action-btn';b1.innerHTML='🃏 Ver flashcards';
+          b1.onclick=()=>{navSection('estudiar');setTimeout(()=>goTo('flashcards'),100);};
+          const b2=document.createElement('button');b2.className='msg-action-btn';b2.innerHTML='📋 Copiar texto';
+          b2.onclick=()=>navigator.clipboard?.writeText(textoBase).then(()=>toast('📋 Copiado'));
+          acts.appendChild(b1);acts.appendChild(b2);parent.appendChild(acts);
+        }
+      }
+      const msgs=document.getElementById('chat-msgs');if(msgs)msgs.scrollTop=msgs.scrollHeight;
+    };
+    reader.readAsDataURL(file);
+  };
+  inp.click();
+}
+
+
+// ── INTEGRACIÓN MODO PROFESOR EN MENÚ CLASES ─────────────────────────
+function bClaseMenu(){
+  const esProfe = localStorage.getItem('lumio_modo')==='profesor';
+  const panel = document.getElementById('profe-panel-clase');
+  const titulo = document.getElementById('clase-menu-titulo');
+  const sub = document.getElementById('clase-menu-sub');
+  const subPanel = document.getElementById('profe-subpanel');
+  if(panel) panel.style.display = esProfe ? 'block' : 'none';
+  if(titulo) titulo.textContent = esProfe ? '👩‍🏫 Clases — Modo Profesor' : 'Clases';
+  if(sub) sub.textContent = esProfe
+    ? (_claseCode ? 'Clase ' + _claseCode + ' · ' + _profeAlumnos.length + ' alumnos' : 'Sin clase asignada — activa desde Ajustes')
+    : 'Únete o gestiona tus clases';
+  const countEl = document.getElementById('profe-alumno-count');
+  if(countEl) countEl.textContent = _profeAlumnos.length + ' registrado' + (_profeAlumnos.length===1?'':'s');
+  if(subPanel) subPanel.style.display = 'none';
+}
+
+function claseProfeTab(tab){
+  const sp = document.getElementById('profe-subpanel');
+  if(!sp) return;
+  sp.style.display = 'block';
+  if(tab==='alumnos'){
+    sp.innerHTML = `<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:10px">👥 Alumnos (${_profeAlumnos.length})</div>` +
+      (_profeAlumnos.length ? _profeAlumnos.map((a,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--bd)">
+        <div style="font-size:22px">${a.avatar||'👤'}</div>
+        <div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--t1)">${a.nombre}</div>
+        <div style="font-size:10px;color:var(--t3)">${a.xp||0} XP · 🍅${a.pomodoros||0} · 🃏${a.cards||0}</div></div>
+        <button onclick="profeRemoveAlumno(${i});bClaseMenu();claseProfeTab('alumnos')" style="background:none;border:none;color:var(--t3);cursor:pointer;font-size:14px">🗑</button>
+      </div>`).join('') : '<div style="color:var(--t3);font-size:12px;padding:10px 0">Sin alumnos registrados</div>') +
+      `<div style="margin-top:12px;display:flex;gap:8px">
+        <input id="cp-nom" class="inp" placeholder="Nombre del alumno" style="flex:1">
+        <button class="mbtn" style="width:auto;padding:10px 16px" onclick="profeAddAlumnoClase()">+</button>
+      </div>`;
+  } else if(tab==='tareas'){
+    sp.innerHTML = `<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:12px">📋 Asignar a la clase</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        ${[['pomodoro','🍅','Pomodoro 25min'],['flashcards','🃏','Repasar FC'],['simulacro','⏱️','Simulacro'],['apuntes','📝','Apuntes']].map(([tipo,ico,nom])=>`
+        <button onclick="profeAsignar('${tipo}');this.textContent='✅ Enviado';setTimeout(()=>this.textContent='${ico} ${nom}',2000)"
+          style="background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:14px 8px;font-size:12px;font-weight:700;color:var(--t1);cursor:pointer;font-family:var(--font)">
+          ${ico} ${nom}
+        </button>`).join('')}
+      </div>`;
+  } else if(tab==='examen'){
+    sp.innerHTML = `<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:10px">📝 Generar examen instantáneo</div>
+      <input id="cp-tema" class="inp" placeholder="Tema (ej: La célula, Rev. Francesa...)" style="margin-bottom:10px">
+      <div style="display:flex;gap:6px;margin-bottom:10px">
+        ${[5,10,15].map(n=>`<div class="chip${n===10?' on':''}" data-pn="${n}" onclick="document.querySelectorAll('[data-pn]').forEach(c=>c.classList.remove('on'));this.classList.add('on')">${n} preg.</div>`).join('')}
+      </div>
+      <button class="mbtn" onclick="profeGenExamenClase()">⚡ Generar y compartir</button>
+      <div id="cp-exam-out" style="margin-top:10px"></div>`;
+  } else if(tab==='stats'){
+    const total=_profeAlumnos.length;
+    const topXP=Math.max(..._profeAlumnos.map(a=>a.xp||0),0);
+    sp.innerHTML = `<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:12px">📊 Estadísticas de clase</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        ${[
+          [total,'Alumnos','var(--y)'],
+          [_profeAlumnos.reduce((s,a)=>s+(a.xp||0),0),'XP total','var(--teal)'],
+          [_profeTareas.length,'Tareas enviadas','var(--orange)'],
+          [topXP,'XP top alumno','var(--purple)']
+        ].map(([v,l,c])=>`<div style="background:var(--bg2);border-radius:10px;padding:12px;text-align:center">
+          <div style="font-size:22px;font-weight:900;color:${c}">${v}</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:2px">${l}</div>
+        </div>`).join('')}
+      </div>
+      <button onclick="profeShareLink()" class="gbtn" style="width:100%;margin-top:10px">📤 Compartir enlace de clase</button>`;
+  }
+  sp.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function profeAddAlumnoClase(){
+  const nom=document.getElementById('cp-nom')?.value.trim();
+  if(!nom){toast('⚠️ Escribe el nombre');return;}
+  const av=AVATARES[_profeAlumnos.length%AVATARES.length];
+  _profeAlumnos.push({nombre:nom,avatar:av,xp:0,pomodoros:0,cards:0,id:'a'+Date.now()});
+  localStorage.setItem('lumio_profe_alumnos',JSON.stringify(_profeAlumnos));
+  document.getElementById('cp-nom').value='';
+  claseProfeTab('alumnos');
+  bClaseMenu();
+  toast('✅ Alumno añadido');
+}
+
+function profeGenExamenClase(){
+  const tema=document.getElementById('cp-tema')?.value.trim()||'General';
+  const n=parseInt(document.querySelector('[data-pn].on')?.dataset.pn)||10;
+  const qs=aiGenerateTest(tema,n,tema);
+  const out=document.getElementById('cp-exam-out');
+  if(!out)return;
+  if(!qs.length){out.innerHTML='<div style="color:var(--t3);font-size:12px">Añade apuntes del tema primero</div>';return;}
+  const txt=qs.map((q,i)=>`${i+1}. ${q.pregunta}\n${q.opciones.map((o,j)=>` ${['a','b','c','d'][j]}) ${o}`).join('\n')}\n`).join('\n');
+  out.innerHTML=`<div style="font-size:12px;color:var(--t2);margin-bottom:8px">✅ ${qs.length} preguntas generadas</div>
+    <button class="gbtn" style="width:100%" onclick="navigator.clipboard?.writeText(${JSON.stringify(txt)}).then(()=>toast('📋 Examen copiado'))">📋 Copiar examen</button>`;
+  haptic('success');
+}
+
 // ════════════════════════════════════════════════════════
 // SERVICE WORKER INLINE — offline garantizado
 // ════════════════════════════════════════════════════════
@@ -12574,13 +14509,10 @@ self.addEventListener('fetch',e=>{
     navigator.serviceWorker.register(url,{scope:'/'})
       .then(()=>{})
       .catch(()=>{});
-    // Revoke after registration (browser has already processed it)
+    // Revoke after registration
     setTimeout(()=>URL.revokeObjectURL(url),5000);
   }catch(e){}
 })();
-// Inicializar notificaciones y URL imports al arrancar
-// _notifSchedule and checkNotaUrlImport called in main init
-
 </script>
 </body>
 </html>
