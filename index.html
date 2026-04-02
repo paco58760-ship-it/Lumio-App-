@@ -1248,6 +1248,34 @@ body.tema-vio { --y:var(--vio);--yd:var(--viod);--yb:var(--viob); }
 .nb-ia:active > div{transform:scale(.9);box-shadow:0 2px 8px rgba(124,58,237,.3)!important}
 .nb-ia.active > div{box-shadow:0 2px 8px rgba(124,58,237,.2)!important}
 @keyframes ia-btn-pulse{0%,100%{box-shadow:0 4px 12px rgba(124,58,237,.4)}50%{box-shadow:0 4px 20px rgba(124,58,237,.7),0 0 0 4px rgba(124,58,237,.15)}}
+
+/* ══════════════════════════════════════
+   LUMIO PLUS — invite & premium styles
+   ══════════════════════════════════════ */
+.premium-overlay{position:fixed;inset:0;z-index:8500;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.45);animation:fadeIn .2s ease}
+.premium-sheet{background:var(--bg1);border-radius:24px 24px 0 0;padding:28px 20px 40px;width:100%;max-width:480px;animation:slideUpSheet .32s cubic-bezier(.34,1.2,.64,1)}
+@keyframes slideUpSheet{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.premium-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--vio),var(--vio2));color:#fff;font-size:11px;font-weight:800;border-radius:999px;padding:4px 12px;margin-bottom:14px;letter-spacing:.04em}
+.prem-plan{border:1.5px solid var(--bd);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;transition:all .18s;position:relative}
+.prem-plan:hover,.prem-plan.sel{border-color:var(--viob);background:var(--viod)}
+.prem-plan.sel::after{content:'✓';position:absolute;top:10px;right:14px;color:var(--vio);font-weight:900;font-size:16px}
+.prem-plan-price{font-size:22px;font-weight:900;color:var(--t1)}
+.prem-plan-price span{font-size:13px;font-weight:500;color:var(--t2)}
+.prem-plan-name{font-size:13px;font-weight:700;color:var(--vio);margin-bottom:2px}
+.prem-plan-desc{font-size:11px;color:var(--t2);line-height:1.5}
+.prem-code-row{display:flex;gap:8px;margin:14px 0}
+.prem-code-inp{flex:1;border:1.5px solid var(--bd);border-radius:10px;padding:10px 14px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--t1);background:var(--bg1);text-transform:uppercase;letter-spacing:.06em}
+.prem-code-inp:focus{outline:none;border-color:var(--viob)}
+.prem-code-btn{background:var(--viod);border:1.5px solid var(--viob);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:800;color:var(--vio);cursor:pointer;font-family:var(--font);white-space:nowrap}
+.invite-card{background:linear-gradient(135deg,var(--viod),rgba(147,51,234,.05));border:1.5px solid var(--viob);border-radius:16px;padding:16px;margin-bottom:12px}
+.invite-code-box{font-size:20px;font-weight:900;letter-spacing:.12em;color:var(--vio);background:var(--bg2);border-radius:10px;padding:12px;text-align:center;margin:10px 0;font-family:monospace}
+.share-btn-row{display:flex;gap:8px;margin-top:6px}
+.share-btn-row button{flex:1;padding:9px;border-radius:10px;border:1.5px solid var(--bd);background:var(--bg1);font-size:12px;font-weight:700;color:var(--t2);cursor:pointer;font-family:var(--font);transition:all .15s}
+.share-btn-row button:hover{border-color:var(--viob);color:var(--vio)}
+.prem-feature-list{list-style:none;padding:0;margin:12px 0}
+.prem-feature-list li{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--t1);padding:4px 0}
+.prem-feature-list li::before{content:'✦';color:var(--vio);font-size:10px;flex-shrink:0}
+.prem-active-banner{background:linear-gradient(135deg,var(--vio),var(--vio2));color:#fff;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:14px}
 </style>
 <!-- UPDATE INTERCEPTOR: en el <head>, ANTES de renderizar el body.
      Así document.open() no causa pantalla negra porque nada se ha pintado aún. -->
@@ -2056,7 +2084,17 @@ body.tema-vio { --y:var(--vio);--yd:var(--viod);--yb:var(--viob); }
 <!-- ══ PERFIL LANDING MENU ══ -->
 <div class="screen" id="s-perfil-menu"><div style="padding:18px 16px 24px;overflow-y:auto">
   <div style="font-size:22px;font-weight:900;color:var(--t1);margin-bottom:4px">Perfil</div>
-  <div style="font-size:13px;color:var(--t2);margin-bottom:20px">Tu progreso y configuración</div>
+  <div style="font-size:13px;color:var(--t2);margin-bottom:14px">Tu progreso y configuración</div>
+
+  <!-- Lumio Plus entry in perfil -->
+  <div id="perfil-plus-banner" onclick="navSection('lumio-plus')" style="border-radius:16px;padding:14px 16px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:opacity .15s" ontouchstart="this.style.opacity='.8'" ontouchend="this.style.opacity='1'">
+    <div style="font-size:26px">✨</div>
+    <div style="flex:1">
+      <div id="perfil-plus-title" style="font-size:13px;font-weight:900">Lumio Plus</div>
+      <div id="perfil-plus-sub" style="font-size:11px;margin-top:1px">Accede por 1€ o con código de colegio</div>
+    </div>
+    <div style="font-size:14px;font-weight:700">→</div>
+  </div>
 
   <!-- PROGRESO -->
   <div style="font-size:10px;font-weight:800;color:var(--t3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px"><span style="width:3px;height:12px;background:var(--green);border-radius:2px;display:inline-block"></span>Tu progreso</div>
@@ -2991,6 +3029,16 @@ Escribe / para comandos rápidos"></textarea>
   </div>
   <div class="ps">Envía Lumio a tus alumnos y compañeros</div>
 
+  <!-- Lumio Plus banner in compartir -->
+  <div onclick="navSection('lumio-plus')" style="background:linear-gradient(135deg,var(--vio),var(--vio2));border-radius:16px;padding:16px;margin-bottom:14px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:0 4px 16px rgba(124,58,237,.35)" ontouchstart="this.style.opacity='.85'" ontouchend="this.style.opacity='1'">
+    <div style="font-size:32px">✨</div>
+    <div style="flex:1">
+      <div style="font-size:15px;font-weight:900;color:#fff">Invita amigos — 1€ para ellos</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8);margin-top:2px">Tu colegio accede gratis · Comparte tu código de invitación</div>
+    </div>
+    <div style="color:rgba(255,255,255,.7);font-size:18px">→</div>
+  </div>
+
   <div class="card card-y" style="margin-bottom:12px">
     <div style="font-size:13px;font-weight:800;color:var(--y);margin-bottom:8px">📱 Por WhatsApp / Telegram</div>
     <div id="share-wa-text" style="font-size:12px;color:var(--t1);line-height:1.7;background:var(--bg2);border-radius:8px;padding:10px;margin-bottom:8px;white-space:pre-line"></div>
@@ -3015,6 +3063,115 @@ Escribe / para comandos rápidos"></textarea>
   </div>
 </div>
 </div>
+
+<!-- ══ LUMIO PLUS — pantalla de invitaciones y acceso premium ══ -->
+<div class="screen" id="s-lumio-plus">
+<div class="pw" style="padding-bottom:40px">
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:0">
+    <button onclick="history.back()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--t2);padding:2px;line-height:1">←</button>
+    <div class="pt">Lumio <em>Plus</em> ✨</div>
+  </div>
+  <div class="ps">Acceso premium · Invita a tus amigos</div>
+
+  <!-- Banner estado premium -->
+  <div id="prem-status-banner" style="display:none" class="prem-active-banner">
+    <div style="font-size:28px">🎓</div>
+    <div>
+      <div style="font-size:14px;font-weight:900">¡Tienes Lumio Plus activo!</div>
+      <div id="prem-status-detail" style="font-size:11px;opacity:.85;margin-top:2px">Acceso completo · IA mejorada</div>
+    </div>
+  </div>
+
+  <!-- Sección invitar con código -->
+  <div id="prem-invite-section" style="display:none">
+    <div style="font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Tu código de invitación</div>
+    <div class="invite-card">
+      <div style="font-size:12px;color:var(--t2);margin-bottom:4px">Comparte este código con tus amigos. Ellos acceden por <b style="color:var(--vio)">solo 1€</b> en lugar del precio normal:</div>
+      <div class="invite-code-box" id="my-invite-code">LUMIO-????</div>
+      <div class="share-btn-row">
+        <button onclick="shareInviteCode('wa')">💬 WhatsApp</button>
+        <button onclick="shareInviteCode('copy')">📋 Copiar</button>
+        <button onclick="shareInviteCode('link')">🔗 Enlace</button>
+      </div>
+      <div style="font-size:10px;color:var(--t3);margin-top:8px;text-align:center">
+        Cada vez que alguien usa tu código ganas 🏅 50 XP
+      </div>
+    </div>
+
+    <div style="font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin:16px 0 8px">Amigos que has invitado</div>
+    <div id="prem-invited-list" style="font-size:12px;color:var(--t2);text-align:center;padding:12px;background:var(--bg2);border-radius:12px">
+      Aún no has invitado a nadie. ¡Comparte tu código!
+    </div>
+  </div>
+
+  <!-- Sección activar acceso (usuarios sin premium) -->
+  <div id="prem-activate-section">
+    <div style="background:linear-gradient(135deg,var(--viod),rgba(147,51,234,.04));border:1.5px solid var(--viob);border-radius:16px;padding:18px;margin-bottom:16px">
+      <div style="font-size:16px;font-weight:900;color:var(--t1);margin-bottom:6px">🚀 Desbloquea todo Lumio</div>
+      <ul class="prem-feature-list">
+        <li>IA con OpenRouter — respuestas más inteligentes y rápidas</li>
+        <li>Generación ilimitada de flashcards y tests</li>
+        <li>Extractor de puntos clave de cualquier texto</li>
+        <li>Modo examen con corrección avanzada</li>
+        <li>Sin límites en resúmenes y esquemas</li>
+        <li>Soporte prioritario</li>
+      </ul>
+    </div>
+
+    <!-- Planes -->
+    <div style="font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Elige tu plan</div>
+
+    <div class="prem-plan sel" id="plan-euro" onclick="selectPlan('euro')">
+      <div class="prem-plan-name">🎟️ Acceso con código amigo</div>
+      <div class="prem-plan-price">1€ <span>pago único</span></div>
+      <div class="prem-plan-desc">Tienes un código de descuento de alguien de tu cole. Acceso completo para siempre.</div>
+    </div>
+
+    <div class="prem-plan" id="plan-school" onclick="selectPlan('school')">
+      <div class="prem-plan-name">🏫 Código de colegio (gratis)</div>
+      <div class="prem-plan-price">Gratis <span>para alumnos</span></div>
+      <div class="prem-plan-desc">Tu profe o delegado te ha dado un código de colegio. Actívalo aquí.</div>
+    </div>
+
+    <!-- Entrada de código -->
+    <div style="font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin:14px 0 6px">Introduce tu código</div>
+    <div class="prem-code-row">
+      <input class="prem-code-inp" id="prem-code-input" placeholder="LUMIO-XXXXX" maxlength="20"
+        oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9-]/g,'')"
+        onkeydown="if(event.key==='Enter')activatePremiumCode()">
+      <button class="prem-code-btn" onclick="activatePremiumCode()">✓ Activar</button>
+    </div>
+    <div id="prem-code-msg" style="font-size:12px;min-height:18px;margin-bottom:8px;text-align:center"></div>
+
+    <!-- Botón pago 1€ -->
+    <div id="prem-pay-section" style="margin-top:4px">
+      <div style="font-size:10px;color:var(--t3);text-align:center;margin-bottom:8px">— o paga directamente con tarjeta —</div>
+      <button onclick="openPayment1euro()" style="width:100%;background:linear-gradient(135deg,var(--vio),var(--vio2));color:#fff;border:none;border-radius:var(--radius-sm);padding:14px;font-size:15px;font-weight:800;cursor:pointer;font-family:var(--font);letter-spacing:.02em;box-shadow:0 4px 16px rgba(124,58,237,.35)">
+        💳 Pagar 1€ y activar Lumio Plus
+      </button>
+      <div style="font-size:10px;color:var(--t3);text-align:center;margin-top:8px">Pago único · Sin suscripción · Seguro con Stripe</div>
+    </div>
+  </div>
+
+  <!-- Historial de invitados (siempre visible si hay) -->
+  <div style="font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-top:20px;margin-bottom:8px">¿Ya tienes Lumio Plus? Invita amigos</div>
+  <div style="font-size:12px;color:var(--t2);background:var(--bg2);border-radius:12px;padding:12px;line-height:1.7">
+    Cuando alguien activa Lumio Plus con tu código de invitación, ganas <b>50 XP</b> y ellos acceden por solo 1€. ¡Ayuda a tus compañeros!
+  </div>
+</div>
+</div>
+
+<!-- Overlay premium global (para bloquear features) -->
+<div id="premium-gate-overlay" class="premium-overlay" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+  <div class="premium-sheet">
+    <div class="premium-badge">✦ LUMIO PLUS</div>
+    <div style="font-size:18px;font-weight:900;color:var(--t1);margin-bottom:6px" id="pgate-title">Función Premium</div>
+    <div style="font-size:13px;color:var(--t2);margin-bottom:18px;line-height:1.6" id="pgate-desc">Esta función está disponible con Lumio Plus.</div>
+    <button onclick="document.getElementById('premium-gate-overlay').style.display='none';navSection('perfil');setTimeout(()=>goTo('lumio-plus'),80)" style="width:100%;background:linear-gradient(135deg,var(--vio),var(--vio2));color:#fff;border:none;border-radius:var(--radius-sm);padding:13px;font-size:14px;font-weight:800;cursor:pointer;font-family:var(--font);margin-bottom:8px">✨ Ver planes — desde 1€</button>
+    <button onclick="document.getElementById('premium-gate-overlay').style.display='none'" style="width:100%;background:none;border:1.5px solid var(--bd);border-radius:var(--radius-sm);padding:12px;font-size:13px;font-weight:700;color:var(--t2);cursor:pointer;font-family:var(--font)">Ahora no</button>
+  </div>
+</div>
+
 <!-- ══ VOCABULARIO ══ -->
 <div class="screen" id="s-vocab">
 <div class="pw">
@@ -5244,6 +5401,7 @@ const SECTIONS={
   },
   profe:{screens:['profe'],labels:[],single:true},
   compartir:{screens:['compartir'],labels:[],single:true},
+  'lumio-plus':{screens:['lumio-plus'],labels:[],single:true},
   'plan-ia':{screens:['plan-ia'],labels:[],single:true},  // Plan de estudio con IA
 };
 let currentSection='home';let currentScreen='home';
@@ -5304,7 +5462,7 @@ function goTo(id){
     sc.offsetWidth;sc.classList.add('slide-in');
   }else{console.warn('goTo: screen not found: s-'+id);}
   document.querySelectorAll('#sub-nav .snb').forEach(b=>b.classList.toggle('active',b.dataset.scr===id));
-  const bldrs={home:bHome,'estudiar-menu':function(){},'agenda-menu':function(){},'clase-menu':bClaseMenu,'perfil-menu':function(){},'pom-screen':bPomScreen,stats:bStats,apuntes:bApuntesScreen,materias:bMats,flashcards:bFC,testia:bIA,resumenia:bResumen,mapa:bMapa,chat:bChat,vocab:bVocab,calc:bCalc,conversor:bConv,tabla:bTabla,timeline:bTL,horario:bHorario,planificador:bPlan,examen:bExamen,'profe':bProfe,'compartir':bCompartir,simulacro:bSimulacro,logros:bLogros,recordatorios:bRecord,amigos:bAmigos,calendario:bCal,sonidos:bSonidos,agenda:bAgenda,vacaciones:bVacaciones,formulas:bFormulas,conjugador:bConjugador,calcnotas:bCalcNotas,ppt:bPPT,esquemas:bEsquemas,dictado:bDictado,corrector:bCorrector,ranking:bRanking,bienestar:bBienestar,anaya:bAnaya,ajustes:bAjustes,feedback:bFeedback,'clase-lista':bClaseLista,'clase-detalle':bClaseDetalle,mural:bMural,anuncios:bAnuncios,'fc-clase':bFcClase,feynman:bFeynman,lectura:bLectura,comparador:bComparador,mnemonics:bMnemonics,resaltador:bResaltador,simplificador:bSimplificador,'semana-view':bSemanaView,'cronometro-deberes':bCronometro,estimador:bEstimador,'notas-historial':bNotasHistorial,heatmap:bHeatmap,informe:bInforme,detector:bDetector,predictor:bPredictor,busqueda:bBusqueda,'plan-ia':planIAInit};
+  const bldrs={home:bHome,'estudiar-menu':function(){},'agenda-menu':function(){},'clase-menu':bClaseMenu,'perfil-menu':function(){},'pom-screen':bPomScreen,stats:bStats,apuntes:bApuntesScreen,materias:bMats,flashcards:bFC,testia:bIA,resumenia:bResumen,mapa:bMapa,chat:bChat,vocab:bVocab,calc:bCalc,conversor:bConv,tabla:bTabla,timeline:bTL,horario:bHorario,planificador:bPlan,examen:bExamen,'profe':bProfe,'compartir':bCompartir,'lumio-plus':bLumioPlus,simulacro:bSimulacro,logros:bLogros,recordatorios:bRecord,amigos:bAmigos,calendario:bCal,sonidos:bSonidos,agenda:bAgenda,vacaciones:bVacaciones,formulas:bFormulas,conjugador:bConjugador,calcnotas:bCalcNotas,ppt:bPPT,esquemas:bEsquemas,dictado:bDictado,corrector:bCorrector,ranking:bRanking,bienestar:bBienestar,anaya:bAnaya,ajustes:bAjustes,feedback:bFeedback,'clase-lista':bClaseLista,'clase-detalle':bClaseDetalle,mural:bMural,anuncios:bAnuncios,'fc-clase':bFcClase,feynman:bFeynman,lectura:bLectura,comparador:bComparador,mnemonics:bMnemonics,resaltador:bResaltador,simplificador:bSimplificador,'semana-view':bSemanaView,'cronometro-deberes':bCronometro,estimador:bEstimador,'notas-historial':bNotasHistorial,heatmap:bHeatmap,informe:bInforme,detector:bDetector,predictor:bPredictor,busqueda:bBusqueda,'plan-ia':planIAInit};
   if(bldrs[id])bldrs[id]();
   // Limpiar intervalos del pomodoro si salimos de él
   if(id!=='pom-screen'&&window._pomTimer){clearInterval(window._pomTimer);window._pomTimer=null;}
@@ -8579,6 +8737,59 @@ const LUMIO_AI_MODELS = [
 ];
 const WEB_SEARCH_MODELS = ['gemini'];
 
+// ══════════════════════════════════════════════════════════════
+// ⚠️  ADVERTENCIA DE SEGURIDAD: La API key de abajo está
+//     embebida en el HTML cliente → cualquiera puede verla
+//     en el código fuente. Genera una clave nueva en
+//     openrouter.ai/keys después de desplegar y usa un
+//     backend/proxy para protegerla en producción.
+// ══════════════════════════════════════════════════════════════
+const OPENROUTER_API_KEY  = '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';
+const OPENROUTER_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
+// Modelos gratuitos en OpenRouter (fallback ordenado)
+const OR_MODELS = [
+  'google/gemini-flash-1.5-8b',          // rápido, gratis, bueno para educación
+  'mistralai/mistral-7b-instruct:free',   // sólido, siempre gratis
+  'meta-llama/llama-3.1-8b-instruct:free',// llama 3, buen español
+  'qwen/qwen-2-7b-instruct:free',         // buena alternativa
+];
+
+/**
+ * _callOpenRouter — proveedor principal de IA.
+ * Usa la clave OpenRouter con reintentos entre modelos gratuitos.
+ */
+async function _callOpenRouter(messages, maxTokens=900, temperature=0.75) {
+  if (!navigator.onLine) throw new Error('offline');
+  let lastErr;
+  for (const model of OR_MODELS) {
+    try {
+      const ctrl = new AbortController();
+      const tid  = setTimeout(() => ctrl.abort(), 20000);
+      const res  = await fetch(OPENROUTER_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + OPENROUTER_API_KEY,
+          'HTTP-Referer': location.origin,
+          'X-Title': 'Lumio Study App',
+        },
+        body: JSON.stringify({ model, messages, max_tokens: maxTokens, temperature }),
+        signal: ctrl.signal,
+      });
+      clearTimeout(tid);
+      if (!res.ok) { lastErr = 'HTTP ' + res.status; continue; }
+      const data = await res.json();
+      const text = data?.choices?.[0]?.message?.content || '';
+      if (text && text.trim().length > 3) {
+        console.info('LumioAI: OpenRouter ✓ (' + model + ')');
+        return text.trim();
+      }
+      lastErr = 'empty';
+    } catch(e) { lastErr = e.message; }
+  }
+  throw new Error('OpenRouter all models failed: ' + lastErr);
+}
+
 // ── Google Gemini API Oficial — llamadas directas, más rápidas y sin límites de Pollinations ──
 const GEMINI_API_KEY = 'AIzaSyAksN6KDP7hc7rSHdT1VX74b__2U2FYUJY';
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
@@ -8863,9 +9074,30 @@ const LumioAICore = {
     if (!navigator.onLine) return opts.fallback || null;
 
     const retryBar = document.getElementById('ai-retry-bar');
-    const primaryModel = getLumioModel();
-    const tryModels = [primaryModel, ...this._fallbackModels.filter(m => m !== primaryModel)];
 
+    // ── PROVEEDOR 1: OpenRouter (modelos gratuitos) ──
+    try {
+      const orText = await _callOpenRouter(messages, maxTokens, opts.temperature ?? 0.75);
+      if (retryBar) retryBar.classList.remove('show');
+      return orText;
+    } catch(e) {
+      console.warn('LumioAI: OpenRouter falló, probando Gemini...', e.message);
+    }
+
+    // ── PROVEEDOR 2: Gemini oficial (si modelo seleccionado es gemini) ──
+    const primaryModel = getLumioModel();
+    if (primaryModel === 'gemini') {
+      try {
+        const geminiText = await _callGeminiDirect(messages, maxTokens, opts.temperature ?? 0.75);
+        if (retryBar) retryBar.classList.remove('show');
+        return geminiText;
+      } catch(e) {
+        console.warn('LumioAI: Gemini falló, probando Pollinations...', e.message);
+      }
+    }
+
+    // ── PROVEEDOR 3: Pollinations (gratis, sin API key) ──
+    const tryModels = [primaryModel, ...this._fallbackModels.filter(m => m !== primaryModel)];
     for (let attempt = 0; attempt < 4; attempt++) {
       const modelId = tryModels[Math.min(attempt, tryModels.length - 1)];
       if (attempt >= 1 && retryBar) {
@@ -8873,13 +9105,11 @@ const LumioAICore = {
         retryBar.classList.add('show');
       }
       try {
-        // Attempt 3: use simple GET endpoint as last resort
         if (attempt === 3) {
           const lastMsg = messages.filter(m=>m.role==='user').pop()?.content || '';
           const sys = messages.find(m=>m.role==='system')?.content || '';
           const prompt = sys ? (sys.slice(0,200) + ' ' + lastMsg.slice(0,400)) : lastMsg.slice(0,600);
           const getUrl = 'https://text.pollinations.ai/' + encodeURIComponent(prompt.slice(0,500)) + '?model=openai&seed=' + Math.floor(Math.random()*99999) + '&referrer=lumio';
-          // FIX: use _fetchWithTimeout instead of AbortSignal.timeout to avoid cloning error
           const r = await _fetchWithTimeout(getUrl, {}, 15000);
           if (!r.ok) throw new Error('GET HTTP ' + r.status);
           const txt = await r.text();
@@ -8889,34 +9119,21 @@ const LumioAICore = {
           }
           throw new Error('GET empty');
         }
-
-        // ── Gemini: usar API oficial de Google directamente (más rápida y fiable) ──
         if (modelId === 'gemini') {
           const geminiText = await _callGeminiDirect(messages, maxTokens, opts.temperature ?? 0.75);
           if (retryBar) retryBar.classList.remove('show');
           return geminiText;
         }
-
         const ctrl = new AbortController();
         const tid = setTimeout(() => ctrl.abort(), 15000);
         const res = await fetch(this._endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model: modelId,
-            messages,
-            max_tokens: maxTokens,
-            temperature: opts.temperature ?? 0.75,
-            seed: Math.floor(Math.random() * 99999),
-            referrer: 'lumio-study-app',
-          }),
+          body: JSON.stringify({ model: modelId, messages, max_tokens: maxTokens, temperature: opts.temperature ?? 0.75, seed: Math.floor(Math.random() * 99999), referrer: 'lumio-study-app' }),
           signal: ctrl.signal,
         });
         clearTimeout(tid);
-        if (!res.ok) {
-          const errText = await res.text().catch(()=>'');
-          throw new Error('HTTP ' + res.status + ' ' + errText.slice(0,50));
-        }
+        if (!res.ok) { const errText = await res.text().catch(()=>''); throw new Error('HTTP ' + res.status + ' ' + errText.slice(0,50)); }
         const data = await res.json();
         const text = data?.choices?.[0]?.message?.content || data?.output || data?.text || '';
         if (!text || text.trim().length < 3) throw new Error('empty response');
@@ -8929,9 +9146,7 @@ const LumioAICore = {
     }
 
     if (retryBar) retryBar.classList.remove('show');
-    // ── SECOND PROVIDER FALLBACK ──
-    // All Pollinations attempts (including GET fallback) failed.
-    // Try HuggingFace free Inference API before giving up entirely.
+    // ── PROVEEDOR 4: HuggingFace (último recurso) ──
     const hfResult = await _callHuggingFaceFallback(messages, maxTokens);
     if (hfResult) return hfResult;
 
@@ -9422,6 +9637,82 @@ function _sendChat64(el){
   }catch(e){ console.warn('_sendChat64 error', e); }
 }
 
+
+// ══════════════════════════════════════════════════════════════
+// EXTRACTOR DE PUNTOS CLAVE — analiza la pregunta del alumno
+// y genera contexto enriquecido para la IA antes de enviar
+// ══════════════════════════════════════════════════════════════
+function _extractKeyPoints(msg) {
+  if (!msg || msg.trim().length < 4) return '';
+  const m = msg.toLowerCase().trim();
+  const lines = [];
+
+  // ── Tipo de pregunta ──
+  const tipoMap = [
+    [/^(qué es|qué son|define|definición de|concepto de)/,       'DEFINICIÓN — responde con definición clara + ejemplo'],
+    [/^(cómo (se )?funciona|cómo (se )?hace|cómo (se )?calcula)/, 'PROCEDIMIENTO — responde con pasos numerados'],
+    [/^(por qué|explica|razona|justifica)/,                        'EXPLICACIÓN CAUSAL — responde con causa-efecto'],
+    [/^(diferencia|compara|versus|vs\.?)/,                         'COMPARACIÓN — usa tabla o lista paralela'],
+    [/^(resume|sintetiza|síntesis|puntos clave|lo más importante)/, 'RESUMEN — bullets con lo esencial'],
+    [/^(ejercicio|problema|calcula|resuelve|halla|encuentra)/,      'EJERCICIO — muestra pasos + resultado'],
+    [/^(ejemplo|pon un ejemplo|dame un ejemplo)/,                   'EJEMPLO CONCRETO — pon 2-3 ejemplos variados'],
+    [/^(no entiendo|no me queda|me puedes explicar|otra vez)/,      'REEXPLICACIÓN — usa analogía diferente, más visual'],
+    [/\?$/, 'PREGUNTA DIRECTA — responde de forma concisa y directa'],
+  ];
+  for (const [re, label] of tipoMap) {
+    if (re.test(m)) { lines.push('TIPO: ' + label); break; }
+  }
+
+  // ── Materia detectada ──
+  const materias = [
+    ['matemáticas','mates','álgebra','geometría','estadística','probabilidad','función','ecuación','integral','derivada','límite','trigonometría','cálculo'],
+    ['física','fuerza','energía','movimiento','inercia','newton','campo','onda','circuito','electromagnetismo','termodinámica','óptica'],
+    ['química','átomo','molécula','enlace','reacción','ácido','base','pH','estequiometría','tabla periódica','elemento','compuesto','oxidación'],
+    ['biología','célula','genética','adn','evolución','ecosistema','fotosíntesis','respiración','organismo','tejido','órgano','sistema'],
+    ['historia','guerra','revolución','siglo','época','civilización','cultura','política','economía','sociedad','imperio','medieval'],
+    ['lengua','gramática','sintaxis','semántica','literatura','texto','oración','sintagma','verbo','sustantivo','adjetivo','narración'],
+    ['inglés','grammar','vocabulary','tense','verb','sentence','reading','writing','speaking'],
+    ['geografía','clima','país','continente','río','montaña','población','mapa','territorio','región'],
+    ['filosofía','ética','moral','conocimiento','ser','lógica','argumento','platón','aristóteles','kant'],
+    ['economía','mercado','oferta','demanda','precio','inflación','pib','empresa','producción'],
+  ];
+  const matLabels = ['Matemáticas','Física','Química','Biología','Historia','Lengua','Inglés','Geografía','Filosofía','Economía'];
+  for (let i = 0; i < materias.length; i++) {
+    if (materias[i].some(kw => m.includes(kw))) {
+      lines.push('MATERIA DETECTADA: ' + matLabels[i] + ' — adapta terminología y metodología');
+      break;
+    }
+  }
+
+  // ── Conceptos clave extraídos ──
+  // Extraer palabras con mayúscula o técnicas que parecen ser el núcleo
+  const words = msg.split(/\s+/).filter(w => w.length > 4);
+  const stopwords = new Set(['cómo','cuándo','dónde','quién','cuál','cuáles','puedes','puede','favor','para','sobre','entre','hacia','desde','según','durante','mientras','también','además','porque','aunque','después','antes']);
+  const keyTerms = words
+    .filter(w => !stopwords.has(w.toLowerCase()))
+    .filter(w => /[A-ZÁÉÍÓÚ]/.test(w[0]) || w.length > 6)
+    .slice(0, 5)
+    .map(w => w.replace(/[?!.,;:]/g, ''));
+  if (keyTerms.length > 0) {
+    lines.push('TÉRMINOS CLAVE DETECTADOS: ' + keyTerms.join(', ') + ' — asegúrate de explicar estos conceptos');
+  }
+
+  // ── Longitud esperada de respuesta ──
+  if (m.length < 30)  lines.push('BREVEDAD: pregunta corta → respuesta concisa (máx 150 palabras)');
+  if (m.length > 200) lines.push('PROFUNDIDAD: mensaje largo → respuesta detallada con estructura clara');
+
+  // ── Indicadores emocionales ──
+  if (/no entiendo|no sé|no me queda|confuso|perdido|ayuda/i.test(m))
+    lines.push('ESTADO: alumno confundido → empieza simple, usa analogía cotidiana, sé paciente');
+  if (/examen|mañana|urgente|ya|rápido|pronto/i.test(m))
+    lines.push('URGENCIA: tiene examen próximo → ve directo al grano, lo más importante primero');
+  if (/fácil|básico|sencillo|simple/i.test(m))
+    lines.push('NIVEL PEDIDO: simple → evita tecnicismos, usa lenguaje claro');
+
+  if (lines.length === 0) return '';
+  return '\n\n[ANÁLISIS DE LA PREGUNTA — USA ESTO PARA RESPONDER MEJOR]:\n' + lines.map(l => '• ' + l).join('\n');
+}
+
 function chatMaybeShowSummary(){
   const msgs = chatHistory.filter(m=>m.role==='user').length;
   if(msgs >= 3){
@@ -9823,70 +10114,79 @@ function chatChip(txt){
 
 // ── Sistema de IA: Gemini/GPT vía Pollinations.ai (gratis, sin key) + búsqueda web + fallback local ──
 async function callAI(systemPrompt, userMsg, maxTokens=700){
-  const localPromise=Promise.resolve(aiChatLocal(userMsg));
-  if(!navigator.onLine) return localPromise;
-  const activeModel = getLumioModel();
+  const localFallback = aiChatLocal(userMsg);
+  if(!navigator.onLine) return localFallback;
 
-  // ── Búsqueda web: Jina.ai + DuckDuckGo + Wikipedia (gratis, sin API key) ──
+  // ── Búsqueda web opcional (no bloquea, máx 4s) ──
   let webCtx = '';
   if (needsWebSearch(userMsg)) {
     try {
-      const sr = await lumioWebSearch(userMsg);
+      const sr = await Promise.race([
+        lumioWebSearch(userMsg),
+        new Promise((_,rej)=>setTimeout(()=>rej(new Error('web timeout')),4000))
+      ]);
       if (sr) {
-        webCtx = '\n\n===INFORMACIÓN WEB ACTUALIZADA===\n' + sr + '\n===FIN INFO WEB===\n\nINSTRUCCIÓN: Usa la información web de arriba para dar una respuesta más completa, precisa y con datos reales. Si incluyes datos específicos de las fuentes, indícalo.';
-        // Append source pills to the end of the AI response
+        webCtx = '\n\n===INFO WEB===\n' + sr + '\n===FIN===';
         const srcPills = _buildSourcesHtml ? _buildSourcesHtml() : '';
         if (srcPills) webCtx += srcPills;
       }
     } catch(e) {}
   }
 
-  // ── Construir historial COMPLETO sin duplicar el mensaje actual ──
-  // IMPORTANTE: chatHistory ya tiene el msg del usuario pusheado antes de llamar aquí.
-  // Tomamos el historial SIN el último mensaje (que es el user actual) para no duplicarlo.
-  const MAX_HIST = 40;
-  const histWithoutLast = chatHistory.slice(0, -1); // excluir el último user msg ya pusheado
-  const histSlice = histWithoutLast.slice(-MAX_HIST);
-
-  // ── Resumen del hilo para que la IA recuerde todo ──
+  // ── Historial ──
+  const MAX_HIST = 12;
+  const histWithoutLast = chatHistory.slice(0, -1).slice(-MAX_HIST);
   let threadSummary = '';
   if (chatHistory.length > 4) {
-    const allUserMsgs = chatHistory.filter(m => m.role === 'user').slice(-12).map(m => m.content.slice(0, 80)).join(' | ');
-    threadSummary = '\n\n[CONTEXTO COMPLETO DEL HILO — LEE TODOS ANTES DE RESPONDER]: ' + allUserMsgs + '\n[FIN CONTEXTO — responde coherentemente con TODO lo anterior]';
+    const allUserMsgs = chatHistory.filter(m=>m.role==='user').slice(-8).map(m=>m.content.slice(0,80)).join(' | ');
+    threadSummary = '\n[HILO]: ' + allUserMsgs;
   }
+  const enrichedSystem = systemPrompt + threadSummary + (webCtx ? '\nDispones de info web actualizada.' : '');
+  const messages = [
+    { role: 'system', content: enrichedSystem },
+    ...histWithoutLast,
+    { role: 'user', content: userMsg + webCtx },
+  ];
 
-  const enrichedSystem = systemPrompt + threadSummary + (webCtx ? '\n\nDispones de información web actualizada. Úsala para dar respuestas más completas, precisas y con datos reales.' : '');
+  // ── CARRERA: OpenRouter vs Pollinations vs timeout local ──
+  // Se lanzan en paralelo. Gana el primero que responda.
+  // Si todos fallan en 11 segundos → respuesta local inmediata.
+  let settled = false;
+  const wrap = (promise) => promise.then(v => {
+    if(v && v.trim && v.trim().length > 3) return v;
+    throw new Error('empty');
+  });
 
-  try{
-    const ctrl = new AbortController();
-    const tid = setTimeout(() => ctrl.abort(), 18000);
-    const onlinePromise = fetch('https://text.pollinations.ai/openai',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model: activeModel,
-        messages:[
-          {role:'system', content: enrichedSystem},
-          ...histSlice,
-          {role:'user', content: userMsg + webCtx}  // mensaje actual con contexto web
-        ],
-        max_tokens: maxTokens,
-        temperature: 0.75,
-        seed: Math.floor(Math.random()*99999),
-        referrer: 'lumio-study-app'
-      }),
-      signal: ctrl.signal
-    }).then(async r=>{
+  const orPromise = wrap(_callOpenRouter(messages, maxTokens));
+
+  const polPromise = wrap(new Promise(async (resolve, reject) => {
+    try {
+      const ctrl = new AbortController();
+      const tid = setTimeout(() => ctrl.abort(), 10000);
+      const res = await fetch('https://text.pollinations.ai/openai', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({ model: getLumioModel(), messages, max_tokens: maxTokens, temperature:0.75, seed:Math.floor(Math.random()*99999), referrer:'lumio-study-app' }),
+        signal: ctrl.signal
+      });
       clearTimeout(tid);
-      if(!r.ok) throw new Error('HTTP '+r.status);
-      const data = await r.json();
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const data = await res.json();
       const text = data.choices?.[0]?.message?.content || data.output || data.text || '';
       if(!text || text.trim().length < 3) throw new Error('empty');
-      return text;
-    });
-    return await Promise.race([onlinePromise, localPromise.then(r=>new Promise(res=>setTimeout(()=>res(r),14000)))]).catch(()=>localPromise);
-  } catch(e){
-    return localPromise;
+      resolve(text);
+    } catch(e) { reject(e); }
+  }));
+
+  // Timeout global: después de 11s usar respuesta local
+  const timeoutPromise = new Promise(resolve => setTimeout(() => resolve(localFallback), 11000));
+
+  try {
+    const result = await Promise.any([orPromise, polPromise, timeoutPromise]);
+    return result || localFallback;
+  } catch(e) {
+    // Promise.any rechaza solo si TODOS fallan
+    return localFallback;
   }
 }
 
@@ -9983,6 +10283,9 @@ async function sendChat(){
     _registerWeakSpot(guessedMat, msg.slice(0,40));
   }
 
+  // ── EXTRACTOR DE PUNTOS CLAVE DE LA PREGUNTA ──────────────────────────
+  const keyPointsCtx = _extractKeyPoints(msg);
+
   const systemPrompt=`Eres LumioAI, el tutor IA de Lumio para ${D.user.name||'el alumno'} (${D.user.curso||'ESO/Bach'}, España).
 ALUMNO: ${D.user.name||'Alumno'} · Curso: ${D.user.curso||'ESO'} · Materias: ${D.mats.map(m=>m.n).join(', ')||'varias'}
 NORMAS SIEMPRE ACTIVAS:
@@ -9991,8 +10294,10 @@ NORMAS SIEMPRE ACTIVAS:
 - **negrita** para términos técnicos, emojis útiles no decorativos
 - Adapta vocabulario a ${D.user.curso||'ESO'}: ni fácil ni técnico en exceso
 - Para mates/física: pasos numerados + fórmula destacada + ejemplo resuelto
-${notasCtx}${curriculumHint}${rachaCtx}${weakContext}${confusedCtx}${notesContext}${cardsContext}`;
+- SIEMPRE responde en español salvo que el alumno escriba en otro idioma
+${notasCtx}${curriculumHint}${rachaCtx}${weakContext}${confusedCtx}${notesContext}${cardsContext}${keyPointsCtx}`;
 
+  const localAIFallback = typeof aiChatLocal === 'function' ? aiChatLocal(msg) : null;
   try{
     // PILAR 4: Dejar que el agente decida la acción
     let _aiResponse;
@@ -10003,7 +10308,7 @@ ${notasCtx}${curriculumHint}${rachaCtx}${weakContext}${confusedCtx}${notesContex
       const _sp=typeof _getModeSystemPrompt==='function'?_getModeSystemPrompt(systemPrompt):systemPrompt;
       _aiResponse = await callAI(_sp, msg, 900);
     }
-    const res = _aiResponse;
+    const res = _aiResponse || localAIFallback || '❌ Sin respuesta. Comprueba tu conexión e inténtalo de nuevo.';
     // Render basic markdown: **bold**, *italic*, newlines
     // Quitar el typing indicator y renderizar respuesta real con acciones
     if(typing){
@@ -11835,8 +12140,6 @@ function resetChatCtx(){
 // ── La misma IA para TODAS las funciones (Test, Resumen, Flashcards, etc.) ──
 async function callAIForTask(systemPrompt, userContent, maxTokens=1600, useWeb=true){
   if(!navigator.onLine){ return null; }
-  const activeModel = getLumioModel();
-  // Búsqueda web para enriquecer tareas (resúmenes, esquemas, etc.)
   let webCtx = '';
   if (useWeb && getLumioWebSearch() && userContent.length < 300) {
     try {
@@ -11844,20 +12147,27 @@ async function callAIForTask(systemPrompt, userContent, maxTokens=1600, useWeb=t
       if (ws) webCtx = '\n\n[CONTEXTO WEB]\n' + ws + '\n[FIN]';
     } catch(e) {}
   }
+  const messages = [
+    {role:'system',content:systemPrompt},
+    {role:'user',content:userContent + webCtx}
+  ];
+
+  // ── PROVEEDOR 1: OpenRouter ──
+  try {
+    const orText = await _callOpenRouter(messages, maxTokens, 0.7);
+    return orText || null;
+  } catch(e) {
+    console.warn('callAIForTask: OpenRouter falló', e.message);
+  }
+
+  // ── PROVEEDOR 2: Pollinations (fallback) ──
   try{
     const ctrl=new AbortController();
     const tid=setTimeout(()=>ctrl.abort(),16000);
     const res=await fetch('https://text.pollinations.ai/openai',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model: activeModel,
-        messages:[{role:'system',content:systemPrompt},{role:'user',content:userContent + webCtx}],
-        max_tokens:maxTokens,
-        temperature:0.7,
-        seed:Math.floor(Math.random()*99999),
-        referrer:'lumio-study-app'
-      }),
+      body:JSON.stringify({ model: getLumioModel(), messages, max_tokens:maxTokens, temperature:0.7, seed:Math.floor(Math.random()*99999), referrer:'lumio-study-app' }),
       signal:ctrl.signal
     });
     clearTimeout(tid);
@@ -11928,51 +12238,112 @@ async function genEsquema(){
   if(btn){btn.disabled=true;btn.textContent='Generando...';}
   await new Promise(r=>setTimeout(r,300));
   try{
-    const esquema=aiGenEsquema(txt);
-    lastEsquema=esquema;
+    const data=aiGenEsquemaData(txt);
+    lastEsquema=_esqDataToText(data);
     const el=document.getElementById('esq-content');
-    const lines=esquema.split('\n');
-    el.innerHTML=`<div style="background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:14px">`+
-      lines.map(l=>{
-        if(!l.trim())return'';
-        const indent=(l.match(/^(\s*)/)[1]||'').length;
-        const isTitle=l.trim().startsWith('📌')||(indent===0&&!l.includes('──')&&!l.includes('•'));
-        const isBranch=l.includes('🔷')||l.includes('──');
-        const size=isTitle?'13px':'12px';
-        const weight=isTitle?'900':isBranch?'700':'400';
-        const col=isTitle?'var(--t1)':isBranch?'var(--t1)':'var(--t2)';
-        const pl=(indent*6)+'px';
-        return`<div style="font-size:${size};font-weight:${weight};color:${col};padding-left:${pl};line-height:1.75;font-family:monospace;white-space:pre-wrap">${l.trim()}</div>`;
-      }).join('')+
-    `</div>`;
+    el.innerHTML=_renderEsquemaTopDown(data);
     document.getElementById('esq-result').style.display='block';
     gainXP(5);
   }catch(e){toast('❌ '+e.message.slice(0,55));}
   if(btn){btn.disabled=false;btn.textContent='🗂️ Generar esquema';}
 }
 
-function aiGenEsquema(txt){
+/* ── Convierte el texto del esquema en datos estructurados ── */
+function aiGenEsquemaData(txt){
   const sents=aiSentences(txt);
   const tf=aiTF(sents);
-  const defs=aiDefinitions(txt);
-  // Detectar párrafos como grupos temáticos
   const paragraphs=txt.split(/\n\n+/).filter(p=>p.trim().length>20).slice(0,6);
-  if(!paragraphs.length)return aiGenEsquemaLineal(sents,tf);
-  let out='';
-  paragraphs.forEach((para,i)=>{
-    const paraSents=aiSentences(para);
-    if(!paraSents.length)return;
-    const mainSent=paraSents.sort((a,b)=>aiScore(b,tf)-aiScore(a,tf))[0];
-    const title=aiCap(aiTokens(mainSent).slice(0,4).join(' '));
-    out+=`📌 ${title}\n`;
-    paraSents.slice(0,3).forEach((s,j)=>{
-      const isLast=j===paraSents.slice(0,3).length-1;
-      out+=`  ${isLast?'└':'├'}── • ${aiCap(s.trim().slice(0,70))}\n`;
+  if(!paragraphs.length){
+    // lineal
+    const scored=sents.map(s=>({s,score:aiScore(s,tf)})).sort((a,b)=>b.score-a.score);
+    const titulo=aiCap(aiTokens(scored[0]?.s||txt).slice(0,5).join(' '))||'Tema principal';
+    return {
+      titulo,
+      ramas: scored.slice(0,6).map(t=>({
+        titulo: aiCap(t.s.trim().slice(0,55)),
+        puntos: []
+      }))
+    };
+  }
+  const ramas=paragraphs.map(para=>{
+    const ps=aiSentences(para);
+    if(!ps.length)return null;
+    const main=ps.sort((a,b)=>aiScore(b,tf)-aiScore(a,tf))[0];
+    const titulo=aiCap(aiTokens(main).slice(0,5).join(' '))||aiCap(main.slice(0,40));
+    const puntos=ps.slice(0,3).map(s=>aiCap(s.trim().slice(0,65)));
+    return {titulo,puntos};
+  }).filter(Boolean);
+  const mainSent=sents.sort((a,b)=>aiScore(b,tf)-aiScore(a,tf))[0]||'';
+  const titulo=aiCap(aiTokens(mainSent).slice(0,5).join(' '))||'Tema principal';
+  return {titulo,ramas};
+}
+
+/* ── Convierte data a texto plano (para copiar/guardar) ── */
+function _esqDataToText(data){
+  let out='📌 '+data.titulo+'\n';
+  (data.ramas||[]).forEach((r,i)=>{
+    const last=i===(data.ramas.length-1);
+    out+=(last?'└':'├')+'── 🔷 '+r.titulo+'\n';
+    (r.puntos||[]).forEach((p,j)=>{
+      const pl=j===(r.puntos.length-1);
+      out+='  '+(last?' ':'│')+'  '+(pl?'└':'├')+'── • '+p+'\n';
     });
-    out+='\n';
   });
   return out.trim();
 }
+
+/* ── Renderiza el esquema en HTML de arriba a abajo ── */
+function _renderEsquemaTopDown(data){
+  const ramas=data.ramas||[];
+  const cols=['#7c3aed','#0d9488','#2563eb','#ea580c','#db2777','#16a34a'];
+
+  // Puntos de cada rama como lista vertical
+  const ramaCards=ramas.map((r,i)=>{
+    const col=cols[i%cols.length];
+    const puntosHtml=(r.puntos||[]).map(p=>
+      `<div style="display:flex;align-items:flex-start;gap:6px;padding:5px 0;border-top:1px solid rgba(0,0,0,.05)">
+        <span style="color:${col};flex-shrink:0;margin-top:1px;font-size:10px">▸</span>
+        <span style="font-size:11px;color:#374151;line-height:1.5">${p}</span>
+      </div>`
+    ).join('');
+
+    return `<div style="flex:1;min-width:130px;max-width:220px;background:#fff;border:1.5px solid ${col}33;border-top:3px solid ${col};border-radius:12px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)">
+      <div style="font-size:12px;font-weight:800;color:${col};margin-bottom:${puntosHtml?'6px':'0'};line-height:1.4">${r.titulo}</div>
+      ${puntosHtml}
+    </div>`;
+  }).join('');
+
+  // Conectores verticales de la raíz a las ramas
+  const connector=`<div style="display:flex;justify-content:center;align-items:flex-start;gap:0;margin:0 auto;width:${Math.min(ramas.length*160,520)}px;position:relative;height:20px">
+    <div style="position:absolute;top:0;left:50%;width:2px;height:100%;background:#c4b5fd;transform:translateX(-50%)"></div>
+    <div style="position:absolute;top:50%;left:10%;right:10%;height:2px;background:#c4b5fd"></div>
+  </div>`;
+
+  return `<div style="padding:4px 0;overflow-x:auto">
+    <!-- Raíz / Título -->
+    <div style="display:flex;justify-content:center;margin-bottom:0">
+      <div style="background:linear-gradient(135deg,#7c3aed,#9333ea);color:#fff;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:900;text-align:center;box-shadow:0 4px 14px rgba(124,58,237,.35);max-width:280px;line-height:1.3">
+        📌 ${data.titulo}
+      </div>
+    </div>
+    <!-- Línea vertical raíz → ramas -->
+    <div style="display:flex;justify-content:center"><div style="width:2px;height:18px;background:#c4b5fd"></div></div>
+    <!-- Línea horizontal distribuidora -->
+    ${ramas.length>1?`<div style="display:flex;justify-content:center"><div style="height:2px;width:${Math.min(ramas.length*160,90)}%;background:#c4b5fd;border-radius:2px"></div></div>`:''}
+    <!-- Líneas verticales hacia cada rama -->
+    <div style="display:flex;justify-content:space-around;padding:0 ${ramas.length>1?'8':'40'}%">
+      ${ramas.map(()=>`<div style="width:2px;height:14px;background:#c4b5fd"></div>`).join('')}
+    </div>
+    <!-- Ramas top-down -->
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:flex-start;padding:0 4px">
+      ${ramaCards}
+    </div>
+  </div>`;
+}
+
+/* mantener aiGenEsquema para compatibilidad con callClaude/otros */
+function aiGenEsquema(txt){return _esqDataToText(aiGenEsquemaData(txt));}
+
 function aiGenEsquemaLineal(sents,tf){
   const scored=sents.map(s=>({s,score:aiScore(s,tf)})).sort((a,b)=>b.score-a.score);
   const top=scored.slice(0,8);
@@ -18332,19 +18703,276 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 
 // ── COMPARTIR LUMIO ────────────────────────────────────────────────────
+
+// ══════════════════════════════════════════════════════════════
+// LUMIO PLUS — Sistema de invitaciones y acceso premium
+// ══════════════════════════════════════════════════════════════
+
+// ── Códigos de colegio GRATUITOS (reparte tú estos a tus alumnos) ──
+const LUMIO_SCHOOL_CODES = [
+  'LUMIO-GRATIS',   // código genérico para tu colegio
+  'PROFE2025',      // para profesores
+  'COLEGIO2025',    // alternativa
+  'LUMIOESCUELA',   // otro
+];
+
+// ── URL de pago Stripe (1€) — reemplaza con tu Payment Link real ──
+// Crea un Payment Link en dashboard.stripe.com/payment-links → "Crear enlace"
+// Pon precio: 1€ · Descripción: "Lumio Plus — Acceso de por vida"
+// Después de pago, Stripe redirige a tu URL con ?session_id=... o manda email con código.
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/REEMPLAZA_CON_TU_LINK';
+
+// ── Helpers de estado premium ──
+function isPremium() {
+  try { return !!localStorage.getItem('lumio_premium_active'); } catch { return false; }
+}
+function setPremium(type, code) {
+  try {
+    localStorage.setItem('lumio_premium_active', '1');
+    localStorage.setItem('lumio_premium_type', type);   // 'school' | 'friend' | 'paid'
+    localStorage.setItem('lumio_premium_code', code);
+    localStorage.setItem('lumio_premium_date', new Date().toISOString());
+  } catch {}
+}
+function getPremiumInfo() {
+  try {
+    return {
+      active: !!localStorage.getItem('lumio_premium_active'),
+      type:   localStorage.getItem('lumio_premium_type') || '',
+      code:   localStorage.getItem('lumio_premium_code') || '',
+      date:   localStorage.getItem('lumio_premium_date') || '',
+    };
+  } catch { return { active: false }; }
+}
+
+// ── Generar código de invitación único para el usuario ──
+function getMyInviteCode() {
+  try {
+    let code = localStorage.getItem('lumio_my_invite_code');
+    if (!code) {
+      // Genera código único basado en nombre + random
+      const name = (D?.user?.name || 'USER').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4).padEnd(4,'X');
+      const rand  = Math.random().toString(36).slice(2,6).toUpperCase();
+      code = 'LUMIO-' + name + rand;
+      localStorage.setItem('lumio_my_invite_code', code);
+    }
+    return code;
+  } catch { return 'LUMIO-AMIGO1'; }
+}
+
+// ── Validar y activar código de acceso ──
+function activatePremiumCode() {
+  const inp = document.getElementById('prem-code-input');
+  const msg = document.getElementById('prem-code-msg');
+  if (!inp || !msg) return;
+  const code = inp.value.trim().toUpperCase();
+  if (!code) { msg.style.color = '#f87171'; msg.textContent = '⚠️ Introduce un código'; return; }
+
+  // Códigos de colegio (gratis)
+  if (LUMIO_SCHOOL_CODES.includes(code)) {
+    setPremium('school', code);
+    msg.style.color = 'var(--green)';
+    msg.textContent = '✅ ¡Código de colegio validado! Acceso gratuito activado.';
+    toast('🎓 ¡Lumio Plus activado gratis!', 'success');
+    try { gainXP(100); } catch {}
+    setTimeout(() => bLumioPlus(), 800);
+    return;
+  }
+
+  // Códigos de invitación de amigos (patrón LUMIO-XXXXXX)
+  if (/^LUMIO-[A-Z0-9]{4,8}$/.test(code)) {
+    // En una app real verificarías contra un servidor.
+    // Aquí usamos honor system: registramos el uso y pedimos confirmación de pago.
+    const usedCodes = JSON.parse(localStorage.getItem('lumio_used_invite_codes') || '[]');
+    if (usedCodes.includes(code)) {
+      msg.style.color = '#f87171';
+      msg.textContent = '❌ Este código ya fue usado en este dispositivo.';
+      return;
+    }
+    // El código de amigo solo activa si se ha pagado (redirige a Stripe primero)
+    const paid = localStorage.getItem('lumio_payment_confirmed_' + code);
+    if (paid) {
+      setPremium('friend', code);
+      usedCodes.push(code);
+      localStorage.setItem('lumio_used_invite_codes', JSON.stringify(usedCodes));
+      msg.style.color = 'var(--green)';
+      msg.textContent = '✅ ¡Acceso activado! Bienvenido a Lumio Plus.';
+      toast('🎉 ¡Lumio Plus activado por 1€!', 'success');
+      try { gainXP(50); } catch {}
+      setTimeout(() => bLumioPlus(), 800);
+    } else {
+      // Guardar el código y redirigir a pago
+      localStorage.setItem('lumio_pending_invite_code', code);
+      msg.style.color = 'var(--vio)';
+      msg.textContent = '✨ Código amigo válido · Ahora realiza el pago de 1€';
+      document.getElementById('prem-pay-section').scrollIntoView({ behavior: 'smooth' });
+    }
+    return;
+  }
+
+  // Código no reconocido
+  msg.style.color = '#f87171';
+  msg.textContent = '❌ Código incorrecto. Pide uno a tu profe o a un amigo con Lumio Plus.';
+}
+
+// ── Abrir link de pago Stripe 1€ ──
+function openPayment1euro() {
+  const pendingCode = localStorage.getItem('lumio_pending_invite_code') || '';
+  const url = STRIPE_PAYMENT_LINK + (pendingCode ? '?client_reference_id=' + pendingCode : '');
+  // Simular confirmación inmediata (en producción Stripe devuelve webhook/redirect)
+  // Para demostración: activamos Premium y guardamos que el pago fue "realizado"
+  if (STRIPE_PAYMENT_LINK.includes('REEMPLAZA')) {
+    // Modo demo sin Stripe real
+    if (pendingCode) localStorage.setItem('lumio_payment_confirmed_' + pendingCode, '1');
+    setPremium('paid', pendingCode || 'STRIPE-DEMO');
+    toast('💳 ¡Pago simulado! Lumio Plus activado (modo demo)', 'success');
+    try { gainXP(100); } catch {}
+    setTimeout(() => bLumioPlus(), 500);
+  } else {
+    window.open(url, '_blank');
+    toast('Abriendo pasarela de pago segura...', 'info');
+  }
+}
+
+// ── Seleccionar plan visual ──
+function selectPlan(plan) {
+  document.querySelectorAll('.prem-plan').forEach(el => el.classList.remove('sel'));
+  document.getElementById('plan-' + plan)?.classList.add('sel');
+}
+
+// ── Compartir código de invitación ──
+function shareInviteCode(via) {
+  const code = getMyInviteCode();
+  const url = location.href.split('?')[0];
+  const text = '🎓 ¡Te invito a usar Lumio, la mejor app de estudio! Usa mi código ' + code + ' para acceder por solo 1€ → ' + url + '?invite=' + code;
+  if (via === 'wa') {
+    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+  } else if (via === 'copy') {
+    navigator.clipboard?.writeText(text).then(() => toast('📋 Código copiado — pégalo en WhatsApp o Instagram'));
+  } else {
+    navigator.clipboard?.writeText(url + '?invite=' + code).then(() => toast('🔗 Enlace copiado'));
+  }
+  // Track invites sent
+  try {
+    const sent = parseInt(localStorage.getItem('lumio_invites_sent') || '0') + 1;
+    localStorage.setItem('lumio_invites_sent', String(sent));
+  } catch {}
+}
+
+// ── Comprobar si hay código de invitación en la URL ──
+function checkInviteInUrl() {
+  try {
+    const params = new URLSearchParams(location.search);
+    const invite = params.get('invite');
+    if (invite && !isPremium()) {
+      // Pre-rellenar el código en el input
+      const inp = document.getElementById('prem-code-input');
+      if (inp) inp.value = invite.toUpperCase();
+      // Guardar como pendiente
+      localStorage.setItem('lumio_pending_invite_code', invite.toUpperCase());
+      // Mostrar pantalla de activación después de carga
+      setTimeout(() => {
+        const msg = document.getElementById('prem-code-msg');
+        if (msg) { msg.style.color = 'var(--vio)'; msg.textContent = '✨ Código amigo detectado · Actívalo o paga 1€'; }
+        navSection('lumio-plus');
+      }, 1800);
+    }
+  } catch {}
+}
+
+// ── Builder de pantalla Lumio Plus ──
+function bLumioPlus() {
+  const info = getPremiumInfo();
+  const banner  = document.getElementById('prem-status-banner');
+  const invSec  = document.getElementById('prem-invite-section');
+  const actSec  = document.getElementById('prem-activate-section');
+  const codeBox = document.getElementById('my-invite-code');
+  const detEl   = document.getElementById('prem-status-detail');
+
+  if (info.active) {
+    // Usuario con premium activo
+    if (banner)  { banner.style.display = 'flex'; }
+    if (invSec)  { invSec.style.display = 'block'; }
+    if (actSec)  { actSec.style.display = 'none'; }
+    if (codeBox) { codeBox.textContent = getMyInviteCode(); }
+    if (detEl) {
+      const typeLabel = info.type === 'school' ? 'Código de colegio' : info.type === 'paid' ? 'Pago directo' : 'Código amigo';
+      detEl.textContent = typeLabel + ' · Desde ' + (info.date ? new Date(info.date).toLocaleDateString('es-ES') : 'hoy');
+    }
+    // Mostrar invitados
+    const invList = document.getElementById('prem-invited-list');
+    const sent = parseInt(localStorage.getItem('lumio_invites_sent') || '0');
+    if (invList) {
+      invList.innerHTML = sent > 0
+        ? '<div style="font-weight:700;color:var(--vio)">🏅 ' + sent + ' invitaciones enviadas</div><div style="font-size:11px;color:var(--t2);margin-top:4px">+' + (sent * 50) + ' XP ganados por invitaciones</div>'
+        : 'Aún no has invitado a nadie. ¡Comparte tu código!';
+    }
+  } else {
+    // Usuario sin premium
+    if (banner)  { banner.style.display = 'none'; }
+    if (invSec)  { invSec.style.display = 'none'; }
+    if (actSec)  { actSec.style.display = 'block'; }
+    // Pre-rellenar código pendiente si existe
+    const pending = localStorage.getItem('lumio_pending_invite_code');
+    const inp = document.getElementById('prem-code-input');
+    if (pending && inp && !inp.value) inp.value = pending;
+  }
+}
+
+// ── Gate premium: muestra overlay si la feature requiere Plus ──
+function requirePremium(title, desc, allowFree = false) {
+  if (allowFree || isPremium()) return true;
+  const ov    = document.getElementById('premium-gate-overlay');
+  const titleEl = document.getElementById('pgate-title');
+  const descEl  = document.getElementById('pgate-desc');
+  if (titleEl) titleEl.textContent = title || 'Función Premium';
+  if (descEl)  descEl.textContent  = desc  || 'Activa Lumio Plus para acceder a esta función.';
+  if (ov) ov.style.display = 'flex';
+  return false;
+}
+
+// Comprobar código de invitación en URL al arrancar
+document.addEventListener('DOMContentLoaded', () => {
+  try { checkInviteInUrl(); } catch(e) {}
+});
+
+// Update the Lumio Plus banner in perfil menu
+function _updatePerfilPlusBanner() {
+  const banner = document.getElementById('perfil-plus-banner');
+  const title  = document.getElementById('perfil-plus-title');
+  const sub    = document.getElementById('perfil-plus-sub');
+  if (!banner) return;
+  if (isPremium()) {
+    banner.style.background = 'linear-gradient(135deg,var(--viod),rgba(147,51,234,.08))';
+    banner.style.border = '1.5px solid var(--viob)';
+    if (title) { title.textContent = '✨ Lumio Plus activo'; title.style.color = 'var(--vio)'; }
+    if (sub)   sub.textContent = 'Comparte tu código con amigos · 1€ para ellos';
+  } else {
+    banner.style.background = 'linear-gradient(135deg,#7c3aed,#9333ea)';
+    banner.style.border = 'none';
+    banner.style.boxShadow = '0 4px 14px rgba(124,58,237,.35)';
+    if (title) { title.textContent = '✨ Activa Lumio Plus'; title.style.color = '#fff'; }
+    if (sub)   { sub.textContent = 'Gratis con código de colegio · Solo 1€ con código amigo'; sub.style.color = 'rgba(255,255,255,.85)'; }
+  }
+}
+document.addEventListener('DOMContentLoaded', () => { try { _updatePerfilPlusBanner(); } catch(e){} });
+
 function bCompartir(){
   const url = window.location.href.split('?')[0];
   const codigoClase = _claseCode || '2A-2026';
-  document.getElementById('share-url').textContent = url + '?clase=' + codigoClase;
+  const myCode = typeof getMyInviteCode === 'function' ? getMyInviteCode() : '';
+  document.getElementById('share-url').textContent = url + '?clase=' + codigoClase + (myCode ? '&invite=' + myCode : '');
   document.getElementById('share-wa-text').textContent =
-    '🎓 ¡Hola! Os comparto Lumio, la app de estudio gratuita que usamos en clase.\n\n' +
+    '🎓 ¡Hola! Os comparto Lumio, la mejor app de estudio gratuita.\n\n' +
     '📚 Tiene: flashcards, pomodoro, IA tutor, test automáticos y mucho más.\n' +
     '📵 Funciona SIN INTERNET una vez instalada.\n\n' +
-    '▶️ Enlace: ' + url + '?clase=' + codigoClase + '\n\n' +
+    '▶️ Enlace: ' + url + (myCode ? '?invite=' + myCode : '') + '\n\n' +
+    (myCode ? '🎟️ Mi código de invitación: ' + myCode + ' → accedes por solo 1€\n' : '') +
     '🔑 Código de clase: ' + codigoClase + '\n\n' +
     'Para instalarla:\n' +
     'Android → Chrome → 3 puntos → "Añadir a pantalla de inicio"\n' +
     'iPhone → Safari → Compartir ⬆ → "Añadir a pantalla de inicio"';
+  try { _updatePerfilPlusBanner(); } catch(e) {}
 }
 function copiarMensajeWA(){
   const txt = document.getElementById('share-wa-text')?.textContent;
@@ -19732,5 +20360,6 @@ document.addEventListener('DOMContentLoaded', () => { try { updateAIModelBadge()
 setTimeout(() => { try { updateAIModelBadge(); } catch(e){} }, 800);
 </script>
 
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"5070e21320304a1ba2b0a42ce9682840","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
