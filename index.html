@@ -1228,7 +1228,13 @@ body.tema-vio { --y:var(--vio);--yd:var(--viod);--yb:var(--viob); }
 .cw-pill{display:inline-flex;align-items:center;gap:7px;background:var(--viod);border:1.5px solid var(--viob);border-radius:999px;padding:6px 16px;font-size:11px;font-weight:700;color:var(--vio);margin-bottom:20px}
 .cw-title{font-size:clamp(24px,6vw,32px);font-weight:900;color:var(--t1);letter-spacing:-.03em;line-height:1.15;margin-bottom:8px}
 .cw-sub{font-size:13px;color:var(--t2);margin-bottom:28px;line-height:1.5}
-.cw-input-row{width:100%;max-width:500px;display:flex;gap:10px;margin-bottom:14px;align-items:center}
+.cw-onboarding-label{font-size:11px;font-weight:700;color:var(--t2);letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px;margin-top:4px;text-align:center}
+.cw-subject-chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:16px;max-width:480px}
+.cw-subject-chip{background:var(--bg1);border:1.5px solid var(--bd);border-radius:999px;padding:7px 13px;font-size:12px;font-weight:700;color:var(--t2);cursor:pointer;font-family:var(--font);transition:all .15s;box-shadow:0 1px 4px rgba(124,58,237,.06)}
+.cw-subject-chip:hover{border-color:var(--viob);color:var(--vio);background:var(--viod);transform:translateY(-1px);box-shadow:0 3px 10px rgba(124,58,237,.12)}
+.cw-subject-chip:active{transform:scale(.95)}
+.cw-subject-chip.selected{background:var(--viod);border-color:var(--vio);color:var(--vio);box-shadow:0 0 0 3px rgba(124,58,237,.1)}
+
 .cw-input{flex:1;padding:14px 18px;border-radius:999px;border:2px solid var(--bd);font-size:14px;font-family:var(--font);color:var(--t1);background:var(--bg1);outline:none;transition:border .2s,box-shadow .2s;box-shadow:0 2px 10px rgba(124,58,237,.06)}
 .cw-input:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(124,58,237,.1)}
 .cw-input::placeholder{color:var(--t3)}
@@ -1331,7 +1337,7 @@ body.tema-vio { --y:var(--vio);--yd:var(--viod);--yb:var(--viob); }
   </div>
   <div class="sp-name" style="color:var(--vio)">Lu<span style="color:var(--vio2)">mio</span></div>
   <div class="sp-tag" style="color:var(--t2)">Tu compañero de estudio con IA</div>
-  <div class="sp-pill">⚡ GPT · Gemini · DeepSeek</div>
+  <div class="sp-pill">⚡ Llama · Gemini · DeepSeek R1</div>
   <div class="sp-bar"><div class="sp-fill"></div></div>
 </div>
 
@@ -1521,7 +1527,7 @@ body.tema-vio { --y:var(--vio);--yd:var(--viod);--yb:var(--viob); }
       <div style="font-size:20px;font-weight:600;color:var(--t1);letter-spacing:-.02em" id="h-nm">Buenas tardes</div>
       <button onclick="showAIModelSheet()" class="ai-model-badge">
         <span class="ai-dot"></span>
-        <span id="home-model-label">Gemini</span>
+        <span id="home-model-label">Llama 3.3 70B</span>
       </button>
     </div>
     <div style="font-size:12px;color:var(--t2);margin-bottom:4px" id="h-date">Cargando...</div>
@@ -2153,7 +2159,7 @@ body.tema-vio { --y:var(--vio);--yd:var(--viod);--yb:var(--viob); }
     <div style="width:38px;height:38px;border-radius:10px;background:rgba(245,197,24,.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">✨</div>
     <div style="flex:1;min-width:0">
       <div style="font-size:12px;font-weight:800;color:var(--t1)">Modelo de IA</div>
-      <div style="font-size:11px;color:var(--y);margin-top:1px;font-weight:600" id="perfil-model-badge">✨ Gemini 2.5 Flash</div>
+      <div style="font-size:11px;color:var(--y);margin-top:1px;font-weight:600" id="perfil-model-badge">🦙 Llama 3.3 70B</div>
     </div>
     <div style="font-size:18px;color:var(--t3)">›</div>
   </div>
@@ -2690,6 +2696,20 @@ Escribe / para comandos rápidos"></textarea>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
         Sugerir temas según mis asignaturas
       </button>
+
+      <!-- Subject chips onboarding -->
+      <div class="cw-onboarding-label">¿Qué asignatura quieres practicar hoy?</div>
+      <div class="cw-subject-chips" id="cw-subject-chips">
+        <button class="cw-subject-chip" onclick="cwSelectSubject('Matemáticas','🔢')">🔢 Mates</button>
+        <button class="cw-subject-chip" onclick="cwSelectSubject('Física','⚡')">⚡ Física</button>
+        <button class="cw-subject-chip" onclick="cwSelectSubject('Química','🧪')">🧪 Química</button>
+        <button class="cw-subject-chip" onclick="cwSelectSubject('Biología','🧬')">🧬 Biología</button>
+        <button class="cw-subject-chip" onclick="cwSelectSubject('Historia','📜')">📜 Historia</button>
+        <button class="cw-subject-chip" onclick="cwSelectSubject('Lengua','✍️')">✍️ Lengua</button>
+        <button class="cw-subject-chip" onclick="cwSelectSubject('Inglés','🇬🇧')">🇬🇧 Inglés</button>
+        <button class="cw-subject-chip" onclick="cwSelectSubject('Geografía','🌍')">🌍 Geografía</button>
+        <button class="cw-subject-chip" onclick="cwSelectSubject('Filosofía','🏛️')">🏛️ Filosofía</button>
+      </div>
 
       <!-- Quick tools label -->
       <div class="cw-tools-label">Herramientas de IA</div>
@@ -5025,7 +5045,7 @@ Escribe / para comandos rápidos"></textarea>
 function haptic(t){
   try{if(!navigator.vibrate)return;navigator.vibrate({light:[20],medium:[40],heavy:[70],success:[20,40,20],error:[70,30,70]}[t]||[20]);}catch(e){}
 }
-const APP_VERSION='3.4.0';
+const APP_VERSION='3.5.0';
 // Cambia esta URL por la raw de tu archivo en GitHub:
 const GITHUB_RAW_URL='';
 
@@ -8038,30 +8058,48 @@ REGLAS:
 - Responde SOLO con el JSON, sin markdown ni texto extra`;
 
   try {
-    const messages = [{ role: 'user', content: prompt }];
-    let raw = await LumioAICore.call(messages, 2000, { temperature: 0.7 });
+    const messages = [
+      { role: 'system', content: 'Eres un tutor educativo español. Responde ÚNICAMENTE con el JSON solicitado, sin texto adicional, sin backticks, sin markdown. Solo el objeto JSON válido.' },
+      { role: 'user', content: prompt }
+    ];
 
-    // Limpiar posible markdown
-    if (raw) raw = raw.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
+    // Timeout global de 18s para todo el plan
+    let raw = await Promise.race([
+      LumioAICore.call(messages, 1100, { temperature: 0.7 }),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 18000))
+    ]);
+
+    // Limpiar posible markdown o texto extra
+    if (raw) {
+      raw = raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
+      // Extraer primer objeto JSON si hay texto antes/después
+      const jsonMatch = raw.match(/\{[\s\S]*\}/);
+      if (jsonMatch) raw = jsonMatch[0];
+    }
+
+    if (!raw) throw new Error('La IA no respondió. Comprueba tu conexión.');
 
     let plan;
-    try { plan = JSON.parse(raw); } catch(e) {
-      // Intentar extraer JSON del texto
-      const match = raw?.match(/\{[\s\S]+\}/);
-      if (match) plan = JSON.parse(match[0]);
-      else throw new Error('JSON inválido');
+    try {
+      plan = JSON.parse(raw);
+    } catch(e) {
+      // Intentar reparar JSON truncado añadiendo cierre
+      try {
+        const repaired = raw.endsWith('}') ? raw : raw + ']}';
+        plan = JSON.parse(repaired);
+      } catch(e2) {
+        console.error('[PlanIA] JSON inválido:', raw.slice(0,200));
+        throw new Error('El plan generado tiene formato incorrecto. Inténtalo de nuevo.');
+      }
     }
 
-    // FIX: plan can be null if JSON.parse returns null (e.g. the model replied "null")
-    // or if the object doesn't have the expected shape. Guard before writing properties.
     if (!plan || typeof plan !== 'object' || Array.isArray(plan)) {
-      throw new Error('El modelo devolvió un plan vacío o con formato incorrecto. Inténtalo de nuevo.');
+      throw new Error('Respuesta inválida del servidor. Inténtalo de nuevo.');
     }
     if (!Array.isArray(plan.dias) || plan.dias.length === 0) {
-      throw new Error('El plan generado no contiene días de estudio. Inténtalo de nuevo.');
+      throw new Error('El plan no tiene días. Inténtalo de nuevo.');
     }
 
-    // Guardar plan en localStorage
     plan._generatedAt = Date.now();
     plan._mats = mats;
     plan._completedTasks = {};
@@ -8072,7 +8110,8 @@ REGLAS:
     if (typeof toast === 'function') toast('✦ Plan generado con IA');
 
   } catch(e) {
-    if (typeof toast === 'function') toast('Error al generar. Inténtalo de nuevo.');
+    const msg = e.message?.includes('timeout') ? '⏱ Tiempo agotado — inténtalo de nuevo' : '❌ ' + (e.message || 'Error al generar el plan');
+    if (typeof toast === 'function') toast(msg);
     console.error('[PlanIA]', e);
   } finally {
     if (btn) { btn.disabled = false; btn.innerHTML = '✦ Generar mi plan personalizado'; }
@@ -8729,11 +8768,12 @@ const LumioAgent = {
 // Modelos disponibles vía Pollinations.ai (gratis, sin API key)
 // ── Modelos IA vía Pollinations.ai (gratis, sin API key) ──
 const LUMIO_AI_MODELS = [
-  { id: 'openai',        name: 'GPT-4o Mini',      icon: '🤖', desc: 'Rápido · Fiable · OpenAI' },
-  { id: 'openai-large',  name: 'GPT-4o',            icon: '💪', desc: 'Más potente · OpenAI' },
-  { id: 'gemini',        name: 'Gemini 2.0 Flash',  icon: '✨', desc: 'Google API · Rápido · Búsqueda web' },
-  { id: 'deepseek',      name: 'DeepSeek V3',       icon: '🔥', desc: 'Razonamiento · Matemáticas' },
-  { id: 'mistral',       name: 'Mistral',            icon: '⚡', desc: 'Europeo · Rápido' },
+  { id: 'groq-llama33-70b',  name: 'Llama 3.3 70B',      icon: '🦙', desc: '⭐ Mejor gratis · Ultra rápido · Groq' },
+  { id: 'groq-deepseek-r1',  name: 'DeepSeek R1 70B',     icon: '🧠', desc: 'Razonamiento avanzado · Groq' },
+  { id: 'groq-mixtral',      name: 'Mixtral 8x7B',        icon: '⚡', desc: 'Contexto largo · Groq' },
+  { id: 'groq-llama31-8b',   name: 'Llama 3.1 8B Instant',icon: '🚀', desc: 'Ultra rápido · Groq' },
+  { id: 'gemini',            name: 'Gemini 2.0 Flash',    icon: '✨', desc: 'Google · Búsqueda web' },
+  { id: 'groq-gemma2',       name: 'Gemma 2 9B',          icon: '💎', desc: 'Google Gemma · Groq' },
 ];
 const WEB_SEARCH_MODELS = ['gemini'];
 
@@ -8748,11 +8788,64 @@ const OPENROUTER_API_KEY  = 'sk-or-v1-e78a6f2a34a578a8e65353b74f76373a04ac2239d9
 const OPENROUTER_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
 // Modelos gratuitos en OpenRouter (fallback ordenado)
 const OR_MODELS = [
-  'google/gemini-flash-1.5-8b',          // rápido, gratis, bueno para educación
-  'mistralai/mistral-7b-instruct:free',   // sólido, siempre gratis
-  'meta-llama/llama-3.1-8b-instruct:free',// llama 3, buen español
-  'qwen/qwen-2-7b-instruct:free',         // buena alternativa
+  'google/gemini-flash-1.5-8b',
+  'meta-llama/llama-3.3-70b-instruct:free',
+  'mistralai/mistral-7b-instruct:free',
+  'qwen/qwen-2-7b-instruct:free',
+  'meta-llama/llama-3.1-8b-instruct:free',
 ];
+
+// ══════════════════════════════════════════════════════════════
+// GROQ API — Proveedor PRINCIPAL (gratis, ultra-rápido)
+// Modelos de alta calidad: Llama 3.3 70B, DeepSeek R1, Mixtral…
+// ══════════════════════════════════════════════════════════════
+const GROQ_API_KEY      = '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';
+const GROQ_ENDPOINT     = 'https://api.groq.com/openai/v1/chat/completions';
+const GROQ_MODEL_MAP = {
+  'groq-llama33-70b': 'llama-3.3-70b-versatile',
+  'groq-deepseek-r1': 'deepseek-r1-distill-llama-70b',
+  'groq-mixtral':     'mixtral-8x7b-32768',
+  'groq-llama31-8b':  'llama-3.1-8b-instant',
+  'groq-gemma2':      'gemma2-9b-it',
+};
+const GROQ_DEFAULT_MODEL = 'llama-3.3-70b-versatile';
+
+/**
+ * _callGroq — proveedor principal de LumioAI.
+ * Usa Groq Cloud (gratis, rapidísimo) con el modelo seleccionado.
+ * Compatible con OpenAI Chat Completions API.
+ */
+async function _callGroq(messages, maxTokens = 900, temperature = 0.75) {
+  if (!navigator.onLine) throw new Error('offline');
+  const selectedId = getLumioModel();
+  const groqModel  = GROQ_MODEL_MAP[selectedId] || GROQ_DEFAULT_MODEL;
+  const safeTokens = Math.min(maxTokens, 8000);
+
+  const res = await _fetchWithTimeout(GROQ_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Content-Type':  'application/json',
+      'Authorization': 'Bearer ' + GROQ_API_KEY,
+    },
+    body: JSON.stringify({
+      model:       groqModel,
+      messages:    messages,
+      max_tokens:  safeTokens,
+      temperature: temperature,
+      stream:      false,
+    }),
+  }, 20000);
+
+  if (!res.ok) {
+    const errText = await res.text().catch(() => '');
+    throw new Error('Groq HTTP ' + res.status + ': ' + errText.slice(0, 120));
+  }
+  const data = await res.json();
+  const text = data?.choices?.[0]?.message?.content || '';
+  if (!text || text.trim().length < 3) throw new Error('Groq: respuesta vacía');
+  console.info('LumioAI: Groq ✓ (' + groqModel + ')');
+  return text.trim();
+}
 
 /**
  * _callOpenRouter — proveedor principal de IA.
@@ -8760,12 +8853,14 @@ const OR_MODELS = [
  */
 async function _callOpenRouter(messages, maxTokens=900, temperature=0.75) {
   if (!navigator.onLine) throw new Error('offline');
-  let lastErr;
-  for (const model of OR_MODELS) {
+  // Limitar tokens a 1200 para compatibilidad con modelos gratuitos
+  const safeTokens = Math.min(maxTokens, 1200);
+  // Lanzar los 2 mejores modelos en paralelo — gana el primero
+  const tryModels = OR_MODELS.slice(0, 3);
+  const racePromises = tryModels.map(model => new Promise(async (resolve, reject) => {
     try {
-      const ctrl = new AbortController();
-      const tid  = setTimeout(() => ctrl.abort(), 20000);
-      const res  = await fetch(OPENROUTER_ENDPOINT, {
+      // FIX: _fetchWithTimeout para evitar AbortSignal cloning error con SW
+      const res  = await _fetchWithTimeout(OPENROUTER_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -8773,21 +8868,20 @@ async function _callOpenRouter(messages, maxTokens=900, temperature=0.75) {
           'HTTP-Referer': location.origin,
           'X-Title': 'Lumio Study App',
         },
-        body: JSON.stringify({ model, messages, max_tokens: maxTokens, temperature }),
-        signal: ctrl.signal,
-      });
-      clearTimeout(tid);
-      if (!res.ok) { lastErr = 'HTTP ' + res.status; continue; }
+        body: JSON.stringify({ model, messages, max_tokens: safeTokens, temperature }),
+      }, 12000);
+      if (!res.ok) { reject(new Error('HTTP ' + res.status)); return; }
       const data = await res.json();
       const text = data?.choices?.[0]?.message?.content || '';
       if (text && text.trim().length > 3) {
         console.info('LumioAI: OpenRouter ✓ (' + model + ')');
-        return text.trim();
-      }
-      lastErr = 'empty';
-    } catch(e) { lastErr = e.message; }
-  }
-  throw new Error('OpenRouter all models failed: ' + lastErr);
+        resolve(text.trim());
+      } else { reject(new Error('empty')); }
+    } catch(e) { reject(e); }
+  }));
+  // Timeout global 14s para toda la carrera
+  const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('OR timeout')), 14000));
+  return Promise.any([...racePromises, timeout.catch(e => { throw e; })]);
 }
 
 // ── Google Gemini API Oficial — llamadas directas, más rápidas y sin límites de Pollinations ──
@@ -8894,7 +8988,7 @@ async function _callHuggingFaceFallback(messages, maxTokens = 600) {
 }
 
 function getLumioModel() {
-  try { return localStorage.getItem('lumio_ai_model') || 'openai'; } catch { return 'openai'; }
+  try { return localStorage.getItem('lumio_ai_model') || 'groq-llama33-70b'; } catch { return 'groq-llama33-70b'; }
 }
 function setLumioModel(id) {
   try { localStorage.setItem('lumio_ai_model', id); } catch {}
@@ -9068,32 +9162,43 @@ function needsWebSearch(msg) {
 const LumioAICore = {
 
   _endpoint: 'https://text.pollinations.ai/openai',
-  _fallbackModels: ['openai', 'openai-large', 'gemini', 'deepseek', 'mistral'],
+  _fallbackModels: ['groq-llama33-70b', 'groq-deepseek-r1', 'groq-mixtral', 'gemini', 'groq-llama31-8b', 'openai', 'openai-large'],
 
   async call(messages, maxTokens = 700, opts = {}) {
     if (!navigator.onLine) return opts.fallback || null;
 
     const retryBar = document.getElementById('ai-retry-bar');
 
-    // ── PROVEEDOR 1: OpenRouter (modelos gratuitos) ──
-    try {
-      const orText = await _callOpenRouter(messages, maxTokens, opts.temperature ?? 0.75);
-      if (retryBar) retryBar.classList.remove('show');
-      return orText;
-    } catch(e) {
-      console.warn('LumioAI: OpenRouter falló, probando Gemini...', e.message);
+    // ── PROVEEDOR 1: Groq (principal — gratis, ultra-rápido) ──
+    const primaryModel = getLumioModel();
+    if (primaryModel !== 'gemini') {
+      try {
+        const groqText = await _callGroq(messages, maxTokens, opts.temperature ?? 0.75);
+        if (retryBar) retryBar.classList.remove('show');
+        return groqText;
+      } catch(e) {
+        console.warn('LumioAI: Groq falló, probando Gemini...', e.message);
+      }
     }
 
-    // ── PROVEEDOR 2: Gemini oficial (si modelo seleccionado es gemini) ──
-    const primaryModel = getLumioModel();
+    // ── PROVEEDOR 2: Gemini oficial ──
     if (primaryModel === 'gemini') {
       try {
         const geminiText = await _callGeminiDirect(messages, maxTokens, opts.temperature ?? 0.75);
         if (retryBar) retryBar.classList.remove('show');
         return geminiText;
       } catch(e) {
-        console.warn('LumioAI: Gemini falló, probando Pollinations...', e.message);
+        console.warn('LumioAI: Gemini falló, probando OpenRouter...', e.message);
       }
+    }
+
+    // ── PROVEEDOR 3: OpenRouter (fallback) ──
+    try {
+      const orText = await _callOpenRouter(messages, maxTokens, opts.temperature ?? 0.75);
+      if (retryBar) retryBar.classList.remove('show');
+      return orText;
+    } catch(e) {
+      console.warn('LumioAI: OpenRouter falló, probando Pollinations...', e.message);
     }
 
     // ── PROVEEDOR 3: Pollinations (gratis, sin API key) ──
@@ -9124,15 +9229,12 @@ const LumioAICore = {
           if (retryBar) retryBar.classList.remove('show');
           return geminiText;
         }
-        const ctrl = new AbortController();
-        const tid = setTimeout(() => ctrl.abort(), 15000);
-        const res = await fetch(this._endpoint, {
+        // FIX: _fetchWithTimeout evita pasar AbortSignal (no cloneable via postMessage)
+        const res = await _fetchWithTimeout(this._endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ model: modelId, messages, max_tokens: maxTokens, temperature: opts.temperature ?? 0.75, seed: Math.floor(Math.random() * 99999), referrer: 'lumio-study-app' }),
-          signal: ctrl.signal,
-        });
-        clearTimeout(tid);
+        }, 15000);
         if (!res.ok) { const errText = await res.text().catch(()=>''); throw new Error('HTTP ' + res.status + ' ' + errText.slice(0,50)); }
         const data = await res.json();
         const text = data?.choices?.[0]?.message?.content || data?.output || data?.text || '';
@@ -9642,6 +9744,87 @@ function _sendChat64(el){
 // EXTRACTOR DE PUNTOS CLAVE — analiza la pregunta del alumno
 // y genera contexto enriquecido para la IA antes de enviar
 // ══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
+// BUSCADOR INTELIGENTE EN BASE DE DATOS
+// Detecta: qué acción quiere el alumno + qué materia/concepto
+// Devuelve contexto enriquecido con datos de LUMIO_DB
+// ══════════════════════════════════════════════════════════════
+function _searchDBForMessage(msg, curso) {
+  const m = msg.toLowerCase().trim();
+  const results = [];
+
+  // 1. Detectar materia en el mensaje
+  const materiaMap = {
+    'matemáticas': 'matematicas', 'mates': 'matematicas', 'matemática': 'matematicas',
+    'lengua': 'lengua', 'castellano': 'lengua', 'literatura': 'lengua',
+    'inglés': 'ingles', 'english': 'ingles',
+    'física': 'fisicaquimica', 'química': 'fisicaquimica', 'fisicoquímica': 'fisicaquimica',
+    'biología': 'biologiageologia', 'bio': 'biologiageologia', 'geología': 'biologiageologia', 'naturales': 'biologiageologia',
+    'historia': 'geografiahistoria', 'geografía': 'geografiahistoria', 'sociales': 'geografiahistoria', 'geo': 'geografiahistoria',
+    'tecnología': 'tecnologia', 'tecno': 'tecnologia',
+    'francés': 'frances',
+    'valores': 'valorescivicos', 'ética': 'valorescivicos', 'cívica': 'valorescivicos',
+    'música': 'musica',
+    'educación física': 'educacionfisica', 'ef': 'educacionfisica',
+  };
+  let matchedAsig = null;
+  let matchedAsigName = '';
+  for (const [alias, id] of Object.entries(materiaMap)) {
+    if (m.includes(alias)) { matchedAsig = id; matchedAsigName = alias; break; }
+  }
+
+  // 2. Detectar acción deseada
+  const accionMap = [
+    { patterns: ['esquema', 'esquemas', 'mapa conceptual', 'mapa mental', 'organiza'], accion: 'ESQUEMA', hint: 'Genera un esquema visual top-down con el contenido de LUMIO_DB' },
+    { patterns: ['resumen', 'resume', 'sintetiza', 'síntesis', 'puntos clave'], accion: 'RESUMEN', hint: 'Haz un resumen estructurado con los puntos más importantes de LUMIO_DB' },
+    { patterns: ['test', 'pregúntame', 'preguntas', 'quiz', 'examina', 'pon a prueba'], accion: 'TEST', hint: 'Genera 5 preguntas tipo test con 4 opciones basadas en los conceptos de LUMIO_DB' },
+    { patterns: ['flashcard', 'tarjeta', 'flashcards', 'tarjetas'], accion: 'FLASHCARDS', hint: 'Genera flashcards pregunta/respuesta con los conceptos clave de LUMIO_DB' },
+    { patterns: ['explícame', 'explicar', 'explain', 'qué es', 'qué son', 'define', 'concepto'], accion: 'EXPLICACIÓN', hint: 'Explica el concepto en profundidad usando LUMIO_DB como base' },
+    { patterns: ['ejercicio', 'problema', 'practica', 'calcula', 'resuelve'], accion: 'EJERCICIO', hint: 'Propón ejercicios prácticos del tipo que aparece en LUMIO_DB' },
+    { patterns: ['plan', 'planificar', 'estudiar', 'cómo estudiar', 'organizar estudio'], accion: 'PLAN', hint: 'Crea un plan de estudio personalizado basado en los temas de LUMIO_DB' },
+  ];
+  let matchedAccion = null;
+  for (const { patterns, accion, hint } of accionMap) {
+    if (patterns.some(p => m.includes(p))) { matchedAccion = { accion, hint }; break; }
+  }
+
+  // 3. Buscar conceptos específicos en la DB
+  const codeMap = {
+    '2bach':'2BACH','1bach':'1BACH','4eso':'4ESO','3eso':'3ESO','2eso':'2ESO','1eso':'1ESO'
+  };
+  const cursoNorm = (curso||'').toLowerCase().replace(/[º°\s]/g,'').replace('bachillerato','bach');
+  const cursoCode = codeMap[cursoNorm] || '2ESO';
+
+  if (matchedAsig && LUMIO_DB[matchedAsig]) {
+    const asig = LUMIO_DB[matchedAsig];
+    const unidades = asig.cursos?.[cursoCode]?.unidades || [];
+    if (unidades.length) {
+      const dbInfo = unidades.map(u => '  · ' + u.titulo + ': ' + (u.conceptos||[]).slice(0,4).join(', ')).join('\n');
+      results.push('📚 TEMARIO DE ' + asig.nombre.toUpperCase() + ' (' + cursoCode + ') EN LUMIO_DB:\n' + dbInfo);
+    }
+  }
+
+  // 4. Buscar el concepto concreto si hay términos específicos
+  if (results.length === 0 && msg.length > 6) {
+    try {
+      const found = buscarConcepto(msg.split(' ').filter(w => w.length > 4)[0] || msg.slice(0,15), cursoCode);
+      if (found.length > 0) {
+        const top = found.slice(0,3).map(f => '  · [' + f.asignatura + '] ' + f.unidad + ': ' + f.concepto).join('\n');
+        results.push('🔍 CONCEPTOS RELACIONADOS EN LUMIO_DB:\n' + top);
+      }
+    } catch(e) {}
+  }
+
+  // 5. Construir string de contexto
+  const lines = [];
+  if (matchedAccion) lines.push(`ACCIÓN DETECTADA: ${matchedAccion.accion} → ${matchedAccion.hint}`);
+  if (matchedAsig && matchedAsigName) lines.push(`MATERIA: ${matchedAsigName.toUpperCase()} (id: ${matchedAsig})`);
+  if (results.length) lines.push(...results);
+
+  if (lines.length === 0) return '';
+  return '\n\n[BÚSQUEDA EN LUMIO_DB — ÚSALA PARA RESPONDER]:\n' + lines.join('\n');
+}
+
 function _extractKeyPoints(msg) {
   if (!msg || msg.trim().length < 4) return '';
   const m = msg.toLowerCase().trim();
@@ -9853,10 +10036,11 @@ function _renderMsg(text, role, withActions=true){
     .replace(/`([^`]+)`/g,'<code style="background:var(--bg2);padding:1px 5px;border-radius:4px;font-family:monospace;font-size:12px">$1</code>')
     .replace(/\*\*([^*]+)\*\*/g,'<b style="color:var(--t1)">$1</b>')
     .replace(/\*([^*]+)\*/g,'<em>$1</em>')
-    .replace(/^(\d+)\.\s+(.+)$/gm,'<div style="display:flex;gap:6px;margin:3px 0"><span style="color:var(--y);font-weight:700;flex-shrink:0">$1.</span><span>$2</span></div>')
-    .replace(/^[•\-\*]\s+(.+)$/gm,'<div style="display:flex;gap:6px;margin:3px 0"><span style="color:var(--y);flex-shrink:0">•</span><span>$1</span></div>')
+    .replace(/^(\d+)\.\s+(.+)$/gm,'<div style="display:block;margin:5px 0;line-height:1.5"><span style="color:var(--y);font-weight:700;margin-right:5px">$1.</span>$2</div>')
+    .replace(/^[•\-\*]\s+(.+)$/gm,'<div style="display:block;margin:5px 0;line-height:1.5"><span style="color:var(--y);margin-right:6px">•</span>$1</div>')
     .replace(/^#{1,3}\s+(.+)$/gm,'<div style="font-weight:800;color:var(--t1);margin:6px 0 3px;font-size:14px">$1</div>')
-    .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+    .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>')
+    .replace(/<\/div>(<br>)+<div/g,'</div><div');
   div.innerHTML = rendered;
   bubble.appendChild(div);
   // Botones de acción (solo para respuestas AI)
@@ -10157,19 +10341,18 @@ async function callAI(systemPrompt, userMsg, maxTokens=700){
     throw new Error('empty');
   });
 
+  const groqPromise = wrap(_callGroq(messages, maxTokens));
   const orPromise = wrap(_callOpenRouter(messages, maxTokens));
 
   const polPromise = wrap(new Promise(async (resolve, reject) => {
     try {
-      const ctrl = new AbortController();
-      const tid = setTimeout(() => ctrl.abort(), 10000);
-      const res = await fetch('https://text.pollinations.ai/openai', {
+      // FIX: usar _fetchWithTimeout en lugar de AbortController para evitar
+      // "AbortSignal object could not be cloned" cuando el SW intercepta el fetch
+      const res = await _fetchWithTimeout('https://text.pollinations.ai/openai', {
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({ model: getLumioModel(), messages, max_tokens: maxTokens, temperature:0.75, seed:Math.floor(Math.random()*99999), referrer:'lumio-study-app' }),
-        signal: ctrl.signal
-      });
-      clearTimeout(tid);
+      }, 10000);
       if(!res.ok) throw new Error('HTTP '+res.status);
       const data = await res.json();
       const text = data.choices?.[0]?.message?.content || data.output || data.text || '';
@@ -10182,7 +10365,7 @@ async function callAI(systemPrompt, userMsg, maxTokens=700){
   const timeoutPromise = new Promise(resolve => setTimeout(() => resolve(localFallback), 11000));
 
   try {
-    const result = await Promise.any([orPromise, polPromise, timeoutPromise]);
+    const result = await Promise.any([groqPromise, orPromise, polPromise, timeoutPromise]);
     return result || localFallback;
   } catch(e) {
     // Promise.any rechaza solo si TODOS fallan
@@ -10207,8 +10390,8 @@ async function sendChat(){
   else if (/esquema|mapa (mental|conceptual)|organiza (esto|el tema|los)/i.test(msg) && _chatMode === 'tutor') {
     setChatMode('esquema');
   }
-  // Si pide test/preguntas → auto test
-  else if (/hazme (un )?test|ponme (a prueba|preguntas)|pregúntame sobre|examen (de|sobre)/i.test(msg) && _chatMode === 'tutor') {
+  // Si pide test/preguntas/practicar → auto test
+  else if (/hazme (un )?test|ponme (a prueba|preguntas)|pregúntame sobre|examen (de|sobre)|quiero practicar|practicar|ejercicios de/i.test(msg) && _chatMode === 'tutor') {
     setChatMode('testia');
   }
   // Si pide corrección → auto corrector
@@ -10283,19 +10466,29 @@ async function sendChat(){
     _registerWeakSpot(guessedMat, msg.slice(0,40));
   }
 
-  // ── EXTRACTOR DE PUNTOS CLAVE DE LA PREGUNTA ──────────────────────────
+  // ── EXTRACTOR DE PUNTOS CLAVE + BÚSQUEDA EN LUMIO_DB ─────────────────
   const keyPointsCtx = _extractKeyPoints(msg);
+  const dbSearchCtx  = _searchDBForMessage(msg, D.user?.curso || '');
 
+  // La IA SIEMPRE tiene acceso a la base de datos curricular completa del curso
   const systemPrompt=`Eres LumioAI, el tutor IA de Lumio para ${D.user.name||'el alumno'} (${D.user.curso||'ESO/Bach'}, España).
 ALUMNO: ${D.user.name||'Alumno'} · Curso: ${D.user.curso||'ESO'} · Materias: ${D.mats.map(m=>m.n).join(', ')||'varias'}
+
+INSTRUCCIÓN CRÍTICA — SIEMPRE ANTES DE RESPONDER:
+1. Lee detenidamente la sección [BÚSQUEDA EN LUMIO_DB] si aparece — contiene el temario OFICIAL del alumno
+2. Usa esos conceptos exactos para tu respuesta (no inventes ni simplifiques en exceso)
+3. Si la acción detectada es ESQUEMA → genera estructura top-down con 📌 y 🔷
+4. Si la acción detectada es TEST o el alumno dice PRACTICAR/EJERCICIOS → genera 5 ejercicios concretos del tema mencionado, con enunciado claro. Si no especifica subtema, usa los más frecuentes del currículo de ${D.user.curso||'ESO'}. NO preguntes contexto adicional, genera los ejercicios directamente.
+5. Si la acción detectada es RESUMEN → bullets con los conceptos más importantes del temario
+6. Adapta siempre el nivel y vocabulario a ${D.user.curso||'ESO'}
+
 NORMAS SIEMPRE ACTIVAS:
-- NUNCA repitas el saludo
+- NUNCA repitas el saludo en la misma sesión
 - Respuestas estructuradas: usa 🔷 para secciones, 📌 conceptos clave
 - **negrita** para términos técnicos, emojis útiles no decorativos
-- Adapta vocabulario a ${D.user.curso||'ESO'}: ni fácil ni técnico en exceso
 - Para mates/física: pasos numerados + fórmula destacada + ejemplo resuelto
-- SIEMPRE responde en español salvo que el alumno escriba en otro idioma
-${notasCtx}${curriculumHint}${rachaCtx}${weakContext}${confusedCtx}${notesContext}${cardsContext}${keyPointsCtx}`;
+- SIEMPRE en español salvo que el alumno escriba en otro idioma
+${notasCtx}${curriculumHint}${rachaCtx}${weakContext}${confusedCtx}${notesContext}${cardsContext}${keyPointsCtx}${dbSearchCtx}`;
 
   const localAIFallback = typeof aiChatLocal === 'function' ? aiChatLocal(msg) : null;
   try{
@@ -11164,6 +11357,59 @@ const LUMIO_DB = {
     }
   },
 
+  // ─────────────────────────────────────────────────────────────────
+  // GEOGRAFÍA E HISTORIA
+  // ─────────────────────────────────────────────────────────────────
+  geografiahistoria: {
+    nombre: 'Geografía e Historia', emoji: '🌍', color: '#f59e0b',
+    cursos: {
+      '1ESO': { unidades: [
+        { titulo: 'La Prehistoria y la Historia Antigua', conceptos: ['Periodización de la Prehistoria: Paleolítico (caza y recolección), Neolítico (revolución agrícola, sedentarismo), Edad de los Metales (cobre, bronce, hierro)', 'Las primeras civilizaciones: Mesopotamia (cuneiforme, Ur, Hammurabi) y Egipto (faraones, pirámides, jeroglíficos)', 'Grecia: polis, democracia ateniense, cultura helenística, mitología, arte y filosofía (Sócrates, Platón, Aristóteles)', 'Roma: monarquía, república, imperio; expansión mediterránea; Julio César, Augusto; legado jurídico y urbanístico'], ejercicios: ['Línea de tiempo desde el Paleolítico hasta la caída de Roma', 'Comparar democracia ateniense con democracia actual', 'Mapa de la expansión romana'] },
+        { titulo: 'El medio físico de la Tierra', conceptos: ['Representación de la Tierra: paralelos, meridianos, latitud, longitud, husos horarios', 'Capas de la Tierra: litosfera, hidrosfera, atmósfera, biosfera', 'Los continentes y océanos: distribución y características', 'El relieve terrestre: montañas, llanuras, mesetas, depresiones; relieve submarino (plataforma, talud, fosa)', 'Los climas: factores (latitud, altitud, continentalidad, corrientes marinas) y tipos (ecuatorial, tropical, mediterráneo, oceánico, árido, polar)'], ejercicios: ['Localizar coordenadas en un mapamundi', 'Identificar los climas de España', 'Perfil del relieve de un mapa topográfico'] },
+      ]},
+      '2ESO': { unidades: [
+        { titulo: 'La Edad Media (s. V–XV)', conceptos: ['Caída del Imperio Romano de Occidente (476 d.C.) y reinos germánicos (visigodos, francos, ostrogodos)', 'El Islam: nacimiento (622, hégira), los cinco pilares, expansión desde Arabia hasta la Península Ibérica (711)', 'Al-Ándalus: Emirato dependiente, Emirato independiente (756), Califato de Córdoba (929), Reinos de Taifas (1031), decadencia', 'El feudalismo: pirámide feudal (rey, nobles/señores, vasallos, siervos), castillo medieval, vida cotidiana', 'Los reinos cristianos peninsulares: Asturias → León → Castilla; Corona de Aragón; Portugal; Navarra', 'La Reconquista: concepto, etapas, Las Navas de Tolosa (1212), Capitulaciones de Granada (1492)', 'Arte medieval: prerrománico (S. Miguel de la Escalada), románico (planta de cruz latina, arquería de medio punto), gótico (arco apuntado, rosetones, Notre Dame)', 'La ciudad medieval: burgo, gremios, ferias, universidades (Bolonia 1088, Salamanca 1218)', 'La Peste Negra (1347–1353): un tercio de la población europea, consecuencias sociales y económicas'], ejercicios: ['Mapa de Al-Ándalus y reinos cristianos en el s. XI', 'Pirámide feudal ilustrada con funciones', 'Comparación arte románico vs gótico con imágenes'] },
+        { titulo: 'La Edad Moderna (s. XV–XVIII)', conceptos: ['El Renacimiento: humanismo, heliocentrismo (Copérnico, Galileo), imprenta (Gutenberg, 1450), arte (Leonardo, Miguel Ángel, Rafael)', 'Los Reyes Católicos: unión de Castilla y Aragón, reconquista de Granada, expulsión de judíos (1492), Inquisición', 'El descubrimiento de América (1492): Cristóbal Colón, tratado de Tordesillas (1494), conquista (Hernán Cortés, Francisco Pizarro)', 'El Imperio español en el siglo XVI: Carlos I y Felipe II; "el sol nunca se pone en el Imperio"; crisis de los Países Bajos', 'La Reforma protestante: Lutero (95 tesis, 1517), Calvino, Enrique VIII; Contrarreforma católica, Concilio de Trento (1545–1563)', 'El Barroco (s. XVII): absolutismo de Luis XIV ("L\'État, c\'est moi"), crisis hispánica (Felipe IV, Conde-Duque de Olivares)', 'Arte del Siglo de Oro español: Velázquez (Las Meninas), Cervantes (El Quijote, 1605), Lope de Vega', 'La Ilustración (s. XVIII): enciclopedistas (Voltaire, Rousseau, Montesquieu), despotismo ilustrado, separación de poderes'], ejercicios: ['Mapa de las rutas de exploración de Colón y Magallanes', 'Comparar religión protestante vs católica', 'Analizar Las Meninas: técnica y simbología'] },
+        { titulo: 'Geografía: Población y sociedad', conceptos: ['Demografía: tasa de natalidad (nacidos/1000 hab/año), tasa de mortalidad, crecimiento vegetativo = natalidad − mortalidad', 'Esperanza de vida, tasa de fecundidad (hijos por mujer), tasa de mortalidad infantil', 'Pirámide de población: progresiva (base ancha, PVD), regresiva (base estrecha, países desarrollados), estacionaria', 'Transición demográfica: fase 1 (alta natalidad y mortalidad), 2 (baja mortalidad), 3 (baja natalidad), 4 (envejecimiento)', 'Migraciones: internas (rural→urbano, interregionales) y externas (emigración, inmigración, refugiados); factores de atracción/repulsión', 'La ciudad: estructura (CBD, ensanche, periferia, área metropolitana), funciones, problemas urbanos (tráfico, vivienda, segregación)', 'Población española: pirámide regresiva, envejecimiento, inmigración, desequilibrios territoriales (costa vs interior)', 'Organización territorial de España: 17 CCAA, 50 provincias, 8.131 municipios; Estado de las Autonomías (Constitución 1978)'], ejercicios: ['Construir e interpretar una pirámide de población real', 'Analizar las migraciones internas en España con mapa', 'Crecimiento vegetativo de España vs un país en desarrollo'] },
+      ]},
+      '3ESO': { unidades: [
+        { titulo: 'El mundo contemporáneo (s. XIX)', conceptos: ['La Revolución Francesa (1789): causas, fases, Declaración de Derechos del Hombre, Bonaparte', 'El liberalismo y el nacionalismo en el s. XIX', 'La Revolución Industrial: primera (carbón y textil, Inglaterra 1760) y segunda (acero, electricidad, química)', 'El movimiento obrero: ludismo, cartismo, sindicatos, marxismo (Manifiesto Comunista, 1848), anarquismo', 'El colonialismo e imperialismo: "reparto de África" (Conferencia de Berlín, 1884), colonias asiáticas'], ejercicios: ['Línea de tiempo de la Revolución Francesa', 'Mapa del reparto colonial de África', 'Fuentes históricas: analizar un cartel obrero del siglo XIX'] },
+        { titulo: 'El siglo XX: guerras y totalitarismos', conceptos: ['Primera Guerra Mundial (1914–1918): causas (alianzas, imperialismo, atentado Sarajevo), frentes, consecuencias (Tratado de Versalles)', 'La Revolución rusa (1917): zarismo, Lenin, URSS, Stalin y el totalitarismo soviético', 'El fascismo italiano (Mussolini) y el nazismo alemán (Hitler, Mein Kampf, Nuremberg)', 'Segunda Guerra Mundial (1939–1945): causas, fases, Holocausto, rendición Japón, ONU', 'La Guerra Fría (1947–1991): OTAN vs Pacto de Varsovia, carrera espacial, Cuba, Muro de Berlín'], ejercicios: ['Mapa de alianzas en la Primera Guerra Mundial', 'Análisis de la propaganda nazi vs democrática', 'Cronología de la Segunda Guerra Mundial'] },
+        { titulo: 'España en el siglo XX', conceptos: ['La Restauración borbónica y el caciquismo', 'La Segunda República (1931–1936): reformas, conflictos, Frente Popular', 'La Guerra Civil (1936–1939): bandos, fases, consecuencias, represión franquista', 'La dictadura franquista (1939–1975): autarquía, desarrollismo (1960), oposición', 'La Transición democrática (1975–1982): Suárez, Constitución 1978, 23-F, entrada en la CEE (1986)'], ejercicios: ['Mapa de los bandos en la Guerra Civil', 'Fuente histórica: analizar el No-Do franquista', 'Debate: ¿fue exitosa la Transición?'] },
+      ]},
+      '4ESO': { unidades: [
+        { titulo: 'El mundo actual', conceptos: ['La globalización: concepto, fases, indicadores (IDH, PIB, Gini)', 'Organismos internacionales: ONU, FMI, OMC, Banco Mundial, OTAN', 'Conflictos actuales: terrorismo, guerras regionales, refugiados', 'La Unión Europea: historia, instituciones (Parlamento, Consejo, Comisión, BCE), euro', 'Retos del siglo XXI: cambio climático (COP, Protocolo de Kioto, Acuerdo de París), desigualdad Norte-Sur, digitalización'], ejercicios: ['Mapa político del mundo actual', 'Análisis de un conflicto actual con fuentes', 'Debate: ¿globalización beneficia o perjudica?'] },
+      ]},
+    }
+  },
+
+  // ─────────────────────────────────────────────────────────────────
+  // VALORES ÉTICOS Y CÍVICOS
+  // ─────────────────────────────────────────────────────────────────
+  valorescivicos: {
+    nombre: 'Valores Éticos y Cívicos', emoji: '⚖️', color: '#a78bfa',
+    cursos: {
+      '2ESO': { unidades: [
+        { titulo: 'Ética y moral', conceptos: ['Diferencia entre ética (reflexión filosófica) y moral (normas de conducta)', 'Principios éticos universales: justicia, igualdad, respeto, dignidad humana', 'Dilemas morales: eutanasia, pena de muerte, consumo responsable, desobediencia civil', 'Ética ambiental: desarrollo sostenible (Brundtland 1987), huella ecológica, consumo responsable'], ejercicios: ['Debate sobre un dilema moral (eutanasia)', 'Análisis de un caso de injusticia con argumentación ética', 'Proyecto de consumo responsable para el aula'] },
+        { titulo: 'Ciudadanía y derechos', conceptos: ['Declaración Universal de los Derechos Humanos (1948): antecedentes, estructura, derechos civiles, políticos, económicos y culturales', 'La Constitución española (1978): artículo 1 (Estado social y democrático de derecho), título I (derechos fundamentales)', 'Democracia: representativa vs directa, partidos políticos, elecciones, separación de poderes (Montesquieu)', 'Ciudadanía activa: participación cívica, voluntariado, ONG, movimientos sociales', 'Ciberciudadanía: identidad digital, privacidad, derechos en internet, desinformación (fake news)'], ejercicios: ['Simulacro de juicio por derechos humanos', 'Análisis de un artículo de la Constitución', 'Campaña de sensibilización contra las fake news'] },
+      ]},
+    }
+  },
+
+  // ─────────────────────────────────────────────────────────────────
+  // FRANCÉS
+  // ─────────────────────────────────────────────────────────────────
+  frances: {
+    nombre: 'Francés', emoji: '🇫🇷', color: '#3b82f6',
+    cursos: {
+      '2ESO': { unidades: [
+        { titulo: 'Gramática esencial', conceptos: ['Présent de l\'indicatif: verbos regulares en -er/-ir/-re y verbos irregulares frecuentes (être, avoir, aller, faire, pouvoir, vouloir)', 'Passé composé: formación (avoir/être + participio), verbos con être (aller → allé, venir → venu)', 'Imparfait: uso para descripción en el pasado vs passé composé para acciones puntuales', 'Futur proche: aller + infinitif ("je vais partir")', 'Adjetivos: concordancia de género y número, posición (beau/bel/belle, nouveau/nouvel)', 'Pronombres personales sujeto y complemento (me, te, le, la, les)', 'Artículos: défini (le, la, les), indéfini (un, une, des), partitif (du, de la, des)', 'Negación: ne...pas, ne...jamais, ne...plus, ne...rien'], ejercicios: ['Conjugar 10 verbos irregulares en présent y passé composé', 'Transformar frases del présent al passé composé', 'Diálogo en un restaurante usando futur proche'] },
+        { titulo: 'Vocabulario y comunicación', conceptos: ['Rutinas diarias: se lever, se doucher, prendre le petit-déjeuner, aller à l\'école', 'La familia: les parents, les grands-parents, les frères et sœurs, les cousins', 'La ville et les transports: la gare, l\'aéroport, le métro, le bus, la voiture', 'Les courses: au marché, à la boulangerie, au supermarché; expressions de quantité', 'Les loisirs: faire du sport, aller au cinéma, écouter de la musique, jouer aux jeux vidéo', 'Les médias: regarder la télé, utiliser les réseaux sociaux, lire le journal'], ejercicios: ['Describir la rutina diaria con verbos pronominaux', 'Role-play: hacer la compra en el mercado', 'Presentación oral sobre los loisirs favoris'] },
+      ]},
+    }
+  },
+
+
 };
 
 // ═══════════════════════════════════════════════════════════════════
@@ -11609,6 +11855,7 @@ const LUMIO_KB = {
 
 // ─────────────────────────────────────────────────
 const LUMIO_INTENTS = [
+  { pattern: /quiero practicar|quiero ejercitar|practicar|práctica|practica|ejercicios de|hacer ejercicios|ejercitarme|ponme ejercicios|hazme ejercicios/i, type: 'practice' },
   // Saludos
   { pattern: /^(hola|hey|buenas|hi|buenos días|buenas tardes|buenas noches)/i, type: 'greeting' },
   // Qué es
@@ -12030,7 +12277,80 @@ ${LUMIO_KB.estudio.tecnicas.pomodoro}
 En Lumio tienes el Pomodoro integrado: ve a Estudiar → Pomodoro y elige tu materia.`;
     if(intent==='exam_prep') return this._examPrep(msg);
 
-    // 2. Try to solve math inline
+    if(intent==='practice'){
+      const praMatMap = {
+        'matematicas': { n:'Matemáticas', temas:['fracciones y decimales','ecuaciones de primer grado','potencias y raíces','porcentajes','geometría: áreas y perímetros','estadística básica'], ejercicios:[
+          '1. Calcula: 3/4 + 2/5 = ?',
+          '2. Resuelve: 2x + 6 = 14',
+          '3. ¿Cuánto es el 25% de 320?',
+          '4. Simplifica: (x² + 3x) / x',
+          '5. ¿Cuál es el área de un triángulo de base 8 cm y altura 5 cm?',
+        ]},
+        'fisica': { n:'Física', temas:['fuerzas y movimiento','energía cinética y potencial','cinemática MRU y MRUA','trabajo y potencia','ondas y sonido'], ejercicios:[
+          '1. Un coche va a 20 m/s. ¿Qué distancia recorre en 15 s?',
+          '2. Una fuerza de 50 N mueve un objeto 10 m. ¿Qué trabajo realiza?',
+          '3. Un objeto de 4 kg está a 5 m de altura. ¿Cuál es su energía potencial? (g = 10 m/s²)',
+          '4. ¿Cuánto tiempo tarda un coche en alcanzar 90 km/h partiendo del reposo con a = 2 m/s²?',
+          '5. Un sonido viaja a 340 m/s. ¿Cuánto tarda en recorrer 1 km?',
+        ]},
+        'quimica': { n:'Química', temas:['tabla periódica','tipos de enlaces','reacciones químicas','ácidos y bases','formulación inorgánica'], ejercicios:[
+          '1. ¿Qué tipo de enlace une Na y Cl en el NaCl?',
+          '2. Escribe la fórmula del óxido de hierro (III)',
+          '3. ¿Cuál es el pH de una solución con [H⁺] = 10⁻⁴ M?',
+          '4. Ajusta la reacción: H₂ + O₂ → H₂O',
+          '5. ¿Cuántos protones tiene el átomo de carbono (número atómico 6)?',
+        ]},
+        'biologia': { n:'Biología', temas:['la célula eucariota y procariota','fotosíntesis y respiración celular','genética mendeliana','el ADN y la herencia','ecosistemas y biomas'], ejercicios:[
+          '1. ¿Qué diferencia hay entre célula eucariota y procariota?',
+          '2. ¿Dónde se realiza la fotosíntesis dentro de la célula?',
+          '3. Si un alelo A es dominante sobre a, ¿cuál es el fenotipo de Aa?',
+          '4. ¿Cuál es la función del ADN en la célula?',
+          '5. Nombra 3 diferencias entre mitosis y meiosis.',
+        ]},
+        'historia': { n:'Historia', temas:['La Revolución Francesa','Las Guerras Mundiales','La Guerra Civil española','La Edad Media','El Renacimiento'], ejercicios:[
+          '1. ¿En qué año comenzó la Revolución Francesa y cuál fue su causa principal?',
+          '2. Nombra 3 consecuencias de la Primera Guerra Mundial.',
+          '3. ¿Qué fue el Tratado de Versalles?',
+          '4. ¿Cuándo comenzó y terminó la Guerra Civil española?',
+          '5. ¿Qué sistema político caracterizó a la Edad Media en Europa?',
+        ]},
+        'lengua': { n:'Lengua', temas:['tipos de oraciones','sintagma nominal y verbal','el análisis sintáctico','figuras retóricas','los géneros literarios'], ejercicios:[
+          '1. Identifica el sujeto y predicado: "Los alumnos estudian mucho para el examen"',
+          '2. ¿Qué tipo de oración es?: "¡Qué calor hace hoy!"',
+          '3. Clasifica el sustantivo "felicidad": ¿concreto o abstracto?',
+          '4. ¿Qué figura retórica es "sus ojos son dos luceros"?',
+          '5. ¿A qué género literario pertenece una novela?',
+        ]},
+        'ingles': { n:'Inglés', temas:['present perfect','conditional sentences','phrasal verbs','reported speech','passive voice'], ejercicios:[
+          '1. Complete: "I ___ (never / be) to Japan." (Present Perfect)',
+          '2. Translate: "Si estudias, aprobarás el examen." (First Conditional)',
+          '3. What does "look up" mean?',
+          '4. Change to passive: "The teacher corrects the exams."',
+          '5. Reported speech: She said: "I am tired." → She said that...',
+        ]},
+        'filosofia': { n:'Filosofía', temas:['los grandes filósofos','ética y moral','la teoría del conocimiento','la lógica','la metafísica'], ejercicios:[
+          '1. ¿Qué es el imperativo categórico de Kant?',
+          '2. ¿Cuál es la diferencia entre ética y moral?',
+          '3. ¿Qué quiso decir Descartes con "Cogito, ergo sum"?',
+          '4. Explica la alegoría de la caverna de Platón.',
+          '5. ¿Qué es el método socrático?',
+        ]},
+        'geografia': { n:'Geografía', temas:['los climas del mundo','el relieve de España','la población mundial','la Unión Europea','sectores económicos'], ejercicios:[
+          '1. ¿Qué caracteriza al clima mediterráneo?',
+          '2. Nombra las tres mesetas principales de España.',
+          '3. ¿Cuáles son los tres sectores económicos?',
+          '4. ¿Cuántos países forman actualmente la Unión Europea?',
+          '5. ¿Qué es la tasa de natalidad?',
+        ]},
+      };
+      const detected = mat || 'matematicas';
+      const info = praMatMap[detected] || praMatMap['matematicas'];
+      const subtema = this._convCtx.lastTopic || info.temas[Math.floor(Math.random()*info.temas.length)];
+      const exs = info.ejercicios;
+      return `🧪 **¡A practicar ${info.n}!**\n\nTe propongo 5 ejercicios variados. Responde los que puedas y te corrijo uno a uno:\n\n${exs.join('\n')}\n\n---\n💡 *Escribe tu respuesta (ej: "1. x = 4") y te digo si es correcta.*\n🔄 ¿Quieres ejercicios de un tema concreto? Dímelo: *"ejercicios de ${info.temas[0]}"*`;
+    }
+
+
     const mathResult=this._solveMath(msg);
     if(mathResult) return mathResult;
 
@@ -12152,15 +12472,23 @@ async function callAIForTask(systemPrompt, userContent, maxTokens=1600, useWeb=t
     {role:'user',content:userContent + webCtx}
   ];
 
-  // ── PROVEEDOR 1: OpenRouter ──
+  // ── PROVEEDOR 1: Groq (principal — gratis y rápido) ──
+  try {
+    const groqText = await _callGroq(messages, maxTokens, 0.7);
+    if (groqText) return groqText;
+  } catch(e) {
+    console.warn('callAIForTask: Groq falló', e.message);
+  }
+
+  // ── PROVEEDOR 2: OpenRouter (fallback) ──
   try {
     const orText = await _callOpenRouter(messages, maxTokens, 0.7);
-    return orText || null;
+    if (orText) return orText;
   } catch(e) {
     console.warn('callAIForTask: OpenRouter falló', e.message);
   }
 
-  // ── PROVEEDOR 2: Pollinations (fallback) ──
+  // ── PROVEEDOR 3: Pollinations (último fallback) ──
   try{
     const ctrl=new AbortController();
     const tid=setTimeout(()=>ctrl.abort(),16000);
@@ -18604,12 +18932,13 @@ function _renderMsg(text, role, withActions=true){
     .replace(/\*\*([^*]+)\*\*/g,'<b style="color:var(--t1)">$1</b>')
     .replace(/\*([^*]+)\*/g,'<em>$1</em>')
     .replace(/^━+$/gm,'<hr style="border:none;border-top:1px solid var(--bd);margin:8px 0">')
-    .replace(/^(\d+)\.\s+(.+)$/gm,'<div style="display:flex;gap:6px;margin:3px 0"><span style="color:var(--y);font-weight:700;flex-shrink:0">$1.</span><span>$2</span></div>')
-    .replace(/^[•\-\*]\s+(.+)$/gm,'<div style="display:flex;gap:6px;margin:3px 0"><span style="color:var(--y);flex-shrink:0">•</span><span>$1</span></div>')
+    .replace(/^(\d+)\.\s+(.+)$/gm,'<div style="display:block;margin:5px 0;line-height:1.5"><span style="color:var(--y);font-weight:700;margin-right:5px">$1.</span>$2</div>')
+    .replace(/^[•\-\*]\s+(.+)$/gm,'<div style="display:block;margin:5px 0;line-height:1.5"><span style="color:var(--y);margin-right:6px">•</span>$1</div>')
     .replace(/^#{1,3}\s+(.+)$/gm,'<div style="font-weight:800;color:var(--t1);margin:8px 0 3px;font-size:14px">$1</div>')
     .replace(/^📌\s+(.+)$/gm,'<div style="font-weight:700;color:var(--teal);margin:8px 0 2px;font-size:13px">📌 $1</div>')
     .replace(/^🔷\s+(.+)$/gm,'<div style="font-weight:800;color:var(--y);margin:10px 0 4px;font-size:14px;border-left:3px solid var(--y);padding-left:8px">$1</div>')
-    .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+    .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>')
+    .replace(/<\/div>(<br>)+<div/g,'</div><div');
   // Parse and extract source citations if present
   let sourcesHtml = '';
   rendered = rendered.replace(/\[FUENTES_INICIO\](.*?)\[FUENTES_FIN\]/s, (_, json) => {
@@ -20221,6 +20550,55 @@ function cwTool(mode, preMsg) {
   const chatInp = document.getElementById('chat-inp');
   if (chatInp && preMsg) { chatInp.value = preMsg; chatInp.focus(); chatInp.setSelectionRange(chatInp.value.length, chatInp.value.length); }
   _renderDynamicChips();
+}
+
+function cwSelectSubject(materia, emoji) {
+  // Marcar chip seleccionado visualmente
+  document.querySelectorAll('.cw-subject-chip').forEach(c => c.classList.remove('selected'));
+  event?.target?.classList?.add('selected');
+
+  // Mostrar sub-temas de esa materia como sugerencias en el input
+  const subtemas = {
+    'Matemáticas': ['Fracciones y decimales','Ecuaciones','Geometría','Estadística','Funciones'],
+    'Física': ['Fuerzas y movimiento','Energía','Cinemática','Ondas','Termodinámica'],
+    'Química': ['Tabla periódica','Reacciones','Ácidos y bases','Formulación','Estequiometría'],
+    'Biología': ['La célula','Genética','Fotosíntesis','Ecosistemas','Evolución'],
+    'Historia': ['Revolución Francesa','Guerras Mundiales','España siglo XX','Edad Media','Renacimiento'],
+    'Lengua': ['Sintaxis','Tipos de oraciones','Figuras retóricas','Literatura','Ortografía'],
+    'Inglés': ['Present perfect','Conditionals','Phrasal verbs','Passive voice','Reported speech'],
+    'Geografía': ['Climas','Relieve','Población','Unión Europea','Sectores económicos'],
+    'Filosofía': ['Platón y Aristóteles','Kant','Ética','Lógica','Metafísica'],
+  };
+  const subs = subtemas[materia] || [];
+
+  // Rellenar el input con "Quiero practicar [materia]" y mostrar chips de subtemas
+  const inp = document.getElementById('cw-input');
+  if (inp) {
+    inp.value = 'Quiero practicar ' + materia;
+    document.getElementById('cw-btn').textContent = '✦ Empezar';
+  }
+
+  // Mostrar chips de sub-temas debajo del input
+  let subRow = document.getElementById('cw-subtopic-chips');
+  if (!subRow) {
+    subRow = document.createElement('div');
+    subRow.id = 'cw-subtopic-chips';
+    subRow.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:480px;margin-bottom:10px;animation:fadeIn .2s ease';
+    const inputRow = document.querySelector('.cw-input-row');
+    if (inputRow) inputRow.parentNode.insertBefore(subRow, inputRow.nextSibling);
+  }
+  subRow.innerHTML = subs.map(s =>
+    `<button onclick="cwSetSubtopic('${materia}','${s}')" style="background:var(--bg2);border:1px solid var(--bd2);border-radius:999px;padding:5px 11px;font-size:11px;font-weight:600;color:var(--vio);cursor:pointer;font-family:var(--font);transition:all .15s" onmouseover="this.style.background='var(--viod)'" onmouseout="this.style.background='var(--bg2)'">${s}</button>`
+  ).join('');
+}
+
+function cwSetSubtopic(materia, subtema) {
+  const inp = document.getElementById('cw-input');
+  if (inp) {
+    inp.value = subtema + ' — ' + materia;
+    inp.focus();
+    document.getElementById('cw-btn').textContent = '✦ Empezar';
+  }
 }
 
 function cwSuggestTopics() {
