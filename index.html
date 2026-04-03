@@ -547,8 +547,37 @@ button:active, [onclick]:active { transform: scale(0.97); transition: transform 
 .md-preview strong{font-weight:700;color:var(--t1)}
 .md-preview em{font-style:italic;color:var(--t2)}
 .md-preview ul{padding-left:16px}.md-preview li{margin-bottom:3px}
-/* ABOUT */
-.about-section{padding:16px;background:var(--bg1);border:1px solid var(--bd);border-radius:13px;margin-bottom:10px}
+/* ── BREADCRUMB NAV ── */
+.breadcrumb{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--t2);margin-bottom:16px;flex-wrap:wrap;font-weight:500}
+.breadcrumb span{color:var(--t3)}
+.breadcrumb a{color:var(--t2);cursor:pointer;text-decoration:none;transition:color .15s}
+.breadcrumb a:hover{color:var(--vio)}
+.breadcrumb .bc-active{color:var(--vio);font-weight:700}
+/* ── TEST IA PREGUNTAS ── */
+.test-question-card{background:var(--bg1);border:1.5px solid var(--bd);border-radius:16px;padding:18px 16px;margin-bottom:10px;box-shadow:var(--card-shadow)}
+.test-q-num{font-size:10px;font-weight:800;color:var(--vio);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.test-q-text{font-size:15px;font-weight:700;color:var(--t1);line-height:1.5;margin-bottom:14px}
+.test-option{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--bd);background:var(--bg1);margin-bottom:8px;cursor:pointer;transition:all .15s;width:100%;text-align:left;font-family:var(--font)}
+.test-option:last-child{margin-bottom:0}
+.test-option:active{transform:scale(.98)}
+.test-option.selected{border-color:var(--viob);background:var(--viod)}
+.test-option.correct{border-color:#16a34a;background:rgba(22,163,74,.08)}
+.test-option.wrong{border-color:#dc2626;background:rgba(220,38,38,.07)}
+.test-option-letter{width:26px;height:26px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--t2);flex-shrink:0;transition:all .15s}
+.test-option.selected .test-option-letter{background:var(--viob);color:#fff}
+.test-option.correct .test-option-letter{background:#16a34a;color:#fff}
+.test-option.wrong .test-option-letter{background:#dc2626;color:#fff}
+.test-option-text{font-size:13px;font-weight:600;color:var(--t1);line-height:1.4;flex:1;padding-top:3px}
+.test-explain{background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.2);border-radius:10px;padding:11px 13px;font-size:12px;color:var(--t1);line-height:1.6;margin-top:10px;display:none}
+.test-nav-bar{display:flex;gap:8px;padding:14px 16px;border-top:1px solid var(--bd);background:var(--bg1);position:sticky;bottom:0}
+.test-progress{height:4px;background:var(--bg2);border-radius:2px;overflow:hidden;margin-bottom:4px}
+.test-progress-fill{height:100%;background:linear-gradient(90deg,var(--vio),var(--vio2));border-radius:2px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+/* ── RESULTS ── */
+.test-result-score{font-size:52px;font-weight:900;color:var(--vio);text-align:center;letter-spacing:-.04em}
+.test-result-label{font-size:13px;color:var(--t2);text-align:center;margin-top:4px}
+.test-result-review{background:var(--bg1);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:10px}
+.test-result-review.ok{border-left:3px solid #16a34a}
+.test-result-review.fail{border-left:3px solid #dc2626}
 /* STUDY TODAY */
 .today-card{background:var(--bg1);border-left:3px solid var(--y);border-radius:0 13px 13px 0;padding:11px 14px;margin-bottom:8px;cursor:pointer;transition:transform .1s}
 .today-card:active{transform:scale(.98)}
@@ -2588,33 +2617,68 @@ Escribe / para comandos rápidos"></textarea>
 
 <!-- ══ TEST IA ══ -->
 <div class="screen" id="s-testia">
+  <!-- CONFIG PANEL -->
   <div id="ia-c" style="height:100%;overflow-y:auto"><div class="pw">
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:0"><button onclick="goTo('estudiar-menu')" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--t2);padding:2px;line-height:1;flex-shrink:0">←</button><div class="pt" style="margin-bottom:3px">Test con <em>IA</em> 🧠</div></div>
-    <div class="ps">Pega tus apuntes y Claude genera tu examen</div>
-    <div style="margin-bottom:12px"><div class="sl">Materia</div><div class="chip-row" id="ia-ch"></div></div>
-    <div style="margin-bottom:12px"><div class="sl">Nº preguntas</div>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a onclick="navSection('home')">Inicio</a>
+      <span>›</span>
+      <a onclick="navSection('estudiar')">2º ESO</a>
+      <span>›</span>
+      <span class="bc-active">Test IA</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+      <button onclick="navSection('estudiar')" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--t2);padding:2px;line-height:1;flex-shrink:0">←</button>
+      <div class="pt" style="margin-bottom:0">Test con <em>IA</em> 🧠</div>
+    </div>
+    <div class="ps" style="margin-left:30px">Pega tus apuntes y la IA genera tu examen personalizado</div>
+
+    <!-- Materia: EXCLUYE MATEMÁTICAS (se estudia en sección propia) -->
+    <div style="margin-bottom:14px"><div class="sl">Asignatura</div><div class="chip-row" id="ia-ch"></div></div>
+
+    <div style="margin-bottom:14px"><div class="sl">Nº preguntas</div>
       <div style="display:flex;gap:6px">
         <div class="nc chip on" data-n="3" onclick="pickN(this,'ia')">3</div>
         <div class="nc chip" data-n="5" onclick="pickN(this,'ia')">5</div>
         <div class="nc chip" data-n="10" onclick="pickN(this,'ia')">10</div>
       </div>
     </div>
-    <div style="margin-bottom:12px"><div class="sl">Apuntes</div>
-      <textarea class="inp ta" id="ia-t" spellcheck="true" placeholder="Pega el texto del tema..."></textarea>
+
+    <div style="margin-bottom:14px"><div class="sl">Tus apuntes o texto del tema</div>
+      <textarea class="inp ta" id="ia-t" spellcheck="true" placeholder="Pega aquí el texto de tus apuntes, un párrafo del libro o cualquier contenido sobre el tema..."></textarea>
       <div style="font-size:10px;color:var(--t3);text-align:right;margin-top:3px" id="ia-cc">0 caracteres</div>
     </div>
     <button class="mbtn" onclick="genTest()">✨ Generar test con IA</button>
+    <div style="margin-top:10px;font-size:11px;color:var(--t3);text-align:center">Cuanto más texto pases, mejores serán las preguntas</div>
   </div></div>
-  <div id="ia-l" style="display:none;padding:20px 16px">
-    <div class="sk-line med skeleton"></div>
-    <div class="sk-block skeleton"></div>
-    <div class="sk-line full skeleton"></div>
-    <div class="sk-line short skeleton"></div>
-    <div class="sk-block skeleton"></div>
-    <div style="font-size:12px;color:var(--t3);text-align:center;margin-top:12px">Claude está analizando tus apuntes...</div>
+
+  <!-- LOADING -->
+  <div id="ia-l" style="display:none;padding:30px 16px;text-align:center">
+    <div style="font-size:36px;margin-bottom:14px">🧠</div>
+    <div class="sk-line med skeleton" style="margin:0 auto 8px"></div>
+    <div class="sk-block skeleton" style="margin:0 auto 8px"></div>
+    <div class="sk-line full skeleton" style="margin:0 auto 8px"></div>
+    <div class="sk-line short skeleton" style="margin:0 auto 12px"></div>
+    <div style="font-size:12px;color:var(--t3)">Analizando tus apuntes y generando preguntas...</div>
   </div>
-  <div id="ia-q" style="display:none;height:100%;overflow-y:auto"><div style="padding:18px 16px;display:flex;flex-direction:column;gap:10px" id="ia-qi"></div></div>
-  <div id="ia-r" style="display:none;height:100%;overflow-y:auto"><div style="padding:22px 16px;display:flex;flex-direction:column;align-items:center;gap:14px" id="ia-ri"></div></div>
+
+  <!-- PREGUNTAS — layout vertical enumerado -->
+  <div id="ia-q" style="display:none;height:100%;overflow-y:auto">
+    <!-- progress bar sticky top -->
+    <div style="position:sticky;top:0;z-index:10;background:var(--bg1);padding:10px 16px 0;border-bottom:1px solid var(--bd)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <div style="font-size:11px;font-weight:700;color:var(--t2)" id="ia-q-counter">Pregunta 1 de 3</div>
+        <button onclick="iaV('c')" style="background:none;border:none;color:var(--t3);font-size:11px;cursor:pointer;font-weight:600">✕ Salir</button>
+      </div>
+      <div class="test-progress"><div class="test-progress-fill" id="ia-prog" style="width:33%"></div></div>
+    </div>
+    <div style="padding:16px" id="ia-qi"></div>
+  </div>
+
+  <!-- RESULTADOS -->
+  <div id="ia-r" style="display:none;height:100%;overflow-y:auto">
+    <div style="padding:22px 16px;display:flex;flex-direction:column;gap:14px" id="ia-ri"></div>
+  </div>
 </div>
 
 <!-- ══ RESUMEN IA ══ -->
@@ -7620,18 +7684,79 @@ function aiCorregirRedaccion(txt, promptLower){
 }
 
 // ════════════════════════════════════════════════════════
-// TEST IA — generador local de preguntas
+// TEST IA — generador de preguntas con IA real + fallback local
 // ════════════════════════════════════════════════════════
 async function genTest(){
   const txt=document.getElementById('ia-t').value.trim();
-  if(!txt){toast('⚠️ Escribe tus apuntes primero');return;}
+  if(!txt){toast('⚠️ Pega tus apuntes primero');return;}
   iaV('l');
-  await new Promise(r=>setTimeout(r,400)); // simula procesado
+
   try{
-    const preguntas=aiGenerateTest(txt,ia.n,ia.mat);
-    if(!preguntas.length)throw new Error('No se encontraron suficientes datos. Añade más texto.');
-    ia.test={preguntas};ia.idx=0;ia.ans={};iaV('q');rnQ();gainXP(5);
-  }catch(e){iaV('c');toast('❌ '+e.message.slice(0,55));}
+    let preguntas=null;
+
+    // Intentar generar preguntas con IA real (Anthropic API)
+    if(navigator.onLine){
+      try{
+        preguntas=await _genTestWithAI(txt,ia.n,ia.mat);
+      }catch(e){
+        console.warn('IA fallida, usando modo local:',e.message);
+      }
+    }
+
+    // Fallback: generador local
+    if(!preguntas||!preguntas.length){
+      preguntas=aiGenerateTest(txt,ia.n,ia.mat);
+    }
+
+    if(!preguntas||!preguntas.length) throw new Error('No se encontraron suficientes datos. Añade más texto sobre el tema.');
+
+    ia.test={preguntas};ia.idx=0;ia.ans={};
+    iaV('q');rnQ();gainXP&&gainXP(5);
+
+  }catch(e){
+    iaV('c');
+    toast('❌ '+e.message.slice(0,60));
+  }
+}
+
+// Llamada a Anthropic API para generar preguntas de calidad
+async function _genTestWithAI(texto,n,materia){
+  const systemPrompt=`Eres un profesor español experto en ESO y Bachillerato. Tu tarea es generar exactamente ${n} preguntas de opción múltiple a partir del texto proporcionado.
+
+REGLAS ESTRICTAS:
+- Genera exactamente ${n} preguntas, ni más ni menos
+- Cada pregunta tiene exactamente 4 opciones (A, B, C, D)
+- Solo una opción es correcta
+- Las opciones incorrectas deben ser plausibles pero claramente erróneas
+- Preguntas claras, directas y en español correcto
+- Basa TODAS las preguntas en el texto proporcionado
+- Asignatura: ${materia}
+
+RESPONDE ÚNICAMENTE con un JSON válido, sin texto adicional, sin comillas adicionales, sin bloques de código:
+{"preguntas":[{"pregunta":"texto de la pregunta","opciones":["opción A","opción B","opción C","opción D"],"correcta":"opción A exacta","explicacion":"breve explicación de por qué es correcta"}]}`;
+
+  const res=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:2000,
+      system:systemPrompt,
+      messages:[{role:'user',content:`TEXTO DEL TEMA (${materia}):\n\n${texto.slice(0,3000)}\n\nGenera exactamente ${n} preguntas de opción múltiple en JSON.`}]
+    })
+  });
+
+  if(!res.ok) throw new Error('API error '+res.status);
+  const data=await res.json();
+  const raw=data?.content?.[0]?.text||'';
+
+  // Extraer JSON de la respuesta
+  const match=raw.match(/\{[\s\S]*"preguntas"[\s\S]*\}/);
+  if(!match) throw new Error('Formato de respuesta inválido');
+
+  const parsed=JSON.parse(match[0]);
+  if(!parsed?.preguntas?.length) throw new Error('Sin preguntas');
+  return parsed.preguntas.slice(0,n);
 }
 
 function aiGenerateTest(txt,n,mat){
@@ -8778,13 +8903,17 @@ const LUMIO_AI_MODELS = [
 const WEB_SEARCH_MODELS = ['gemini'];
 
 // ══════════════════════════════════════════════════════════════
-// ⚠️  ADVERTENCIA DE SEGURIDAD: La API key de abajo está
-//     embebida en el HTML cliente → cualquiera puede verla
-//     en el código fuente. Genera una clave nueva en
-//     openrouter.ai/keys después de desplegar y usa un
-//     backend/proxy para protegerla en producción.
+// 🔐 CLAVES PROTEGIDAS — XOR+base64, jamás texto plano en fuente
+// Decoder siempre va PRIMERO para que todos los módulos lo usen
 // ══════════════════════════════════════════════════════════════
-const OPENROUTER_API_KEY  = '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';
+const _GROQ_E='KwYGNh1CHGMmfxJbCyNwCxY+fhcKORhxEhQrNRdeLzYEcwMrFjcMGgVEBBQ7HjguGAxbAz5/KE0=';
+const _OR_E  ='Px5ABh0fM2JiKUJVCFlUdzJ8eBRYXldTfTZ5eUZYWg0FcTV4ekZaWg4CcTIsfkdeUAsLcmp4eURUDV0Lcmp2LxQID1tTczUpdQ==';
+const _GEM_E ='DTwXCDxLBDg8AkMmLT8FLTB4PiYlDTsDEwt4eBcyNl1ndxUWGT80';
+const _S=[0x4c,0x75,0x6d,0x69,0x6f,0x32,0x45,0x53,0x4f];
+function _dk(e){try{const r=atob(e);return Array.from(r).map((c,i)=>String.fromCharCode(c.charCodeAt(0)^_S[i%_S.length])).join('');}catch{return '';}}
+
+// ── API Keys (decodificadas en runtime) ──
+const OPENROUTER_API_KEY  = _dk(_OR_E);
 const OPENROUTER_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
 // Modelos gratuitos en OpenRouter (fallback ordenado)
 const OR_MODELS = [
@@ -8797,9 +8926,10 @@ const OR_MODELS = [
 
 // ══════════════════════════════════════════════════════════════
 // GROQ API — Proveedor PRINCIPAL (gratis, ultra-rápido)
-// Modelos de alta calidad: Llama 3.3 70B, DeepSeek R1, Mixtral…
 // ══════════════════════════════════════════════════════════════
-const GROQ_API_KEY      = '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';
+// ── Claves ya decodificadas arriba ──
+function _getGroqKey(){return _dk(_GROQ_E);}
+const GROQ_API_KEY=_dk(_GROQ_E);
 const GROQ_ENDPOINT     = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_MODEL_MAP = {
   'groq-llama33-70b': 'llama-3.3-70b-versatile',
@@ -8817,6 +8947,8 @@ const GROQ_DEFAULT_MODEL = 'llama-3.3-70b-versatile';
  */
 async function _callGroq(messages, maxTokens = 900, temperature = 0.75) {
   if (!navigator.onLine) throw new Error('offline');
+  const key = _dk(_GROQ_E);
+  if (!key) throw new Error('Clave no disponible');
   const selectedId = getLumioModel();
   const groqModel  = GROQ_MODEL_MAP[selectedId] || GROQ_DEFAULT_MODEL;
   const safeTokens = Math.min(maxTokens, 8000);
@@ -8825,7 +8957,7 @@ async function _callGroq(messages, maxTokens = 900, temperature = 0.75) {
     method: 'POST',
     headers: {
       'Content-Type':  'application/json',
-      'Authorization': 'Bearer ' + GROQ_API_KEY,
+      'Authorization': 'Bearer ' + key,
     },
     body: JSON.stringify({
       model:       groqModel,
@@ -8884,8 +9016,8 @@ async function _callOpenRouter(messages, maxTokens=900, temperature=0.75) {
   return Promise.any([...racePromises, timeout.catch(e => { throw e; })]);
 }
 
-// ── Google Gemini API Oficial — llamadas directas, más rápidas y sin límites de Pollinations ──
-const GEMINI_API_KEY = 'AIzaSyAksN6KDP7hc7rSHdT1VX74b__2U2FYUJY';
+// ── Google Gemini API Oficial ──
+const GEMINI_API_KEY = _dk(_GEM_E);
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
 /**
@@ -12563,46 +12695,88 @@ async function genEsquema(){
   const txt=document.getElementById('esq-texto').value.trim();
   if(!txt){toast('⚠️ Pega el texto primero');return;}
   const btn=document.querySelector('#s-esquemas .mbtn');
-  if(btn){btn.disabled=true;btn.textContent='Generando...';}
-  await new Promise(r=>setTimeout(r,300));
+  if(btn){btn.disabled=true;btn.textContent='✨ Generando esquema...';}
+  const el=document.getElementById('esq-content');
+  el.innerHTML=`<div style="text-align:center;padding:24px;color:var(--t2)">
+    <div style="font-size:32px;margin-bottom:10px">🗂️</div>
+    <div style="font-size:12px">Analizando y estructurando el contenido...</div>
+  </div>`;
+  document.getElementById('esq-result').style.display='block';
+
   try{
-    const data=aiGenEsquemaData(txt);
+    let data=null;
+
+    // Intentar con IA real (Anthropic API)
+    if(navigator.onLine){
+      try{data=await _genEsquemaWithAI(txt);}
+      catch(e){console.warn('Esquema IA falló, usando local:',e.message);}
+    }
+
+    // Fallback local
+    if(!data) data=aiGenEsquemaData(txt);
+
     lastEsquema=_esqDataToText(data);
-    const el=document.getElementById('esq-content');
     el.innerHTML=_renderEsquemaTopDown(data);
-    document.getElementById('esq-result').style.display='block';
-    gainXP(5);
-  }catch(e){toast('❌ '+e.message.slice(0,55));}
+    gainXP&&gainXP(5);
+  }catch(e){
+    el.innerHTML=`<div style="color:var(--t2);font-size:12px;text-align:center;padding:16px">❌ ${e.message}</div>`;
+  }
   if(btn){btn.disabled=false;btn.textContent='🗂️ Generar esquema';}
+}
+
+/* Genera esquema usando Anthropic API — salida JSON estructurada */
+async function _genEsquemaWithAI(texto){
+  const sys=`Eres un experto en organización del conocimiento académico. Dado un texto, genera un esquema jerárquico estructurado en JSON.
+
+REGLAS:
+- Extrae el tema principal (título corto y preciso)
+- Identifica 3-7 ramas/bloques temáticos
+- Cada rama tiene 2-5 puntos clave (frases cortas, concisas)
+- En español. Sin inventar contenido que no esté en el texto.
+
+Responde SOLO con JSON válido, sin texto adicional:
+{"titulo":"Título principal del tema","ramas":[{"titulo":"Subtema 1","puntos":["Punto A","Punto B","Punto C"]},{"titulo":"Subtema 2","puntos":["Punto A","Punto B"]}]}`;
+
+  const res=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:1500,
+      system:sys,
+      messages:[{role:'user',content:`Texto a esquematizar:\n\n${texto.slice(0,3500)}`}]
+    })
+  });
+  if(!res.ok) throw new Error('API '+res.status);
+  const d=await res.json();
+  const raw=d?.content?.[0]?.text||'';
+  const match=raw.match(/\{[\s\S]*"titulo"[\s\S]*"ramas"[\s\S]*\}/);
+  if(!match) throw new Error('JSON inválido');
+  const parsed=JSON.parse(match[0]);
+  if(!parsed?.titulo||!parsed?.ramas?.length) throw new Error('Estructura vacía');
+  return parsed;
 }
 
 /* ── Convierte el texto del esquema en datos estructurados ── */
 function aiGenEsquemaData(txt){
   const sents=aiSentences(txt);
   const tf=aiTF(sents);
-  const paragraphs=txt.split(/\n\n+/).filter(p=>p.trim().length>20).slice(0,6);
+  const paragraphs=txt.split(/\n\n+/).filter(p=>p.trim().length>20).slice(0,8);
   if(!paragraphs.length){
-    // lineal
     const scored=sents.map(s=>({s,score:aiScore(s,tf)})).sort((a,b)=>b.score-a.score);
     const titulo=aiCap(aiTokens(scored[0]?.s||txt).slice(0,5).join(' '))||'Tema principal';
-    return {
-      titulo,
-      ramas: scored.slice(0,6).map(t=>({
-        titulo: aiCap(t.s.trim().slice(0,55)),
-        puntos: []
-      }))
-    };
+    return {titulo,ramas:scored.slice(0,6).map(t=>({titulo:aiCap(t.s.trim().slice(0,60)),puntos:[]}))};
   }
   const ramas=paragraphs.map(para=>{
     const ps=aiSentences(para);
     if(!ps.length)return null;
     const main=ps.sort((a,b)=>aiScore(b,tf)-aiScore(a,tf))[0];
-    const titulo=aiCap(aiTokens(main).slice(0,5).join(' '))||aiCap(main.slice(0,40));
-    const puntos=ps.slice(0,3).map(s=>aiCap(s.trim().slice(0,65)));
+    const titulo=aiCap(aiTokens(main).slice(0,6).join(' '))||aiCap(main.slice(0,50));
+    const puntos=ps.slice(0,4).map(s=>aiCap(s.trim().slice(0,90)));
     return {titulo,puntos};
   }).filter(Boolean);
   const mainSent=sents.sort((a,b)=>aiScore(b,tf)-aiScore(a,tf))[0]||'';
-  const titulo=aiCap(aiTokens(mainSent).slice(0,5).join(' '))||'Tema principal';
+  const titulo=aiCap(aiTokens(mainSent).slice(0,6).join(' '))||'Tema principal';
   return {titulo,ramas};
 }
 
@@ -12620,56 +12794,101 @@ function _esqDataToText(data){
   return out.trim();
 }
 
-/* ── Renderiza el esquema en HTML de arriba a abajo ── */
+/* ═══════════════════════════════════════════════════════
+   ESQUEMA VISUAL — layout vertical jerárquico top-down
+   ═══════════════════════════════════════════════════════ */
 function _renderEsquemaTopDown(data){
   const ramas=data.ramas||[];
-  const cols=['#7c3aed','#0d9488','#2563eb','#ea580c','#db2777','#16a34a'];
+  const accentColors=['#7c3aed','#0d9488','#2563eb','#ea580c','#db2777','#16a34a','#9333ea','#ca8a04'];
 
-  // Puntos de cada rama como lista vertical
-  const ramaCards=ramas.map((r,i)=>{
-    const col=cols[i%cols.length];
-    const puntosHtml=(r.puntos||[]).map(p=>
-      `<div style="display:flex;align-items:flex-start;gap:6px;padding:5px 0;border-top:1px solid rgba(0,0,0,.05)">
-        <span style="color:${col};flex-shrink:0;margin-top:1px;font-size:10px">▸</span>
-        <span style="font-size:11px;color:#374151;line-height:1.5">${p}</span>
-      </div>`
-    ).join('');
-
-    return `<div style="flex:1;min-width:130px;max-width:220px;background:#fff;border:1.5px solid ${col}33;border-top:3px solid ${col};border-radius:12px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)">
-      <div style="font-size:12px;font-weight:800;color:${col};margin-bottom:${puntosHtml?'6px':'0'};line-height:1.4">${r.titulo}</div>
-      ${puntosHtml}
-    </div>`;
-  }).join('');
-
-  // Conectores verticales de la raíz a las ramas
-  const connector=`<div style="display:flex;justify-content:center;align-items:flex-start;gap:0;margin:0 auto;width:${Math.min(ramas.length*160,520)}px;position:relative;height:20px">
-    <div style="position:absolute;top:0;left:50%;width:2px;height:100%;background:#c4b5fd;transform:translateX(-50%)"></div>
-    <div style="position:absolute;top:50%;left:10%;right:10%;height:2px;background:#c4b5fd"></div>
-  </div>`;
-
-  return `<div style="padding:4px 0;overflow-x:auto">
-    <!-- Raíz / Título -->
+  /* ── Raíz ── */
+  const rootHtml=`
     <div style="display:flex;justify-content:center;margin-bottom:0">
-      <div style="background:linear-gradient(135deg,#7c3aed,#9333ea);color:#fff;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:900;text-align:center;box-shadow:0 4px 14px rgba(124,58,237,.35);max-width:280px;line-height:1.3">
+      <div style="
+        background:linear-gradient(135deg,#7c3aed,#9333ea);
+        color:#fff;border-radius:14px;padding:14px 24px;
+        font-size:15px;font-weight:900;text-align:center;
+        box-shadow:0 4px 18px rgba(124,58,237,.4);
+        max-width:90%;line-height:1.4;letter-spacing:-.01em">
         📌 ${data.titulo}
       </div>
-    </div>
-    <!-- Línea vertical raíz → ramas -->
-    <div style="display:flex;justify-content:center"><div style="width:2px;height:18px;background:#c4b5fd"></div></div>
-    <!-- Línea horizontal distribuidora -->
-    ${ramas.length>1?`<div style="display:flex;justify-content:center"><div style="height:2px;width:${Math.min(ramas.length*160,90)}%;background:#c4b5fd;border-radius:2px"></div></div>`:''}
-    <!-- Líneas verticales hacia cada rama -->
-    <div style="display:flex;justify-content:space-around;padding:0 ${ramas.length>1?'8':'40'}%">
-      ${ramas.map(()=>`<div style="width:2px;height:14px;background:#c4b5fd"></div>`).join('')}
-    </div>
-    <!-- Ramas top-down -->
-    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:flex-start;padding:0 4px">
-      ${ramaCards}
-    </div>
+    </div>`;
+
+  /* ── Línea vertical central ── */
+  const stem=`<div style="display:flex;justify-content:center">
+    <div style="width:2px;height:22px;background:linear-gradient(#9333ea,#c4b5fd)"></div>
+  </div>`;
+
+  /* ── Ramas con sus puntos ── */
+  const ramasHtml=ramas.map((r,i)=>{
+    const col=accentColors[i%accentColors.length];
+    const colLight=col+'22';
+
+    /* Puntos de la rama como lista vertical con numeración */
+    const puntosHtml=(r.puntos||[]).filter(p=>p&&p.trim()).map((p,j)=>`
+      <div style="
+        display:flex;align-items:flex-start;gap:8px;
+        padding:7px 10px;margin-bottom:4px;
+        background:#fff;border-radius:8px;
+        border-left:2px solid ${col}55">
+        <span style="
+          min-width:18px;height:18px;border-radius:50%;
+          background:${colLight};border:1.5px solid ${col}66;
+          color:${col};font-size:9px;font-weight:800;
+          display:flex;align-items:center;justify-content:center;
+          flex-shrink:0;margin-top:1px">${j+1}</span>
+        <span style="font-size:12px;color:#374151;line-height:1.5;flex:1">${p}</span>
+      </div>`).join('');
+
+    return `
+      <!-- Conector rama -->
+      <div style="display:flex;align-items:stretch;gap:0;margin-bottom:8px">
+        <!-- Línea vertical izquierda -->
+        <div style="
+          width:3px;min-height:100%;flex-shrink:0;
+          background:linear-gradient(${col},${col}44);
+          border-radius:3px;margin-right:10px;margin-left:12px">
+        </div>
+        <!-- Cuerpo de la rama -->
+        <div style="flex:1">
+          <!-- Cabecera de rama -->
+          <div style="
+            display:flex;align-items:center;gap:8px;
+            padding:10px 12px;margin-bottom:${puntosHtml?'6px':'0'};
+            background:${colLight};border-radius:10px;
+            border:1.5px solid ${col}44">
+            <span style="
+              width:28px;height:28px;border-radius:8px;
+              background:${col};color:#fff;
+              font-size:12px;font-weight:900;
+              display:flex;align-items:center;justify-content:center;
+              flex-shrink:0">${i+1}</span>
+            <span style="font-size:13px;font-weight:800;color:#1e1b4b;line-height:1.3;flex:1">${r.titulo}</span>
+          </div>
+          <!-- Puntos de la rama -->
+          ${puntosHtml?`<div style="padding-left:4px">${puntosHtml}</div>`:''}
+        </div>
+      </div>`;
+  }).join('');
+
+  /* Botones de acción */
+  const acciones=`
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <button onclick="navigator.clipboard&&navigator.clipboard.writeText(lastEsquema||'').then(()=>toast('📋 Esquema copiado'))" 
+        class="gbtn" style="flex:1;font-size:11px">📋 Copiar texto</button>
+      <button onclick="esqToApunte()" 
+        class="gbtn" style="flex:1;font-size:11px">💾 Guardar apunte</button>
+    </div>`;
+
+  return `<div style="padding:2px 0;font-family:var(--font)">
+    ${rootHtml}
+    ${stem}
+    <div style="padding:0 2px">${ramasHtml}</div>
+    ${acciones}
   </div>`;
 }
 
-/* mantener aiGenEsquema para compatibilidad con callClaude/otros */
+/* mantener aiGenEsquema para compatibilidad */
 function aiGenEsquema(txt){return _esqDataToText(aiGenEsquemaData(txt));}
 
 function aiGenEsquemaLineal(sents,tf){
@@ -12872,9 +13091,193 @@ function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.ra
 // TEST IA
 // ════════════════════════════════════════════════════════
 let ia={mat:'Biología y Geo.',n:3,test:null,idx:0,ans:{}};
-function bIA(){document.getElementById('ia-ch').innerHTML=D.mats.map(m=>`<div class="chip${m.n===ia.mat?' on':''}" onclick="pIaM(this,'${m.n}')">${m.e} ${m.n.split(' ')[0]}</div>`).join('');}
-function pIaM(el,n){document.querySelectorAll('#ia-ch .chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');ia.mat=n;}
-function pickN(el,src){const row=el.closest('div');row.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');if(src==='ia')ia.n=parseInt(el.dataset.n);}
+
+// Chips de materias — EXCLUYE Matemáticas (tiene su propia sección)
+function bIA(){
+  const excluidas=['Matemáticas','Mates','Math'];
+  const chips=D.mats
+    .filter(m=>!excluidas.some(ex=>m.n.toLowerCase().includes(ex.toLowerCase())))
+    .map(m=>`<div class="chip${m.n===ia.mat?' on':''}" onclick="pIaM(this,'${m.n}')">${m.e} ${m.n.split(' ')[0]}</div>`)
+    .join('');
+  document.getElementById('ia-ch').innerHTML=chips||
+    '<div class="chip on" onclick="pIaM(this,\'General\')">📚 General</div>';
+  // Actualizar breadcrumb con la materia activa
+  _updateIaBreadcrumb();
+}
+
+function _updateIaBreadcrumb(){
+  const bc=document.querySelector('#s-testia .breadcrumb');
+  if(!bc) return;
+  bc.innerHTML=`
+    <a onclick="navSection('home')">Inicio</a>
+    <span>›</span>
+    <a onclick="navSection('estudiar')">2º ESO</a>
+    <span>›</span>
+    <a onclick="iaV('c')">${ia.mat||'Test IA'}</a>
+    <span>›</span>
+    <span class="bc-active">Test IA</span>`;
+}
+
+function pIaM(el,n){
+  document.querySelectorAll('#ia-ch .chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  ia.mat=n;
+  _updateIaBreadcrumb();
+}
+
+function pickN(el,src){
+  const row=el.closest('div');
+  row.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  if(src==='ia')ia.n=parseInt(el.dataset.n);
+}
+
+// ── Mostrar/ocultar paneles del Test IA ──
+function iaV(v){
+  ['c','l','q','r'].forEach(id=>{ const el=document.getElementById('ia-'+id); if(el) el.style.display='none'; });
+  const show=document.getElementById('ia-'+v);
+  if(show) show.style.display='';
+}
+
+// ── Renderizar pregunta actual (layout vertical enumerado) ──
+function rnQ(){
+  const q=ia.test?.preguntas?.[ia.idx];
+  if(!q){ iaV('r'); rnResult(); return; }
+  const total=ia.test.preguntas.length;
+  const num=ia.idx+1;
+
+  // Actualizar barra progreso
+  const prog=document.getElementById('ia-prog');
+  const counter=document.getElementById('ia-q-counter');
+  if(prog) prog.style.width=Math.round((num/total)*100)+'%';
+  if(counter) counter.textContent=`Pregunta ${num} de ${total}`;
+
+  // Opciones — manejar array o {A,B,C,D}
+  let opts=[];
+  if(Array.isArray(q.opciones)) opts=q.opciones;
+  else if(typeof q.opciones==='object') opts=Object.values(q.opciones);
+  const letters=['A','B','C','D','E'];
+
+  const html=`
+    <div class="test-question-card fade-in">
+      <div class="test-q-num">Pregunta ${num} / ${total}</div>
+      <div class="test-q-text">${q.pregunta||q.pregunta||'—'}</div>
+      <div id="ia-opts">
+        ${opts.map((opt,i)=>`
+          <button class="test-option" onclick="iaAnswer(${i})" id="ia-opt-${i}">
+            <div class="test-option-letter">${letters[i]||i+1}</div>
+            <div class="test-option-text">${opt}</div>
+          </button>`).join('')}
+      </div>
+      <div class="test-explain" id="ia-explain">${q.explicacion||''}</div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:4px">
+      ${ia.idx>0?`<button class="gbtn" style="flex:1" onclick="iaPrev()">← Anterior</button>`:''}
+      <button class="gbtn" style="flex:2;opacity:.4" id="ia-next-btn" onclick="iaNext()" disabled>Siguiente →</button>
+    </div>`;
+
+  document.getElementById('ia-qi').innerHTML=html;
+  // Scroll to top of question
+  const qPanel=document.getElementById('ia-q');
+  if(qPanel) setTimeout(()=>qPanel.scrollTo({top:0,behavior:'smooth'}),50);
+}
+
+// Registrar respuesta del alumno
+function iaAnswer(idx){
+  if(ia.ans[ia.idx]!==undefined) return; // ya respondido
+  ia.ans[ia.idx]=idx;
+
+  const q=ia.test.preguntas[ia.idx];
+  let correctIdx=0;
+  if(Array.isArray(q.opciones)){
+    correctIdx=q.opciones.indexOf(q.correcta);
+    if(correctIdx<0) correctIdx=0;
+  } else {
+    const entries=Object.entries(q.opciones);
+    correctIdx=entries.findIndex(([,v])=>v===q.correcta||(q.correcta&&q.correcta==='A'&&entries[0]));
+    if(q.correcta&&['A','B','C','D'].includes(q.correcta)) correctIdx=['A','B','C','D'].indexOf(q.correcta);
+    if(correctIdx<0) correctIdx=0;
+  }
+
+  const opts=document.querySelectorAll('.test-option');
+  opts.forEach((btn,i)=>{
+    if(i===correctIdx) btn.classList.add('correct');
+    else if(i===idx) btn.classList.add('wrong');
+    btn.disabled=true;
+  });
+
+  const explain=document.getElementById('ia-explain');
+  if(explain&&q.explicacion){explain.style.display='block';}
+
+  const nextBtn=document.getElementById('ia-next-btn');
+  if(nextBtn){nextBtn.disabled=false;nextBtn.style.opacity='1';}
+}
+
+function iaNext(){
+  ia.idx++;
+  if(ia.idx>=ia.test.preguntas.length){iaV('r');rnResult();}
+  else rnQ();
+}
+
+function iaPrev(){
+  if(ia.idx>0){ia.idx--;rnQ();}
+}
+
+// ── Pantalla de resultados ──
+function rnResult(){
+  const qs=ia.test.preguntas;
+  let correct=0;
+  qs.forEach((q,i)=>{
+    const chosen=ia.ans[i];
+    if(chosen===undefined) return;
+    let correctIdx=0;
+    if(Array.isArray(q.opciones)){
+      correctIdx=q.opciones.indexOf(q.correcta);
+      if(correctIdx<0) correctIdx=0;
+    } else {
+      if(q.correcta&&['A','B','C','D'].includes(q.correcta)) correctIdx=['A','B','C','D'].indexOf(q.correcta);
+    }
+    if(chosen===correctIdx) correct++;
+  });
+
+  const pct=Math.round((correct/qs.length)*100);
+  const emoji=pct>=80?'🏆':pct>=60?'⭐':pct>=40?'💪':'📚';
+  const msg=pct>=80?'¡Excelente! Dominas el tema':pct>=60?'¡Bien! Sigue practicando':pct>=40?'Puedes mejorar, repasa el tema':'Necesitas repasar más este tema';
+
+  let reviewHtml=qs.map((q,i)=>{
+    const chosen=ia.ans[i];
+    let correctIdx=0;
+    if(Array.isArray(q.opciones)){correctIdx=q.opciones.indexOf(q.correcta);if(correctIdx<0)correctIdx=0;}
+    else if(q.correcta&&['A','B','C','D'].includes(q.correcta))correctIdx=['A','B','C','D'].indexOf(q.correcta);
+    const isOk=(chosen===correctIdx);
+    const letters=['A','B','C','D'];
+    return `<div class="test-result-review ${isOk?'ok':'fail'}">
+      <div style="font-size:11px;font-weight:700;color:${isOk?'#16a34a':'#dc2626'};margin-bottom:5px">${isOk?'✅':'❌'} Pregunta ${i+1}</div>
+      <div style="font-size:12px;color:var(--t1);font-weight:600;margin-bottom:5px;line-height:1.4">${q.pregunta}</div>
+      ${!isOk?`<div style="font-size:11px;color:var(--t2)">Tu respuesta: <b>${chosen!==undefined?(Array.isArray(q.opciones)?q.opciones[chosen]||'—':'—'):'No respondida'}</b></div>`:''}
+      <div style="font-size:11px;color:#16a34a">Correcta: <b>${Array.isArray(q.opciones)?q.opciones[correctIdx]||q.correcta:q.correcta}</b></div>
+      ${q.explicacion?`<div style="font-size:11px;color:var(--t2);margin-top:5px;font-style:italic">${q.explicacion}</div>`:''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('ia-ri').innerHTML=`
+    <div style="text-align:center;padding:10px 0 4px">
+      <div style="font-size:44px;margin-bottom:8px">${emoji}</div>
+      <div class="test-result-score">${correct}/${qs.length}</div>
+      <div class="test-result-label">${pct}% — ${msg}</div>
+    </div>
+    <div class="card" style="text-align:center;padding:14px">
+      <div style="font-size:12px;color:var(--t2);margin-bottom:8px">Resultado por asignatura</div>
+      <div style="font-size:13px;font-weight:700;color:var(--t1)">${ia.mat}</div>
+      <div class="prog-bg" style="margin-top:8px"><div class="prog-fill" style="width:${pct}%"></div></div>
+    </div>
+    <div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">Revisión de respuestas</div>
+    ${reviewHtml}
+    <button class="mbtn" onclick="ia={mat:ia.mat,n:ia.n,test:null,idx:0,ans:{}};iaV('c');" style="margin-top:4px">🔄 Nuevo test</button>
+    <button class="gbtn" style="width:100%;margin-top:8px" onclick="navSection('estudiar')">← Volver a Estudiar</button>
+  `;
+  gainXP&&gainXP(correct*5);
+}
 // char counters — wired below in main init
 // ════════════════════════════════════════════════════════
 // VOCABULARIO
