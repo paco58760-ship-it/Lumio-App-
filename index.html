@@ -44,39 +44,39 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  /* ── Light theme: suave, moderno, EstudioIA-inspired ── */
-  --bg:#f7f7f8;--bg1:#ffffff;--bg2:#f0effe;--bg3:#e9e4fd;
-  --y:#f59e0b;--yd:rgba(245,158,11,.1);--yb:rgba(245,158,11,.3);
-  --vio:#7c3aed;--vio2:#9333ea;--viod:rgba(124,58,237,.07);--viob:rgba(124,58,237,.18);
-  --viogs:linear-gradient(135deg,rgba(124,58,237,.06),rgba(147,51,234,.03));
+  /* ── Dark theme: Knowunity-inspired — negro, morado, dorado ── */
+  --bg:#000000;--bg1:#111113;--bg2:#18181b;--bg3:#222228;
+  --y:#f5c518;--yd:rgba(245,197,24,.13);--yb:rgba(245,197,24,.32);
+  --vio:#7c3aed;--vio2:#9333ea;--viod:rgba(124,58,237,.12);--viob:rgba(124,58,237,.28);
+  --viogs:linear-gradient(135deg,rgba(124,58,237,.10),rgba(147,51,234,.06));
   --vio3:#6d28d9;
-  --teal:#0d9488;--coral:#ec4899;--blue:#3b82f6;--green:#16a34a;
-  --orange:#ea580c;--purple:#9333ea;--red:#dc2626;--danger:#dc2626;
-  --t1:#1e1b4b;--t2:#6b7280;--t3:#c4b5fd;
-  --bd:rgba(124,58,237,.1);--bd2:rgba(124,58,237,.18);
-  --card-shadow:0 0 0 1px rgba(0,0,0,.07);
-  --card-shadow-y:0 0 0 1px rgba(0,0,0,.07);
-  --card-shadow-v:0 0 0 1px rgba(0,0,0,.07);
-  --glass:rgba(255,255,255,.8);
-  --glass-border:rgba(124,58,237,.12);
+  --viog:linear-gradient(135deg,#7c3aed,#9333ea);
+  --teal:#2dd4bf;--coral:#f472b6;--blue:#60a5fa;--green:#4ade80;
+  --orange:#fb923c;--purple:#c084fc;--red:#f87171;--danger:#f87171;
+  --t1:#ffffff;--t2:#9ca3af;--t3:#4b5563;
+  --bd:rgba(255,255,255,.08);--bd2:rgba(255,255,255,.14);
+  --card-shadow:0 0 0 1px rgba(255,255,255,.06);
+  --card-shadow-y:0 0 0 1px rgba(245,197,24,.18);
+  --card-shadow-v:0 0 0 1px rgba(124,58,237,.22);
+  --glass:rgba(0,0,0,.7);
+  --glass-border:rgba(255,255,255,.08);
   --radius:18px;--radius-sm:13px;--radius-xs:9px;
   --font:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
-html,body{height:100%;min-height:-webkit-fill-available;background:#f7f7f8;font-family:var(--font);-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+html,body{height:100%;min-height:-webkit-fill-available;background:var(--bg);font-family:var(--font);-webkit-font-smoothing:antialiased;overscroll-behavior:none}
 #phone{width:100%;max-width:100%;min-height:100vh;min-height:-webkit-fill-available;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;-webkit-transform:translateZ(0);transform:translateZ(0)}
 #screens{flex:1;overflow:hidden;position:relative;background:var(--bg);display:flex;flex-direction:column;min-height:0;}
 #s-home{display:none;flex:1;min-height:0;}
 #s-home.active{display:flex;background:var(--bg);flex:1;min-height:0;}
 /* NAV */
-#nav{height:68px;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(124,58,237,.1);display:flex;align-items:center;justify-content:space-around;overflow-x:hidden;flex-shrink:0;padding:0 4px;padding-bottom:env(safe-area-inset-bottom,0px);position:relative;z-index:10;}
-.nb{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 8px 4px;border:none;background:none;cursor:pointer;color:var(--t3);transition:color .2s,transform .15s,background .15s;flex-shrink:0;min-width:56px;border-radius:12px;position:relative}.nb:active{background:var(--viod);transform:scale(.94)}
+#nav{height:76px;background:var(--bg1);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--bd);display:flex;align-items:flex-end;justify-content:space-around;overflow-x:hidden;flex-shrink:0;padding:0 2px 10px;padding-bottom:max(10px,env(safe-area-inset-bottom,10px));position:relative;z-index:10;}
+.nb{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 10px 5px;border:none;background:none;cursor:pointer;color:var(--t3);transition:color .2s,transform .15s,background .2s;flex-shrink:0;min-width:60px;border-radius:14px;position:relative}.nb:active{background:var(--viod);transform:scale(.92)}
 .nb.active .ni,.nb.active svg{filter:none}
-.nb:active{transform:scale(.92)}
-.nb.active{color:var(--vio)}
-.nb.active::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:16px;height:2px;background:var(--vio);border-radius:999px}
-.ni{font-size:20px;line-height:1;transition:transform .2s}
+.nb.active{color:var(--vio);background:rgba(124,58,237,.07)}
+.nb.active::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:20px;height:3px;background:var(--vio);border-radius:999px}
+.ni{font-size:22px;line-height:1;transition:transform .2s}
 .nb.active .ni{transform:translateY(-1px)}
-.nb span{font-size:9px;font-weight:600;white-space:nowrap;letter-spacing:.01em}
+.nb span{font-size:10px;font-weight:700;white-space:nowrap;letter-spacing:.005em}
 /* SPLASH */
 
 /* Offline indicator */
@@ -425,7 +425,17 @@ button:active, [onclick]:active { transform: scale(0.97); transition: transform 
 .spell-toolbar{display:flex;gap:7px;margin-bottom:8px;flex-wrap:wrap}
 .spell-tag{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.3);color:#f87171;border-radius:6px;padding:3px 9px;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s}
 .spell-tag:hover{background:rgba(248,113,113,.25)}
-/* DARK/LIGHT MODE */
+/* DARK THEME — explícito para que el toggle funcione */
+[data-theme="dark"]{
+  --bg:#000000;--bg1:#111113;--bg2:#18181b;--bg3:#222228;
+  --y:#f5c518;--yd:rgba(245,197,24,.13);--yb:rgba(245,197,24,.32);
+  --viod:rgba(124,58,237,.12);--viob:rgba(124,58,237,.28);
+  --t1:#ffffff;--t2:#9ca3af;--t3:#4b5563;
+  --bd:rgba(255,255,255,.08);--bd2:rgba(255,255,255,.14);
+  --card-shadow:0 0 0 1px rgba(255,255,255,.06);
+  --glass:rgba(0,0,0,.7);--glass-border:rgba(255,255,255,.08);
+}
+/* LIGHT THEME */
 [data-theme="light"]{
   /* Light — warm paper white, soft borders */
   --bg:#f5f4f0;--bg1:#fffffe;--bg2:#edece8;--bg3:#e3e2dd;
@@ -435,29 +445,88 @@ button:active, [onclick]:active { transform: scale(0.97); transition: transform 
   --t1:#0f1116;--t2:#484f5e;--t3:#939aaa;
   --bd:rgba(0,0,0,.10);--bd2:rgba(0,0,0,.18);
   --card-shadow:0 1px 6px rgba(0,0,0,.10);
+  --glass:rgba(255,255,255,.85);
+  --glass-border:rgba(0,0,0,.08);
 }
 /* ONBOARDING */
-#onboarding{position:fixed;inset:0;background:var(--bg);z-index:980;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:0;gap:0;transition:opacity .4s;overflow-y:auto}
+/* ── ONBOARDING DARK REDESIGN ── */
+#onboarding{position:fixed;inset:0;background:#000;z-index:980;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:0;gap:0;transition:opacity .4s;overflow:hidden}
 #onboarding.out{opacity:0;pointer-events:none}
-.ob-step{display:none;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:520px;text-align:center;min-height:100vh;padding:48px 24px 0}
+/* Top bar: back arrow + progress */
+#ob-topbar{display:flex;align-items:center;gap:12px;padding:env(safe-area-inset-top,12px) 20px 0;height:56px;flex-shrink:0}
+#ob-back-btn{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .15s}
+#ob-back-btn:active{background:rgba(255,255,255,.2)}
+#ob-progress-track{flex:1;height:5px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden}
+#ob-progress-fill{height:100%;background:linear-gradient(90deg,#3b9eff,#5bb8ff);border-radius:999px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+/* Steps */
+.ob-step{display:none;flex-direction:column;align-items:center;flex:1;width:100%;text-align:center;padding:28px 24px 24px;overflow-y:auto;animation:obIn .3s ease}
 .ob-step.active{display:flex}
-.ob-ico{font-size:56px;animation:spul 2s ease-in-out infinite}
-.ob-title{font-size:26px;font-weight:900;color:var(--t1)}
-.ob-sub{font-size:14px;color:var(--t2);line-height:1.6}
-.ob-dots{display:flex;gap:7px;margin-top:6px}
-.ob-dot{width:8px;height:8px;border-radius:50%;background:var(--bg3);transition:background .2s}
-.ob-dot.on{background:var(--y)}
-.ob-mats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;width:100%}
-.ob-mat{background:var(--bg1);border:2px solid var(--bd);border-radius:12px;padding:12px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:all .15s;text-align:left}
-.ob-mat.sel{border-color:var(--y);background:var(--yd)}
+.ob-step.back-anim{animation:obOut .25s ease}
+@keyframes obIn{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:translateX(0)}}
+@keyframes obOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-32px)}}
+/* Typography */
+.ob-ico{font-size:72px;margin-bottom:8px;flex-shrink:0}
+.ob-title{font-size:28px;font-weight:900;color:#fff;line-height:1.2;letter-spacing:-.02em;margin-bottom:10px}
+.ob-title span{color:#3b9eff}
+.ob-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.6;max-width:320px}
+/* Primary blue button */
+.ob-btn-primary{width:100%;padding:18px;border-radius:999px;background:#3b9eff;border:none;color:#fff;font-size:17px;font-weight:800;cursor:pointer;font-family:var(--font);transition:transform .1s,background .15s;flex-shrink:0;margin-top:auto}
+.ob-btn-primary:active{transform:scale(.97);background:#2d8fe8}
+/* Course list */
+.ob-curso-list{display:flex;flex-direction:column;gap:10px;width:100%;overflow-y:auto;flex:1;padding:4px 0}
+.ob-curso-item{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;color:#fff;font-size:15px;font-weight:700;text-align:center;cursor:pointer;transition:all .15s;flex-shrink:0}
+.ob-curso-item:active,.ob-curso-item.sel{background:rgba(59,158,255,.18);border-color:#3b9eff;color:#3b9eff}
+/* Subjects list */
+.ob-mats-grid{display:flex;flex-direction:column;gap:8px;width:100%;overflow-y:auto;flex:1}
+.ob-mat{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .15s;text-align:left;flex-shrink:0}
+.ob-mat.sel{border-color:#3b9eff;background:rgba(59,158,255,.15)}
 .ob-mat-ico{font-size:22px;flex-shrink:0}
-.ob-mat-nm{font-size:12px;font-weight:700;color:var(--t1);line-height:1.3}
-.ob-time-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
-.ob-time{background:var(--bg1);border:2px solid var(--bd);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .15s}
-.ob-time.sel{border-color:var(--y);background:var(--yd)}
-.ob-time-ico{font-size:24px;margin-bottom:4px}
-.ob-time-lbl{font-size:12px;font-weight:700;color:var(--t1)}
-.ob-time-sub{font-size:10px;color:var(--t2);margin-top:2px}
+.ob-mat-nm{font-size:14px;font-weight:700;color:#fff;line-height:1.3}
+/* Time grid (2col) */
+.ob-time-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+.ob-time{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 8px;text-align:center;cursor:pointer;transition:all .15s}
+.ob-time.sel{border-color:#3b9eff;background:rgba(59,158,255,.15)}
+.ob-time-ico{font-size:28px;margin-bottom:6px}
+.ob-time-lbl{font-size:13px;font-weight:800;color:#fff}
+.ob-time-sub{font-size:11px;color:rgba(255,255,255,.45);margin-top:3px}
+/* Drum picker */
+.ob-drum-wrap{position:relative;height:220px;overflow:hidden;width:100%;max-width:280px;margin:16px auto}
+.ob-drum-wrap::before,.ob-drum-wrap::after{content:'';position:absolute;left:0;right:0;height:70px;z-index:2;pointer-events:none}
+.ob-drum-wrap::before{top:0;background:linear-gradient(to bottom,#000,transparent)}
+.ob-drum-wrap::after{bottom:0;background:linear-gradient(to top,#000,transparent)}
+.ob-drum-sel{position:absolute;top:50%;left:0;right:0;height:66px;transform:translateY(-50%);background:rgba(255,255,255,.1);border-radius:18px;z-index:1}
+.ob-drum{overflow-y:scroll;height:100%;scroll-snap-type:y mandatory;-ms-overflow-style:none;scrollbar-width:none;position:relative;z-index:3}
+.ob-drum::-webkit-scrollbar{display:none}
+.ob-drum-item{height:66px;display:flex;align-items:center;justify-content:center;scroll-snap-align:center;font-size:36px;font-weight:900;color:rgba(255,255,255,.3);transition:color .15s,font-size .15s}
+.ob-drum-item.center{color:#fff;font-size:44px}
+/* Stat screen */
+.ob-stat-big{font-size:80px;font-weight:900;color:#3b9eff;line-height:1}
+.ob-stat-label{font-size:18px;font-weight:700;color:#fff;margin-top:12px;line-height:1.4}
+.ob-stat-label span{color:#3b9eff}
+.ob-bubble{background:rgba(255,255,255,.1);border-radius:999px;padding:8px 18px;font-size:14px;color:rgba(255,255,255,.7);display:inline-block;margin-bottom:24px}
+/* Feature list */
+.ob-feat{display:flex;align-items:flex-start;gap:16px;text-align:left;width:100%;padding:0 4px}
+.ob-feat-ico{font-size:28px;flex-shrink:0;margin-top:2px}
+.ob-feat-body{}
+.ob-feat-title{font-size:16px;font-weight:800;color:#fff}
+.ob-feat-desc{font-size:13px;color:rgba(255,255,255,.5);margin-top:2px}
+/* Harvard quote card */
+.ob-harvard{background:rgba(255,255,255,.06);border-radius:20px;padding:18px;text-align:center;width:100%;margin-top:auto}
+.ob-harvard-logo{font-size:13px;font-weight:800;color:rgba(255,255,255,.4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+.ob-harvard-quote{font-size:13px;color:rgba(255,255,255,.65);line-height:1.5;font-style:italic}
+.ob-harvard-cite{font-size:11px;color:rgba(255,255,255,.35);margin-top:8px}
+/* Grade confirm animation */
+.ob-grade-badge{width:140px;height:140px;border-radius:32px;background:#16a34a;display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:900;color:#fff;gap:8px;animation:obBadgePop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes obBadgePop{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+/* Loading screen */
+.ob-loading-step{display:flex;flex-direction:column;gap:14px;width:100%;text-align:left;background:rgba(255,255,255,.05);border-radius:20px;padding:20px}
+.ob-loading-row{display:flex;align-items:flex-start;gap:14px}
+.ob-loading-num{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);color:rgba(255,255,255,.4);font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ob-loading-num.done{background:#3b9eff;color:#fff}
+.ob-loading-text{font-size:14px;font-weight:600;color:rgba(255,255,255,.4);padding-top:6px;line-height:1.4}
+.ob-loading-text.active{color:#fff}
+.ob-prog-track{height:6px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;width:100%;margin-top:8px}
+.ob-prog-fill{height:100%;background:linear-gradient(90deg,#3b9eff,#5bb8ff);border-radius:999px;transition:width .6s ease}
 /* SUB-NAV */
 #sub-nav{flex-shrink:0;background:var(--bg1);border-bottom:1px solid var(--bd);overflow-x:auto;display:none;padding:8px 12px;gap:6px;-webkit-overflow-scrolling:touch}
 #sub-nav::-webkit-scrollbar{display:none}
@@ -700,12 +769,7 @@ button:active, [onclick]:active { transform: scale(0.97); transition: transform 
 #exam-imminent-overlay{position:fixed;inset:0;background:var(--bg);z-index:988;display:none;flex-direction:column;overflow-y:auto}
 #exam-imminent-overlay.show{display:flex}
 
-/* ══ ONBOARDING TRANSITIONS ══ */
-.ob-step{display:none;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:520px;text-align:center;min-height:100vh;padding:48px 24px 0;animation:obSlide .25s ease}
-.ob-step.active{display:flex}
-@keyframes obSlide{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
-.ob-step.back-anim{animation:obSlideBack .25s ease}
-@keyframes obSlideBack{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:none}}
+/* ══ ONBOARDING TRANSITIONS — handled above ══ */
 
 /* ══ BUTTON MICRO-INTERACTIONS ══ */
 .mbtn:active{transform:scale(.96);opacity:.85}
@@ -1366,92 +1430,141 @@ body.tema-vio { --y:var(--vio);--yd:var(--viod);--yb:var(--viob); }
   </div>
   <div class="sp-name" style="color:var(--vio)">Lu<span style="color:var(--vio2)">mio</span></div>
   <div class="sp-tag" style="color:var(--t2)">Tu compañero de estudio con IA</div>
-  <div class="sp-pill">⚡ Llama · Gemini · DeepSeek R1</div>
+  <div class="sp-pill">⚡ Powered by Claude AI</div>
   <div class="sp-bar"><div class="sp-fill"></div></div>
 </div>
 
 <!-- ONBOARDING -->
 <div id="onboarding" style="display:none">
-  <!-- Step 1: Nombre -->
-  <div class="ob-step active" id="ob-1">
-    <div class="ob-ico" style="width:80px;height:80px;background:var(--y);border-radius:22px;padding:14px">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%"><circle cx="256" cy="210" r="108" fill="none" stroke="#0d0f14" stroke-width="28"/><path d="M200 328 Q256 372 312 328" fill="none" stroke="#0d0f14" stroke-width="26" stroke-linecap="round"/><rect x="216" y="364" width="80" height="22" rx="11" fill="#0d0f14"/><rect x="226" y="400" width="60" height="20" rx="10" fill="#0d0f14"/><rect x="236" y="432" width="40" height="18" rx="9" fill="#0d0f14"/><line x1="256" y1="82" x2="256" y2="52" stroke="#0d0f14" stroke-width="22" stroke-linecap="round"/><line x1="366" y1="118" x2="388" y2="96" stroke="#0d0f14" stroke-width="22" stroke-linecap="round"/><line x1="146" y1="118" x2="124" y2="96" stroke="#0d0f14" stroke-width="22" stroke-linecap="round"/><line x1="406" y1="210" x2="436" y2="210" stroke="#0d0f14" stroke-width="22" stroke-linecap="round"/><line x1="76" y1="210" x2="106" y2="210" stroke="#0d0f14" stroke-width="22" stroke-linecap="round"/></svg>
+  <!-- TOP BAR (shared, always visible) -->
+  <div id="ob-topbar">
+    <button id="ob-back-btn" onclick="obBackBtn()" style="display:none">←</button>
+    <div id="ob-progress-track"><div id="ob-progress-fill" style="width:14%"></div></div>
+  </div>
+
+  <!-- Step 1: Bienvenida + Nombre -->
+  <div class="ob-step active" id="ob-1" style="justify-content:center;gap:20px">
+    <div class="ob-ico">👋</div>
+    <div class="ob-title" style="font-size:32px">¡Vamos a<br>conocernos, <span id="ob-name-preview">amigo</span>!</div>
+    <div class="ob-sub">Tu app de estudio inteligente. En 30 segundos lista para ti.</div>
+    <div style="width:100%;margin-top:16px">
+      <input id="ob-name" placeholder="Escribe tu nombre..." maxlength="20"
+        style="width:100%;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:16px;padding:18px 20px;font-size:17px;font-weight:700;color:#fff;text-align:center;outline:none;font-family:var(--font)"
+        oninput="const v=this.value.trim();document.getElementById('ob-name-preview').textContent=v||'amigo'">
     </div>
-    <div class="ob-title">¡Bienvenido a Lumio!</div>
-    <div class="ob-sub">Tu app de estudio inteligente. En 30 segundos la dejamos lista para ti.</div>
-    <div style="width:100%">
-      <div class="sl">¿Cómo te llamas?</div>
-      <input class="inp" id="ob-name" placeholder="Escribe tu nombre..." maxlength="20" style="font-size:16px;text-align:center">
-    </div>
-    <div class="ob-dots"><div class="ob-dot on"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
-    <button class="mbtn" onclick="obNext(1)" style="max-width:280px">Continuar →</button>
+    <button class="ob-btn-primary" onclick="obNext(1)">Continuar</button>
   </div>
 
   <!-- Step 2: Curso -->
-  <div class="ob-step" id="ob-2">
-    <div class="ob-ico">🎓</div>
-    <div class="ob-title">¿En qué curso estás?</div>
-    <div class="ob-sub">Lumio cargará automáticamente las asignaturas de tu curso. Podrás añadir o quitar las que no tengas.</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%" id="ob-curso-grid"></div>
-    <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot on"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
-    <div style="display:flex;gap:8px;width:100%">
-      <button class="gbtn" onclick="obBack(2)" style="flex:1">← Atrás</button>
-      <button class="mbtn" onclick="obNext(2)" style="flex:2">Continuar →</button>
-    </div>
+  <div class="ob-step" id="ob-2" style="gap:20px">
+    <div class="ob-title" style="margin-bottom:4px">¿En qué curso<br>estás?</div>
+    <div class="ob-curso-list" id="ob-curso-grid"></div>
+    <button class="ob-btn-primary" onclick="obNext(2)" style="margin-top:8px">Continuar</button>
   </div>
 
   <!-- Step 3: Materias -->
-  <div class="ob-step" id="ob-3">
-    <div class="ob-ico">📚</div>
-    <div class="ob-title">Tus materias</div>
-    <div class="ob-sub">Elige las que estudias. Lumio organizará tus apuntes, flashcards y exámenes <b>por materia</b> — así nunca mezclas Mates con Historia.</div>
+  <div class="ob-step" id="ob-3" style="gap:16px">
+    <div class="ob-title" style="margin-bottom:0">Elige un tema<br>actual de clase</div>
+    <div class="ob-sub" style="margin-bottom:4px">Selecciona tus asignaturas</div>
     <div class="ob-mats-grid" id="ob-mats-grid"></div>
-    <div class="ob-dots" style="margin-top:8px"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot on"></div><div class="ob-dot"></div><div class="ob-dot"></div></div>
-    <!-- Sticky button bar — always visible regardless of scroll -->
-    <div style="position:sticky;bottom:0;left:0;right:0;background:var(--bg);padding:16px 0 max(24px,env(safe-area-inset-bottom));display:flex;gap:8px;width:100%;margin-top:auto">
-      <button class="gbtn" onclick="obBack(3)" style="flex:1">← Atrás</button>
-      <button class="mbtn" onclick="obNext(3)" style="flex:2;font-size:16px;padding:14px">Continuar →</button>
+    <div style="position:sticky;bottom:0;background:#000;padding:12px 0 max(16px,env(safe-area-inset-bottom));width:100%;margin-top:auto">
+      <button class="ob-btn-primary" onclick="obNext(3)">Continuar</button>
     </div>
   </div>
 
-  <!-- Step 4: Horario -->
-  <div class="ob-step" id="ob-4">
-    <div class="ob-ico">⏰</div>
-    <div class="ob-title">¿Cuándo sueles estudiar?</div>
-    <div class="ob-sub">Te enviaremos un recordatorio diario a esa hora para que no te olvides. Puedes cambiarlo después en Ajustes.</div>
-    <div class="ob-time-grid">
-      <div class="ob-time sel" data-t="manana" onclick="selTime(this)"><div class="ob-time-ico">🌅</div><div class="ob-time-lbl">Mañana</div><div class="ob-time-sub">7:00 – 12:00</div></div>
-      <div class="ob-time" data-t="tarde" onclick="selTime(this)"><div class="ob-time-ico">☀️</div><div class="ob-time-lbl">Tarde</div><div class="ob-time-sub">15:00 – 19:00</div></div>
-      <div class="ob-time" data-t="noche" onclick="selTime(this)"><div class="ob-time-ico">🌙</div><div class="ob-time-lbl">Noche</div><div class="ob-time-sub">19:00 – 22:00</div></div>
-      <div class="ob-time" data-t="variable" onclick="selTime(this)"><div class="ob-time-ico">🔀</div><div class="ob-time-lbl">Variable</div><div class="ob-time-sub">Cuando puedo</div></div>
+  <!-- Step 4: Por qué Lumio (estilo Knowunity) -->
+  <div class="ob-step" id="ob-4" style="gap:28px;justify-content:center">
+    <div class="ob-ico">💪</div>
+    <div class="ob-title">Estamos aquí para<br>ayudarte a sacar<br>mejores notas</div>
+    <div style="display:flex;flex-direction:column;gap:20px;width:100%;text-align:left">
+      <div class="ob-feat"><div class="ob-feat-ico">✦</div><div class="ob-feat-body"><div class="ob-feat-title">Tutor IA</div><div class="ob-feat-desc">Te explica las cosas hasta que las entiendas de verdad</div></div></div>
+      <div class="ob-feat"><div class="ob-feat-ico">📝</div><div class="ob-feat-body"><div class="ob-feat-title">Aprendizaje en pequeñas dosis</div><div class="ob-feat-desc">Lecciones cortas que encajan en tu día</div></div></div>
     </div>
-    <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot on"></div><div class="ob-dot"></div></div>
-    <div style="display:flex;gap:8px;width:100%">
-      <button class="gbtn" onclick="obBack(4)" style="flex:1">← Atrás</button>
-      <button class="mbtn" onclick="obNext(4)" style="flex:2">Continuar →</button>
+    <div class="ob-harvard">
+      <div class="ob-harvard-logo">✦ LUMIO STUDY</div>
+      <div class="ob-harvard-quote">La práctica activa y constante mejora significativamente la retención y el rendimiento académico.</div>
+      <div class="ob-harvard-cite">Método de estudio activo — Lumio</div>
+    </div>
+    <button class="ob-btn-primary" onclick="obGoTo(6)">Siguiente</button>
+  </div>
+
+  <!-- Step 6: ¿Qué nota tienes ahora? — Drum -->
+  <div class="ob-step" id="ob-6" style="gap:20px">
+    <div class="ob-title">¿Qué nota quieres<br>sacar?</div>
+    <div class="ob-drum-wrap">
+      <div class="ob-drum-sel"></div>
+      <div class="ob-drum" id="ob-drum-current" onscroll="obDrumScroll('current')">
+        <div style="height:77px"></div>
+        <div class="ob-drum-item" data-v="4">4</div>
+        <div class="ob-drum-item" data-v="5">5</div>
+        <div class="ob-drum-item center" data-v="6">6</div>
+        <div class="ob-drum-item" data-v="7">7</div>
+        <div class="ob-drum-item" data-v="8">8</div>
+        <div class="ob-drum-item" data-v="9">9</div>
+        <div class="ob-drum-item" data-v="10">10</div>
+        <div style="height:77px"></div>
+      </div>
+    </div>
+    <button class="ob-btn-primary" onclick="obNext(6)">Continuar</button>
+  </div>
+
+  <!-- Step 7: nota objetivo — Drum -->
+  <div class="ob-step" id="ob-7" style="gap:20px">
+    <div class="ob-title">¿Cuál es tu nota<br>objetivo?</div>
+    <div class="ob-drum-wrap">
+      <div class="ob-drum-sel"></div>
+      <div class="ob-drum" id="ob-drum-target" onscroll="obDrumScroll('target')">
+        <div style="height:77px"></div>
+        <div class="ob-drum-item" data-v="5">5</div>
+        <div class="ob-drum-item" data-v="6">6</div>
+        <div class="ob-drum-item" data-v="7">7</div>
+        <div class="ob-drum-item" data-v="8">8</div>
+        <div class="ob-drum-item center" data-v="9">9</div>
+        <div class="ob-drum-item" data-v="10">10</div>
+        <div style="height:77px"></div>
+      </div>
+    </div>
+    <div id="ob-nota-feedback" style="background:rgba(255,255,255,.07);border-radius:18px;padding:16px 20px;width:100%;text-align:left">
+      <span style="font-size:15px;font-weight:800;color:#fff">Mejora de notas: </span>
+      <span id="ob-nota-delta" style="color:#4ade80;font-weight:800">+3</span>
+      <span id="ob-nota-dif" style="background:#16a34a;color:#fff;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:800;margin-left:8px">Desafío</span>
+      <div id="ob-nota-hint" style="font-size:12px;color:rgba(255,255,255,.45);margin-top:6px">¡Con Lumio lo conseguirás!</div>
+    </div>
+    <button class="ob-btn-primary" onclick="obNext(7)">Continuar</button>
+  </div>
+
+  <!-- Step 8: Badge animado de nota -->
+  <div class="ob-step" id="ob-8" style="justify-content:center;gap:28px">
+    <div style="display:flex;justify-content:center">
+      <div class="ob-grade-badge" id="ob-badge-grade">9 💪</div>
+    </div>
+    <div class="ob-title" id="ob-badge-title">¡Eso está totalmente<br>al alcance!</div>
+  </div>
+
+  <!-- Step 9: Loading personalización -->
+  <div class="ob-step" id="ob-9" style="justify-content:center;gap:24px">
+    <div class="ob-ico">🎓</div>
+    <div class="ob-title" style="font-size:24px">Personalizando<br>Lumio</div>
+    <div id="ob-load-pct" style="font-size:18px;font-weight:700;color:rgba(255,255,255,.6)">0%</div>
+    <div class="ob-prog-track"><div class="ob-prog-fill" id="ob-load-bar" style="width:0%"></div></div>
+    <div class="ob-loading-step">
+      <div class="ob-loading-row"><div class="ob-loading-num done" id="ob-ls-1">✓</div><div class="ob-loading-text active" id="ob-lt-1">Obteniendo tu plan de estudios</div></div>
+      <div class="ob-loading-row"><div class="ob-loading-num" id="ob-ls-2">2</div><div class="ob-loading-text" id="ob-lt-2">Adaptando explicaciones para tu curso</div></div>
+      <div class="ob-loading-row"><div class="ob-loading-num" id="ob-ls-3">3</div><div class="ob-loading-text" id="ob-lt-3">Personalizando tu compañero IA</div></div>
+      <div class="ob-loading-row"><div class="ob-loading-num" id="ob-ls-4">4</div><div class="ob-loading-text" id="ob-lt-4">Configurando las herramientas</div></div>
+      <div class="ob-loading-row"><div class="ob-loading-num" id="ob-ls-5">5</div><div class="ob-loading-text" id="ob-lt-5">¡Listo para empezar!</div></div>
     </div>
   </div>
 
-  <!-- Step 5: Objetivo -->
-  <div class="ob-step" id="ob-5">
-    <div class="ob-ico">🎯</div>
-    <div class="ob-title">Tu primer objetivo</div>
-    <div class="ob-sub">¿Cuántos minutos al día quieres estudiar? Puedes cambiarlo cuando quieras.</div>
-    <div class="ob-time-grid">
-      <div class="ob-time" data-m="30" onclick="selObGoal(this)"><div class="ob-time-ico">⚡</div><div class="ob-time-lbl">30 min</div><div class="ob-time-sub">Ritmo ligero</div></div>
-      <div class="ob-time sel" data-m="60" onclick="selObGoal(this)"><div class="ob-time-ico">📚</div><div class="ob-time-lbl">1 hora</div><div class="ob-time-sub">Recomendado</div></div>
-      <div class="ob-time" data-m="90" onclick="selObGoal(this)"><div class="ob-time-ico">💪</div><div class="ob-time-lbl">1h 30m</div><div class="ob-time-sub">Dedicado</div></div>
-      <div class="ob-time" data-m="120" onclick="selObGoal(this)"><div class="ob-time-ico">🏆</div><div class="ob-time-lbl">2 horas</div><div class="ob-time-sub">Intensivo</div></div>
+  <!-- Step 10: ¿Qué quieres hacer primero? -->
+  <div class="ob-step" id="ob-10" style="justify-content:center;gap:24px">
+    <div class="ob-ico">✅</div>
+    <div class="ob-title">¿Qué quieres hacer<br>primero?</div>
+    <div style="display:flex;flex-direction:column;gap:12px;width:100%">
+      <div class="ob-curso-item" onclick="obFinish('examen')">📚  Preparar un examen</div>
+      <div class="ob-curso-item" onclick="obFinish('deberes')">📝  Ayuda con deberes</div>
     </div>
-    <div id="ob-summary" style="background:var(--bg1);border:1px solid var(--yb);border-radius:13px;padding:14px;width:100%;display:none">
-      <div style="font-size:11px;font-weight:700;color:var(--y);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Tu configuración</div>
-      <div id="ob-summary-content" style="font-size:12px;color:var(--t2);line-height:1.8"></div>
-    </div>
-    <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot on"></div></div>
-    <div style="display:flex;gap:8px;width:100%">
-      <button class="gbtn" onclick="obBack(5)" style="flex:1">← Atrás</button>
-      <button class="mbtn" onclick="obFinish()" style="flex:2">¡Empezar! 🚀</button>
-    </div>
+    <button style="background:none;border:none;color:#3b9eff;font-size:15px;font-weight:700;cursor:pointer;padding:8px;font-family:var(--font)" onclick="obFinish()">Saltar</button>
   </div>
 </div>
 
@@ -1554,9 +1667,9 @@ body.tema-vio { --y:var(--vio);--yd:var(--viod);--yb:var(--viob); }
   <div class="home-hero" style="margin-bottom:12px">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
       <div style="font-size:20px;font-weight:600;color:var(--t1);letter-spacing:-.02em" id="h-nm">Buenas tardes</div>
-      <button onclick="showAIModelSheet()" class="ai-model-badge">
+      <button onclick="showAIModelSheet()" class="ai-model-badge" style="display:none">
         <span class="ai-dot"></span>
-        <span id="home-model-label">Llama 3.3 70B</span>
+        <span id="home-model-label">Claude</span>
       </button>
     </div>
     <div style="font-size:12px;color:var(--t2);margin-bottom:4px" id="h-date">Cargando...</div>
@@ -2875,8 +2988,8 @@ Escribe / para comandos rápidos"></textarea>
     </div>
     <!-- Action buttons compact group -->
     <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
-      <button onclick="showAIModelSheet()" class="ai-model-badge" id="chat-model-badge" title="Modelo IA">
-        <span class="ai-dot"></span><span id="chat-model-label">GPT-4o</span>
+      <button onclick="showAIModelSheet()" class="ai-model-badge" id="chat-model-badge" title="Modelo IA" style="display:none">
+        <span class="ai-dot"></span><span id="chat-model-label">Claude</span>
       </button>
       <button onclick="toggleWebSearch()" id="web-search-btn" title="Búsqueda web" style="background:var(--viod);border:1.5px solid var(--viob);color:var(--vio);border-radius:8px;padding:5px 8px;font-size:12px;cursor:pointer;font-family:var(--font);flex-shrink:0;font-weight:700;transition:all .15s">🌐</button>
       <button onclick="chatNuevo()" title="Nuevo chat" style="background:var(--bg2);border:none;color:var(--vio);border-radius:8px;padding:6px 9px;font-size:13px;cursor:pointer;font-family:var(--font);flex-shrink:0">✏️</button>
@@ -3193,7 +3306,7 @@ Escribe / para comandos rápidos"></textarea>
     <div style="background:linear-gradient(135deg,var(--viod),rgba(147,51,234,.04));border:1.5px solid var(--viob);border-radius:16px;padding:18px;margin-bottom:16px">
       <div style="font-size:16px;font-weight:900;color:var(--t1);margin-bottom:6px">🚀 Desbloquea todo Lumio</div>
       <ul class="prem-feature-list">
-        <li>IA con OpenRouter — respuestas más inteligentes y rápidas</li>
+        <li>IA con Claude (Anthropic) — respuestas más inteligentes y rápidas</li>
         <li>Generación ilimitada de flashcards y tests</li>
         <li>Extractor de puntos clave de cualquier texto</li>
         <li>Modo examen con corrección avanzada</li>
@@ -4616,38 +4729,35 @@ Escribe / para comandos rápidos"></textarea>
 <nav id="nav">
   <!-- 🏠 Inicio -->
   <button class="nb active" data-section="home" onclick="navSection('home')">
-    <svg class="ni" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+    <svg class="ni" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
     <span>Inicio</span>
   </button>
-  <!-- 📚 Estudiar (solo herramientas UI) -->
+  <!-- 📚 Estudiar -->
   <button class="nb" data-section="estudiar" onclick="navSection('estudiar')">
-    <svg class="ni" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+    <svg class="ni" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
     <span>Estudiar</span>
   </button>
-  <!-- 🤖 IA — Hub central, botón especial -->
-  <button class="nb nb-ia" data-section="ia" onclick="navSection('ia')">
-    <div style="width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#7c3aed,#9333ea);display:flex;align-items:center;justify-content:center;margin-bottom:1px;box-shadow:0 4px 14px rgba(124,58,237,.45);transition:all .2s;position:relative">
-      <!-- Libro + chispa en miniatura -->
-      <svg viewBox="0 0 28 28" width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+  <!-- ✦ Chat IA — botón central elevado estilo Knowunity -->
+  <button class="nb nb-ia" data-section="ia" onclick="navSection('ia')" style="margin-top:18px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px">
+    <div style="width:50px;height:50px;border-radius:17px;background:linear-gradient(135deg,#7c3aed,#9333ea);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(124,58,237,.50),0 2px 6px rgba(0,0,0,.25);transition:all .2s;position:relative;flex-shrink:0;margin-top:14px">
+      <svg viewBox="0 0 28 28" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
         <path d="M3 5C3 5 9 4 14 7L14 23C9 20 3 21 3 21Z" fill="rgba(255,255,255,.9)"/>
         <path d="M25 5C25 5 19 4 14 7L14 23C19 20 25 21 25 21Z" fill="rgba(255,255,255,.7)"/>
         <rect x="13.2" y="6.5" width="1.6" height="17" rx=".8" fill="rgba(255,255,255,.5)"/>
-        <g transform="translate(20,5)">
-          <path d="M0,-3 .8,-.8 3,0 .8,.8 0,3 -.8,.8 -3,0 -.8,-.8Z" fill="#f0abfc"/>
-        </g>
+        <g transform="translate(20,5)"><path d="M0,-3 .8,-.8 3,0 .8,.8 0,3 -.8,.8 -3,0 -.8,-.8Z" fill="#f5c518"/></g>
       </svg>
     </div>
-    <span style="color:var(--vio);font-weight:800;font-size:8.5px;letter-spacing:.02em">Chat IA</span>
+    <span style="color:var(--vio);font-weight:800;font-size:10px;letter-spacing:.01em">Chat IA</span>
   </button>
-  <!-- 📅 Plan IA -->
+  <!-- 🏆 Plan IA -->
   <button class="nb" data-section="plan-ia" onclick="navSection('plan-ia')" style="position:relative">
-    <svg class="ni" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+    <svg class="ni" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
     <span>Plan IA</span>
-    <span style="position:absolute;top:5px;right:6px;background:var(--vio);color:#fff;font-size:5.5px;font-weight:900;padding:1px 3px;border-radius:3px;line-height:1.5">IA</span>
+    <span style="position:absolute;top:4px;right:6px;background:var(--vio);color:#fff;font-size:5px;font-weight:900;padding:1px 3px;border-radius:3px;line-height:1.5">IA</span>
   </button>
   <!-- 👤 Perfil -->
   <button class="nb" data-section="perfil" onclick="navSection('perfil')">
-    <svg class="ni" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <svg class="ni" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     <span>Perfil</span>
   </button>
 </nav>
@@ -5109,9 +5219,9 @@ Escribe / para comandos rápidos"></textarea>
 function haptic(t){
   try{if(!navigator.vibrate)return;navigator.vibrate({light:[20],medium:[40],heavy:[70],success:[20,40,20],error:[70,30,70]}[t]||[20]);}catch(e){}
 }
-const APP_VERSION='3.5.0';
+const APP_VERSION='3.6.0';
 // Cambia esta URL por la raw de tu archivo en GitHub:
-const GITHUB_RAW_URL='';
+const GITHUB_RAW_URL='https://raw.githubusercontent.com/paco58760-ship-it/Lumio-App-/main/index_v6.html';
 
 // ── Google Apps Script — pega aquí la URL de tu web app desplegada ──
 // Instrucciones más abajo en la pantalla de Ajustes → Feedback
@@ -8184,15 +8294,22 @@ REGLAS:
 
   try {
     const messages = [
-      { role: 'system', content: 'Eres un tutor educativo español. Responde ÚNICAMENTE con el JSON solicitado, sin texto adicional, sin backticks, sin markdown. Solo el objeto JSON válido.' },
+      { role: 'system', content: 'Eres un tutor educativo español. Responde ÚNICAMENTE con el JSON solicitado, sin texto adicional, sin backticks, sin markdown. Solo el objeto JSON válido y completo.' },
       { role: 'user', content: prompt }
     ];
 
-    // Timeout global de 18s para todo el plan
-    let raw = await Promise.race([
-      LumioAICore.call(messages, 1100, { temperature: 0.7 }),
-      new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 18000))
-    ]);
+    // Usar Anthropic API directamente (principal) con fallback a LumioAICore
+    // 2000 tokens — suficiente para 7 días × 4 tareas sin truncar
+    let raw;
+    try {
+      raw = await _callAnthropicAPI(messages, 2000, 0.7);
+    } catch(e) {
+      console.warn('[PlanIA] Anthropic falló, usando LumioAICore...', e.message);
+      raw = await Promise.race([
+        LumioAICore.call(messages, 1500, { temperature: 0.7 }),
+        new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 30000))
+      ]);
+    }
 
     // Limpiar posible markdown o texto extra
     if (raw) {
@@ -8208,12 +8325,19 @@ REGLAS:
     try {
       plan = JSON.parse(raw);
     } catch(e) {
-      // Intentar reparar JSON truncado añadiendo cierre
+      // Intentar reparar JSON truncado de varias formas
+      let repaired = raw;
       try {
-        const repaired = raw.endsWith('}') ? raw : raw + ']}';
+        // Cerrar arrays y objetos abiertos
+        const opens = (repaired.match(/\[/g)||[]).length - (repaired.match(/\]/g)||[]).length;
+        const openBraces = (repaired.match(/\{/g)||[]).length - (repaired.match(/\}/g)||[]).length;
+        for(let i=0;i<opens;i++) repaired += ']';
+        for(let i=0;i<openBraces;i++) repaired += '}';
+        // Quitar coma trailing antes del cierre
+        repaired = repaired.replace(/,\s*([\]}])/g,'$1');
         plan = JSON.parse(repaired);
       } catch(e2) {
-        console.error('[PlanIA] JSON inválido:', raw.slice(0,200));
+        console.error('[PlanIA] JSON inválido:', raw.slice(0,300));
         throw new Error('El plan generado tiene formato incorrecto. Inténtalo de nuevo.');
       }
     }
@@ -8893,12 +9017,12 @@ const LumioAgent = {
 // Modelos disponibles vía Pollinations.ai (gratis, sin API key)
 // ── Modelos IA vía Pollinations.ai (gratis, sin API key) ──
 const LUMIO_AI_MODELS = [
-  { id: 'groq-llama33-70b',  name: 'Llama 3.3 70B',      icon: '🦙', desc: '⭐ Mejor gratis · Ultra rápido · Groq' },
+  { id: 'claude-sonnet', name: 'Claude Sonnet',     icon: '✦', desc: '⭐ Principal · Rápido · Anthropic' },
+  { id: 'groq-llama33-70b',  name: 'Llama 3.3 70B',      icon: '🦙', desc: 'Ultra rápido · Groq' },
   { id: 'groq-deepseek-r1',  name: 'DeepSeek R1 70B',     icon: '🧠', desc: 'Razonamiento avanzado · Groq' },
   { id: 'groq-mixtral',      name: 'Mixtral 8x7B',        icon: '⚡', desc: 'Contexto largo · Groq' },
   { id: 'groq-llama31-8b',   name: 'Llama 3.1 8B Instant',icon: '🚀', desc: 'Ultra rápido · Groq' },
   { id: 'gemini',            name: 'Gemini 2.0 Flash',    icon: '✨', desc: 'Google · Búsqueda web' },
-  { id: 'groq-gemma2',       name: 'Gemma 2 9B',          icon: '💎', desc: 'Google Gemma · Groq' },
 ];
 const WEB_SEARCH_MODELS = ['gemini'];
 
@@ -8947,14 +9071,19 @@ const GROQ_DEFAULT_MODEL = 'llama-3.3-70b-versatile';
  */
 async function _callGroq(messages, maxTokens = 900, temperature = 0.75) {
   if (!navigator.onLine) throw new Error('offline');
+  const selectedId = getLumioModel();
+  // Si el usuario tiene seleccionado Claude, usar Anthropic directamente
+  if (selectedId === 'claude-sonnet') {
+    return _callAnthropicAPI(messages, maxTokens, temperature);
+  }
   const key = _dk(_GROQ_E);
   if (!key) throw new Error('Clave no disponible');
-  const selectedId = getLumioModel();
   const groqModel  = GROQ_MODEL_MAP[selectedId] || GROQ_DEFAULT_MODEL;
   const safeTokens = Math.min(maxTokens, 8000);
 
   const res = await _fetchWithTimeout(GROQ_ENDPOINT, {
     method: 'POST',
+    mode: 'cors',
     headers: {
       'Content-Type':  'application/json',
       'Authorization': 'Bearer ' + key,
@@ -8975,7 +9104,7 @@ async function _callGroq(messages, maxTokens = 900, temperature = 0.75) {
   const data = await res.json();
   const text = data?.choices?.[0]?.message?.content || '';
   if (!text || text.trim().length < 3) throw new Error('Groq: respuesta vacía');
-  console.info('LumioAI: Groq ✓ (' + groqModel + ')');
+  console.log('LumioAI: Groq ✓ (' + groqModel + ')');
   return text.trim();
 }
 
@@ -8994,10 +9123,11 @@ async function _callOpenRouter(messages, maxTokens=900, temperature=0.75) {
       // FIX: _fetchWithTimeout para evitar AbortSignal cloning error con SW
       const res  = await _fetchWithTimeout(OPENROUTER_ENDPOINT, {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + OPENROUTER_API_KEY,
-          'HTTP-Referer': location.origin,
+          'HTTP-Referer': location.href,
           'X-Title': 'Lumio Study App',
         },
         body: JSON.stringify({ model, messages, max_tokens: safeTokens, temperature }),
@@ -9006,7 +9136,7 @@ async function _callOpenRouter(messages, maxTokens=900, temperature=0.75) {
       const data = await res.json();
       const text = data?.choices?.[0]?.message?.content || '';
       if (text && text.trim().length > 3) {
-        console.info('LumioAI: OpenRouter ✓ (' + model + ')');
+        console.log('LumioAI: OpenRouter ✓ (' + model + ')');
         resolve(text.trim());
       } else { reject(new Error('empty')); }
     } catch(e) { reject(e); }
@@ -9046,7 +9176,7 @@ async function _callGeminiDirect(messages, maxTokens = 700, temperature = 0.75) 
 
   const res = await _fetchWithTimeout(
     GEMINI_API_URL + '?key=' + GEMINI_API_KEY,
-    { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) },
+    { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) },
     20000
   );
 
@@ -9057,7 +9187,7 @@ async function _callGeminiDirect(messages, maxTokens = 700, temperature = 0.75) 
   const data = await res.json();
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
   if (!text || text.trim().length < 3) throw new Error('Gemini: respuesta vacía');
-  console.info('LumioAI: Gemini API oficial ✓');
+  console.log('LumioAI: Gemini API oficial ✓');
   return text.trim();
 }
 
@@ -9109,7 +9239,7 @@ async function _callHuggingFaceFallback(messages, maxTokens = 600) {
     // HF returns [{generated_text: "..."}]
     const text = Array.isArray(data) ? data[0]?.generated_text : data?.generated_text;
     if (text && text.trim().length > 3) {
-      console.info('LumioAI: HuggingFace fallback used successfully.');
+      console.log('LumioAI: HuggingFace fallback used successfully.');
       return text.trim();
     }
     return null;
@@ -9120,7 +9250,7 @@ async function _callHuggingFaceFallback(messages, maxTokens = 600) {
 }
 
 function getLumioModel() {
-  try { return localStorage.getItem('lumio_ai_model') || 'groq-llama33-70b'; } catch { return 'groq-llama33-70b'; }
+  try { return localStorage.getItem('lumio_ai_model') || 'claude-sonnet'; } catch { return 'claude-sonnet'; }
 }
 function setLumioModel(id) {
   try { localStorage.setItem('lumio_ai_model', id); } catch {}
@@ -9291,99 +9421,99 @@ function needsWebSearch(msg) {
   return false;
 }
 
-const LumioAICore = {
+// ── Helper: Pollinations GET — único proveedor que funciona desde file:// ──
+// GET simple no dispara preflight CORS → funciona con origen null (file://)
+async function _callPollinationsGET(messages, maxTokens, temperature) {
+  const lastMsg = messages.filter(m => m.role === 'user').pop()?.content || '';
+  const sys = messages.find(m => m.role === 'system')?.content || '';
+  // Construir prompt compacto: system (200 chars) + user (800 chars)
+  const prompt = (sys ? sys.slice(0, 200) + '\n\n' : '') + lastMsg.slice(0, 800);
+  const seed = Math.floor(Math.random() * 99999);
+  const getUrl = 'https://text.pollinations.ai/' + encodeURIComponent(prompt) +
+    '?model=openai-large&seed=' + seed + '&referrer=lumio&json=false';
+  const r = await _fetchWithTimeout(getUrl, {}, 25000);
+  if (!r.ok) throw new Error('Pollinations GET HTTP ' + r.status);
+  const txt = await r.text();
+  if (!txt || txt.trim().length < 3) throw new Error('Pollinations GET empty');
+  return txt.trim();
+}
 
-  _endpoint: 'https://text.pollinations.ai/openai',
-  _fallbackModels: ['groq-llama33-70b', 'groq-deepseek-r1', 'groq-mixtral', 'gemini', 'groq-llama31-8b', 'openai', 'openai-large'],
+// ══════════════════════════════════════════════════════════════
+// _callAnthropicAPI — Proveedor PRINCIPAL: Claude via Anthropic API
+// No requiere API key en entorno claude.ai — funciona directamente
+// ══════════════════════════════════════════════════════════════
+async function _callAnthropicAPI(messages, maxTokens = 1000, temperature = 0.75) {
+  const systemMsg = messages.find(m => m.role === 'system');
+  const userMessages = messages.filter(m => m.role !== 'system');
+  if (!userMessages.length) throw new Error('No hay mensajes de usuario');
+
+  const body = {
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: maxTokens,   // sin cap — el llamante decide el límite
+    messages: userMessages.map(m => ({ role: m.role, content: String(m.content || '') })),
+  };
+  if (systemMsg) body.system = systemMsg.content;
+
+  const res = await _fetchWithTimeout('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  }, 30000);
+
+  if (!res.ok) {
+    const err = await res.text().catch(() => '');
+    throw new Error('Anthropic HTTP ' + res.status + ': ' + err.slice(0, 120));
+  }
+  const data = await res.json();
+  const text = data?.content?.find(b => b.type === 'text')?.text || '';
+  if (!text || text.trim().length < 2) throw new Error('Anthropic: respuesta vacía');
+  console.log('LumioAI: Anthropic Claude ✓');
+  return text.trim();
+}
+
+const LumioAICore = {
 
   async call(messages, maxTokens = 700, opts = {}) {
     if (!navigator.onLine) return opts.fallback || null;
-
     const retryBar = document.getElementById('ai-retry-bar');
 
-    // ── PROVEEDOR 1: Groq (principal — gratis, ultra-rápido) ──
-    const primaryModel = getLumioModel();
-    if (primaryModel !== 'gemini') {
-      try {
-        const groqText = await _callGroq(messages, maxTokens, opts.temperature ?? 0.75);
-        if (retryBar) retryBar.classList.remove('show');
-        return groqText;
-      } catch(e) {
-        console.warn('LumioAI: Groq falló, probando Gemini...', e.message);
-      }
-    }
-
-    // ── PROVEEDOR 2: Gemini oficial ──
-    if (primaryModel === 'gemini') {
-      try {
-        const geminiText = await _callGeminiDirect(messages, maxTokens, opts.temperature ?? 0.75);
-        if (retryBar) retryBar.classList.remove('show');
-        return geminiText;
-      } catch(e) {
-        console.warn('LumioAI: Gemini falló, probando OpenRouter...', e.message);
-      }
-    }
-
-    // ── PROVEEDOR 3: OpenRouter (fallback) ──
+    // ══ PROVEEDOR 1: Anthropic Claude (principal — funciona en claude.ai) ══
     try {
-      const orText = await _callOpenRouter(messages, maxTokens, opts.temperature ?? 0.75);
+      const txt = await _callAnthropicAPI(messages, maxTokens, opts.temperature ?? 0.75);
       if (retryBar) retryBar.classList.remove('show');
-      return orText;
+      return txt;
     } catch(e) {
-      console.warn('LumioAI: OpenRouter falló, probando Pollinations...', e.message);
+      console.warn('LumioAI: Anthropic falló, probando Groq...', e.message);
     }
 
-    // ── PROVEEDOR 3: Pollinations (gratis, sin API key) ──
-    const tryModels = [primaryModel, ...this._fallbackModels.filter(m => m !== primaryModel)];
-    for (let attempt = 0; attempt < 4; attempt++) {
-      const modelId = tryModels[Math.min(attempt, tryModels.length - 1)];
-      if (attempt >= 1 && retryBar) {
-        retryBar.textContent = '⏳ Reintentando (' + attempt + '/3)…';
-        retryBar.classList.add('show');
-      }
-      try {
-        if (attempt === 3) {
-          const lastMsg = messages.filter(m=>m.role==='user').pop()?.content || '';
-          const sys = messages.find(m=>m.role==='system')?.content || '';
-          const prompt = sys ? (sys.slice(0,200) + ' ' + lastMsg.slice(0,400)) : lastMsg.slice(0,600);
-          const getUrl = 'https://text.pollinations.ai/' + encodeURIComponent(prompt.slice(0,500)) + '?model=openai&seed=' + Math.floor(Math.random()*99999) + '&referrer=lumio';
-          const r = await _fetchWithTimeout(getUrl, {}, 15000);
-          if (!r.ok) throw new Error('GET HTTP ' + r.status);
-          const txt = await r.text();
-          if (txt && txt.trim().length > 3) {
-            if (retryBar) retryBar.classList.remove('show');
-            return txt;
-          }
-          throw new Error('GET empty');
-        }
-        if (modelId === 'gemini') {
-          const geminiText = await _callGeminiDirect(messages, maxTokens, opts.temperature ?? 0.75);
-          if (retryBar) retryBar.classList.remove('show');
-          return geminiText;
-        }
-        // FIX: _fetchWithTimeout evita pasar AbortSignal (no cloneable via postMessage)
-        const res = await _fetchWithTimeout(this._endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ model: modelId, messages, max_tokens: maxTokens, temperature: opts.temperature ?? 0.75, seed: Math.floor(Math.random() * 99999), referrer: 'lumio-study-app' }),
-        }, 15000);
-        if (!res.ok) { const errText = await res.text().catch(()=>''); throw new Error('HTTP ' + res.status + ' ' + errText.slice(0,50)); }
-        const data = await res.json();
-        const text = data?.choices?.[0]?.message?.content || data?.output || data?.text || '';
-        if (!text || text.trim().length < 3) throw new Error('empty response');
-        if (retryBar) retryBar.classList.remove('show');
-        return text;
-      } catch (e) {
-        console.warn('LumioAI attempt ' + attempt + ' failed:', e.message);
-        if (attempt < 3) await new Promise(r => setTimeout(r, 800 * (attempt + 1)));
-      }
+    // ══ PROVEEDOR 2: Groq ══
+    try {
+      const txt = await _callGroq(messages, maxTokens, opts.temperature ?? 0.75);
+      if (retryBar) retryBar.classList.remove('show');
+      return txt;
+    } catch(e) {
+      console.warn('LumioAI: Groq falló, probando Gemini...', e.message);
+    }
+
+    // ══ PROVEEDOR 3: Gemini ══
+    try {
+      const txt = await _callGeminiDirect(messages, maxTokens, opts.temperature ?? 0.75);
+      if (retryBar) retryBar.classList.remove('show');
+      return txt;
+    } catch(e) {
+      console.warn('LumioAI: Gemini falló, probando OpenRouter...', e.message);
+    }
+
+    // ══ PROVEEDOR 4: OpenRouter ══
+    try {
+      const txt = await _callOpenRouter(messages, maxTokens, opts.temperature ?? 0.75);
+      if (retryBar) retryBar.classList.remove('show');
+      return txt;
+    } catch(e) {
+      console.warn('LumioAI: OpenRouter falló...', e.message);
     }
 
     if (retryBar) retryBar.classList.remove('show');
-    // ── PROVEEDOR 4: HuggingFace (último recurso) ──
-    const hfResult = await _callHuggingFaceFallback(messages, maxTokens);
-    if (hfResult) return hfResult;
-
     return opts.fallback || null;
   },
 
@@ -10464,45 +10594,24 @@ async function callAI(systemPrompt, userMsg, maxTokens=700){
     { role: 'user', content: userMsg + webCtx },
   ];
 
-  // ── CARRERA: OpenRouter vs Pollinations vs timeout local ──
-  // Se lanzan en paralelo. Gana el primero que responda.
-  // Si todos fallan en 11 segundos → respuesta local inmediata.
-  let settled = false;
-  const wrap = (promise) => promise.then(v => {
-    if(v && v.trim && v.trim().length > 3) return v;
-    throw new Error('empty');
-  });
-
-  const groqPromise = wrap(_callGroq(messages, maxTokens));
-  const orPromise = wrap(_callOpenRouter(messages, maxTokens));
-
-  const polPromise = wrap(new Promise(async (resolve, reject) => {
-    try {
-      // FIX: usar _fetchWithTimeout en lugar de AbortController para evitar
-      // "AbortSignal object could not be cloned" cuando el SW intercepta el fetch
-      const res = await _fetchWithTimeout('https://text.pollinations.ai/openai', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({ model: getLumioModel(), messages, max_tokens: maxTokens, temperature:0.75, seed:Math.floor(Math.random()*99999), referrer:'lumio-study-app' }),
-      }, 10000);
-      if(!res.ok) throw new Error('HTTP '+res.status);
-      const data = await res.json();
-      const text = data.choices?.[0]?.message?.content || data.output || data.text || '';
-      if(!text || text.trim().length < 3) throw new Error('empty');
-      resolve(text);
-    } catch(e) { reject(e); }
-  }));
-
-  // Timeout global: después de 11s usar respuesta local
-  const timeoutPromise = new Promise(resolve => setTimeout(() => resolve(localFallback), 11000));
-
+  // ── PROVEEDOR 1: Pollinations GET (funciona desde file://) ──
   try {
-    const result = await Promise.any([groqPromise, orPromise, polPromise, timeoutPromise]);
-    return result || localFallback;
-  } catch(e) {
-    // Promise.any rechaza solo si TODOS fallan
-    return localFallback;
-  }
+    const txt = await _callPollinationsGET(messages, maxTokens, 0.75);
+    if (txt) return txt;
+  } catch(e) {}
+
+  // ── PROVEEDOR 2: Groq + OpenRouter en paralelo ──
+  try {
+    const wrap = p => p.then(v => { if(v && v.trim().length > 3) return v; throw new Error('empty'); });
+    const result = await Promise.any([
+      wrap(_callGroq(messages, maxTokens)),
+      wrap(_callOpenRouter(messages, maxTokens)),
+      new Promise((_,rej) => setTimeout(()=>rej(new Error('timeout')), 10000))
+    ]);
+    if (result) return result;
+  } catch(e) {}
+
+  return localFallback;
 }
 
 async function sendChat(){
@@ -10756,7 +10865,7 @@ window._examMode={active:false,scores:[],q:0,total:5};
       if (bar) msgs.style.paddingBottom = (bar.offsetHeight + 8) + 'px';
     }
     syncPadding();
-    new ResizeObserver(syncPadding).observe(document.getElementById('chat-bottom-bar') || msgs);
+    let _roPending=false;new ResizeObserver(()=>{if(_roPending)return;_roPending=true;requestAnimationFrame(()=>{_roPending=false;syncPadding();});}).observe(document.getElementById('chat-bottom-bar')||msgs);
 
     // Show/hide FAB based on scroll position
     msgs.addEventListener('scroll', () => {
@@ -12589,55 +12698,39 @@ function resetChatCtx(){
 
 
 
-// ── La misma IA para TODAS las funciones (Test, Resumen, Flashcards, etc.) ──
+// ── La misma IA para TODAS las funciones (Test, Resumen, Flashcards, Plan, etc.) ──
 async function callAIForTask(systemPrompt, userContent, maxTokens=1600, useWeb=true){
   if(!navigator.onLine){ return null; }
-  let webCtx = '';
-  if (useWeb && getLumioWebSearch() && userContent.length < 300) {
-    try {
-      const ws = await lumioWebSearch(userContent.slice(0,150));
-      if (ws) webCtx = '\n\n[CONTEXTO WEB]\n' + ws + '\n[FIN]';
-    } catch(e) {}
-  }
   const messages = [
     {role:'system',content:systemPrompt},
-    {role:'user',content:userContent + webCtx}
+    {role:'user',content:userContent}
   ];
 
-  // ── PROVEEDOR 1: Groq (principal — gratis y rápido) ──
+  // ── PROVEEDOR 1: Pollinations GET — único garantizado desde file:// ──
   try {
-    const groqText = await _callGroq(messages, maxTokens, 0.7);
-    if (groqText) return groqText;
+    const txt = await _callPollinationsGET(messages, maxTokens, 0.7);
+    if (txt) return txt;
+  } catch(e) {
+    console.warn('callAIForTask: Pollinations GET falló', e.message);
+  }
+
+  // ── PROVEEDOR 2: Groq ──
+  try {
+    const txt = await _callGroq(messages, maxTokens, 0.7);
+    if (txt) return txt;
   } catch(e) {
     console.warn('callAIForTask: Groq falló', e.message);
   }
 
-  // ── PROVEEDOR 2: OpenRouter (fallback) ──
+  // ── PROVEEDOR 3: OpenRouter ──
   try {
-    const orText = await _callOpenRouter(messages, maxTokens, 0.7);
-    if (orText) return orText;
+    const txt = await _callOpenRouter(messages, maxTokens, 0.7);
+    if (txt) return txt;
   } catch(e) {
     console.warn('callAIForTask: OpenRouter falló', e.message);
   }
 
-  // ── PROVEEDOR 3: Pollinations (último fallback) ──
-  try{
-    const ctrl=new AbortController();
-    const tid=setTimeout(()=>ctrl.abort(),16000);
-    const res=await fetch('https://text.pollinations.ai/openai',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({ model: getLumioModel(), messages, max_tokens:maxTokens, temperature:0.7, seed:Math.floor(Math.random()*99999), referrer:'lumio-study-app' }),
-      signal:ctrl.signal
-    });
-    clearTimeout(tid);
-    if(!res.ok)throw new Error('HTTP '+res.status);
-    const data=await res.json();
-    const txt=data.choices?.[0]?.message?.content||data.output||'';
-    return txt.trim()||null;
-  }catch(e){
-    return null;
-  }
+  return null;
 }
 
 
@@ -14749,7 +14842,7 @@ function bAjustesAccent(){
 function toggleTheme(){
   localStorage.setItem('lumio_theme_manual','1'); // user chose manually
   isDark=!isDark;
-  document.documentElement.setAttribute('data-theme',isDark?'':'light');
+  document.documentElement.setAttribute('data-theme',isDark?'dark':'light');
   const btn=document.getElementById('fab-theme');
   const tbtn=document.getElementById('theme-toggle-btn');
   const ttb2=document.getElementById('theme-btn');
@@ -14764,20 +14857,17 @@ function toggleTheme(){
 // ════════════════════════════════════════════════════════
 // Cursos disponibles
 const CURSOS=[
-  {id:'1pri', label:'1º Primaria', ico:'🌈'},
-  {id:'2pri', label:'2º Primaria', ico:'⭐'},
-  {id:'3pri', label:'3º Primaria', ico:'🌟'},
-  {id:'4pri', label:'4º Primaria', ico:'🎯'},
-  {id:'5pri', label:'5º Primaria', ico:'🚀'},
-  {id:'6pri', label:'6º Primaria', ico:'🏅'},
+  {id:'5pri', label:'5º primaria', ico:'🚀'},
+  {id:'6pri', label:'6º primaria', ico:'🏅'},
   {id:'1eso', label:'1º ESO', ico:'🌱'},
   {id:'2eso', label:'2º ESO', ico:'📗'},
   {id:'3eso', label:'3º ESO', ico:'📘'},
   {id:'4eso', label:'4º ESO', ico:'📙'},
-  {id:'1bach',label:'1º Bach',ico:'🎓'},
-  {id:'2bach',label:'2º Bach',ico:'🏆'},
-  {id:'fp',   label:'FP',          ico:'🔧'},
-  {id:'otro', label:'Otro',        ico:'📚'},
+  {id:'1bach',label:'1º Bachillerato', ico:'🎓'},
+  {id:'2bach',label:'2º Bachillerato', ico:'🏆'},
+  {id:'2bachpau',label:'2º Bachillerato con PAU', ico:'🎯'},
+  {id:'fp',   label:'FP', ico:'🔧'},
+  {id:'otro', label:'Otro', ico:'📚'},
 ];
 const MATS_POR_CURSO={
   '1pri':['Lengua','Matemáticas','Inglés','Conocimiento del Medio','Ed. Artística','Ed. Física','Religión','Catalán'],
@@ -14846,87 +14936,177 @@ const MAT_EMOJI={
   'Asignatura 4':'📚','Asignatura 5':'📚',
 };
 
+// ── ONBOARDING v2 — dark Knowunity style ──────────────────────
 let obSelCurso='2eso';
 let obSelMats=new Set(['Matemáticas','Biología y Geo.','Física y Química','Geografía e Hist.','Lengua','Inglés','Tecnología','Ed. Plástica']);
 let obSelTime='tarde';
+let obGoalMinutes=60;
+let _obCurrentGrade=6;   // nota actual (drum 1)
+let _obTargetGrade=9;    // nota objetivo (drum 2)
+const OB_TOTAL=10;
+
+function _obSetProgress(step){
+  const pct=Math.round((step/OB_TOTAL)*100);
+  const fill=document.getElementById('ob-progress-fill');
+  if(fill)fill.style.width=pct+'%';
+  const backBtn=document.getElementById('ob-back-btn');
+  if(backBtn)backBtn.style.display=(step>1?'flex':'none');
+}
+
+function obGoTo(n){
+  document.querySelectorAll('.ob-step').forEach(el=>el.classList.remove('active','back-anim'));
+  const next=document.getElementById('ob-'+n);
+  if(next)next.classList.add('active');
+  _obSetProgress(n);
+}
 
 function showOnboarding(){
   document.getElementById('onboarding').style.display='flex';
   const cg=document.getElementById('ob-curso-grid');
   if(cg){
-    cg.innerHTML=CURSOS.map(cur=>`
-      <div class="ob-mat${cur.id===obSelCurso?' sel':''}" style="justify-content:center;text-align:center" data-c="${cur.id}" onclick="selObCurso('${cur.id}',this)">
-        <div style="font-size:22px;margin-bottom:2px">${cur.ico}</div>
-        <div class="ob-mat-nm" style="text-align:center">${cur.label}</div>
-      </div>`).join('');
+    cg.innerHTML=CURSOS.map(cur=>`<div class="ob-curso-item${cur.id===obSelCurso?' sel':''}" data-c="${cur.id}" onclick="selObCurso('${cur.id}',this)">${cur.label}</div>`).join('');
   }
   buildObMatsGrid(obSelCurso);
+  // init drums
+  _obInitDrum('ob-drum-current',2);
+  _obInitDrum('ob-drum-target',5);
 }
+
 function selObCurso(id,el){
   obSelCurso=id;
-  document.querySelectorAll('#ob-curso-grid .ob-mat').forEach(e=>e.classList.remove('sel'));
+  document.querySelectorAll('#ob-curso-grid .ob-curso-item').forEach(e=>e.classList.remove('sel'));
   el.classList.add('sel');
+  buildObMatsGrid(id);
 }
 function buildObMatsGrid(cursoId){
   const mats=MATS_POR_CURSO[cursoId]||[];
   obSelMats=new Set(mats.slice(0,Math.min(8,mats.length)));
   const grid=document.getElementById('ob-mats-grid');
   if(grid){
-    grid.innerHTML=mats.map(n=>`
-      <div class="ob-mat${obSelMats.has(n)?' sel':''}" onclick="toggleObMat('${n}',this)">
-        <div class="ob-mat-ico">${MAT_EMOJI[n]||'📚'}</div>
-        <div class="ob-mat-nm">${n}</div>
-      </div>`).join('');
+    grid.innerHTML=mats.map(n=>`<div class="ob-mat${obSelMats.has(n)?' sel':''}" onclick="toggleObMat('${n}',this)"><div class="ob-mat-ico">${MAT_EMOJI[n]||'📚'}</div><div class="ob-mat-nm">${n}</div></div>`).join('');
   }
 }
 function toggleObMat(n,el){obSelMats.has(n)?obSelMats.delete(n):obSelMats.add(n);el.classList.toggle('sel',obSelMats.has(n));}
-function selTime(el){obSelTime=el.dataset.t;document.querySelectorAll('.ob-time').forEach(t=>t.classList.remove('sel'));el.classList.add('sel');}
-let obGoalMinutes=60;
-function selObGoal(el){
-  obGoalMinutes=parseInt(el.dataset.m)||60;
-  document.querySelectorAll('.ob-time-grid .ob-time').forEach(t=>t.classList.remove('sel'));
-  el.classList.add('sel');
-  const summary=document.getElementById('ob-summary');
-  const content=document.getElementById('ob-summary-content');
-  if(summary&&content){
-    summary.style.display='block';
-    const curso=CURSOS.find(cur=>cur.id===obSelCurso);
-    content.innerHTML='👤 <b>'+D.user.name+'</b><br>🎓 '+(curso?curso.label:obSelCurso)+'<br>📚 '+[...obSelMats].slice(0,4).join(', ')+(obSelMats.size>4?' y '+(obSelMats.size-4)+' más':'')+'<br>🎯 Objetivo: '+obGoalMinutes+' min/día';
-  }
+
+// Drum picker
+function _obInitDrum(drumId, defaultOffset){
+  const drum=document.getElementById(drumId);
+  if(!drum)return;
+  // scroll to default item (offset 0-based from first real item)
+  const itemH=66;
+  drum.scrollTop=defaultOffset*itemH;
+  _obUpdateDrumCenter(drum);
 }
+function obDrumScroll(which){
+  const drum=document.getElementById(which==='current'?'ob-drum-current':'ob-drum-target');
+  if(!drum)return;
+  clearTimeout(drum._snap);
+  drum._snap=setTimeout(()=>{
+    const itemH=66;
+    const idx=Math.round(drum.scrollTop/itemH);
+    drum.scrollTop=idx*itemH;
+    _obUpdateDrumCenter(drum);
+    // update feedback
+    const items=[...drum.querySelectorAll('.ob-drum-item')];
+    const val=parseInt(items[idx]?.dataset.v||'0');
+    if(which==='current'){_obCurrentGrade=val;}
+    else{_obTargetGrade=val;_obUpdateNotaFeedback();}
+  },150);
+}
+function _obUpdateDrumCenter(drum){
+  const itemH=66;
+  const centerIdx=Math.round(drum.scrollTop/itemH);
+  drum.querySelectorAll('.ob-drum-item').forEach((el,i)=>{el.classList.toggle('center',i===centerIdx);});
+}
+function _obUpdateNotaFeedback(){
+  const delta=_obTargetGrade-_obCurrentGrade;
+  const deltaEl=document.getElementById('ob-nota-delta');
+  const difEl=document.getElementById('ob-nota-dif');
+  const hintEl=document.getElementById('ob-nota-hint');
+  if(deltaEl)deltaEl.textContent=(delta>=0?'+':'')+delta;
+  let dif,col,hint;
+  if(delta<=0){dif='Mantener';col='#3b9eff';hint='Mantener el nivel es todo un reto, ¡tú puedes!';}
+  else if(delta<=1){dif='Fácil';col='#16a34a';hint='Un paso pequeño, ¡súper factible!';}
+  else if(delta<=3){dif='Desafío';col='#d97706';hint='¡Con Lumio lo conseguirás!';}
+  else{dif='Ambicioso';col='#dc2626';hint='¡Apuesta alta! Lumio te ayudará cada día.';}
+  if(difEl){difEl.textContent=dif;difEl.style.background=col;}
+  if(hintEl)hintEl.textContent=hint;
+}
+
+function obBackBtn(){
+  // Find current active step
+  const active=document.querySelector('.ob-step.active');
+  if(!active)return;
+  const n=parseInt(active.id.replace('ob-',''));
+  if(n>1)obGoTo(n-1);
+}
+
 function obNext(step){
   if(step===1){
     const name=document.getElementById('ob-name').value.trim();
     if(!name){document.getElementById('ob-name').style.borderColor='#f87171';return;}
     D.user.name=name;
   }
-  if(step===2){
-    buildObMatsGrid(obSelCurso);
+  if(step===2){buildObMatsGrid(obSelCurso);}
+  if(step===7){
+    // Show badge screen briefly then auto-go to loading
+    const badge=document.getElementById('ob-badge-grade');
+    const title=document.getElementById('ob-badge-title');
+    if(badge)badge.textContent=_obTargetGrade+' 💪';
+    if(title)title.innerHTML='¡Eso está totalmente<br>al alcance, '+D.user.name+'!';
+    obGoTo(8);
+    setTimeout(()=>_obStartLoading(),1800);
+    return;
   }
-  const curr=document.getElementById('ob-'+step);
-  const next=document.getElementById('ob-'+(step+1));
-  if(curr)curr.classList.remove('active');
-  if(next){next.classList.remove('back-anim');next.classList.add('active');}
+  if(step===8){return;} // handled above
+  obGoTo(step+1);
 }
-function obBack(step){
-  const curr=document.getElementById('ob-'+step);
-  const prev=document.getElementById('ob-'+(step-1));
-  if(curr)curr.classList.remove('active');
-  if(prev){prev.classList.add('back-anim');prev.classList.add('active');}
+
+function _obStartLoading(){
+  obGoTo(9);
+  const steps=[
+    {num:'ob-ls-1',txt:'ob-lt-1',pct:20,delay:600},
+    {num:'ob-ls-2',txt:'ob-lt-2',pct:45,delay:1200},
+    {num:'ob-ls-3',txt:'ob-lt-3',pct:68,delay:2000},
+    {num:'ob-ls-4',txt:'ob-lt-4',pct:85,delay:2800},
+    {num:'ob-ls-5',txt:'ob-lt-5',pct:100,delay:3600},
+  ];
+  const bar=document.getElementById('ob-load-bar');
+  const pct=document.getElementById('ob-load-pct');
+  steps.forEach((s,i)=>{
+    setTimeout(()=>{
+      if(bar)bar.style.width=s.pct+'%';
+      if(pct)pct.textContent=s.pct+'%';
+      const num=document.getElementById(s.num);const txt=document.getElementById(s.txt);
+      if(num){num.textContent='✓';num.classList.add('done');}
+      if(txt)txt.classList.add('active');
+      if(i>0){
+        const prev=steps[i-1];
+        const pNum=document.getElementById(prev.num);
+        if(pNum){pNum.style.opacity='.5';}
+      }
+    },s.delay);
+  });
+  setTimeout(()=>obGoTo(10),4400);
 }
-function obFinish(){
+
+function selTime(el){obSelTime=el.dataset.t;document.querySelectorAll('.ob-time').forEach(t=>t.classList.remove('sel'));el.classList.add('sel');}
+function selObGoal(el){obGoalMinutes=parseInt(el.dataset.m)||60;}
+
+function obFinish(intent){
   const curso=CURSOS.find(cur=>cur.id===obSelCurso);
   D.user.curso=curso?curso.label:'2º ESO';
   D.mats=[...obSelMats].map((n,i)=>({id:'m'+(i+1),n,c:MAT_COLORS[n]||'#8a94a6',e:MAT_EMOJI[n]||'📚',p:0,h:0,t:8,ok:0}));
   D.cards=[];
-  D.user.studyTime=obSelTime;
+  D.user.studyTime=obSelTime||'tarde';
   D.objetivoDiario=obGoalMinutes||60;
   localStorage.setItem('lumio_seen_onboarding','1');
-  localStorage.setItem('lumio_user',JSON.stringify({name:D.user.name,studyTime:obSelTime,curso:D.user.curso}));
+  localStorage.setItem('lumio_user',JSON.stringify({name:D.user.name,studyTime:D.user.studyTime,curso:D.user.curso}));
   saveState();
-  document.getElementById('onboarding').classList.add('out');
-  setTimeout(()=>{document.getElementById('onboarding').style.display='none';},500);
-  bHome();pomMatActiva=D.mats[0]?.n||'Matemáticas';
+  const ob=document.getElementById('onboarding');
+  if(ob){ob.classList.add('out');setTimeout(()=>{ob.style.display='none';},500);}
+  bHome();
+  pomMatActiva=D.mats[0]?.n||'Matemáticas';
   const ac=document.getElementById('about-creator');if(ac)ac.textContent=D.user.name;
   updateCursoLabels();
   setTimeout(startTutorial,800);
@@ -18217,6 +18397,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     // Restore theme
     const savedTheme=localStorage.getItem('lumio_theme');
     if(savedTheme==='light'){isDark=false;document.documentElement.setAttribute('data-theme','light');const tb=document.getElementById('theme-btn');if(tb)tb.textContent='☀️';}
+    else{isDark=true;document.documentElement.setAttribute('data-theme','dark');}
 
     // Restore user data (legacy key compatibility)
     const savedUser=JSON.parse(localStorage.getItem('lumio_user')||'null');
